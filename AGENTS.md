@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 # SYSTEM PROMPT: Agente para desarrollo Frontend del ERP de Eventos
 
 ## 1. ROL Y CONTEXTO
@@ -332,4 +330,3 @@ VITE_APP_ID=
 - **Fase REFACTOR:** [Mejoras de optimización aplicadas]
 - **Resultado de tests:** [Confirmación de la ejecución exitosa de las pruebas]
 ```
->>>>>>> agent
