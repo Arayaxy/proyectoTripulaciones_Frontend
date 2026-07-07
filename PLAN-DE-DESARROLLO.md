@@ -23,6 +23,10 @@ Para cada elemento del plan, aplicar el ciclo TDD definido en [AGENTS.md §4](./
   - Crear `src/styles/_variables.scss` con colores, fuentes, espaciados y breakpoints.
   - Crear `src/styles/_mixins.scss` con mixins `flex-center`, `card`, `button-base`, `respond-to`.
   - Migrar `index.css` y `App.css` a SASS progresivamente.
+<<<<<<< HEAD
+=======
+  - Metodología BEM + Mobile-First.
+>>>>>>> agent
 
 - [ ] **0.3. Servicio API Centralizado**
   - **TDD:** Testear métodos get, post, put, del simulando fetch exitoso y fallido.
@@ -69,6 +73,7 @@ Para cada elemento del plan, aplicar el ciclo TDD definido en [AGENTS.md §4](./
 
 ---
 
+<<<<<<< HEAD
 ## FASE 5: DOMINIO PONENTE (DASHBOARD + DETALLE EVENTO)
 
 - [ ] **5.1. PonenteDashboard** — Página principal del ponente:
@@ -86,6 +91,14 @@ Para cada elemento del plan, aplicar el ciclo TDD definido en [AGENTS.md §4](./
 - [ ] **5.3. Notificaciones** — Visualización de notificaciones de cambios en itinerario/perfil.
 
 - [ ] **5.4. Chat** — Chat con organizadoras.
+=======
+## FASE 5: DOMINIO PONENTE
+
+- [ ] **5.1. Itinerario** — Vista del itinerario completo del ponente.
+- [ ] **5.2. Presentaciones** — Subida y modificación de presentación propia.
+- [ ] **5.3. Chat** — Chat con organizadoras.
+- [ ] **5.4. Notificaciones** — Visualización de notificaciones de cambios en itinerario/perfil.
+>>>>>>> agent
 
 ---
 
