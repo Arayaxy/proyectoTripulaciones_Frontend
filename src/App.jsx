@@ -1,14 +1,12 @@
 
-import { Route, Routes } from 'react-router-dom'
-import './App.css'
-import { RequireAdmin } from './components/RequireAdmin'
-import { AuthContextProvider } from './context/AuthContext'
-import { Home } from './pages/Home'
-import { Login } from './pages/Login'
+import { Route, Routes } from 'react-router';
+import { RequireAdmin } from './components/RequireAdmin';
+import { AuthContextProvider } from './context/AuthContext';
+import { Home } from './pages/Home';
+import { Login } from './pages/Login';
+import './App.css';
 
-function App() {
-
-
+export const App = () => {
   return (
     <>
       <AuthContextProvider>
@@ -18,8 +16,5 @@ function App() {
         </Routes>
       </AuthContextProvider>
     </>
-
   )
-}
-
-export default App
+};
