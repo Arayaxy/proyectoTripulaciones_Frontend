@@ -1,0 +1,54 @@
+// ─── Colores ──────────────────────────────────────────────────────────────
+$color-primary: #2B7A8E; // botón Aceptar, foco inputs
+$color-accent: #00B4C8; // texto BACKSTAGE, detalles
+$color-dot: #5AC85A; // puntos verdes del logo
+$color-text: #1A1A1A; // texto principal
+$color-text-muted: #888888; // textos secundarios
+$color-border: #D0D0D0; // bordes inputs y botón Google
+$color-bg: #FFFFFF; // fondo general
+$color-footer-bg: #F5F5F5; // fondo footer
+$color-error: #D32F2F; // mensajes de error
+
+// ─── Tipografía ───────────────────────────────────────────────────────────
+$font-primary: 'Montserrat', sans-serif;
+$font-secondary: 'Lato', sans-serif;
+$fw-light: 300;
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-semibold: 600;
+$fw-bold: 700;
+$lh-normal: 1.4;
+$lh-titulo: 1.1;
+
+// ─── Tamaños de texto ─────────────────────────────────────────────────────
+$txt-xs: 0.75rem; // 12px
+$txt-sm: 0.8125rem; // 13px
+$txt-base: 0.875rem; // 14px
+$txt-md: 0.9375rem; // 15px
+$txt-lg: 1rem; // 16px
+$txt-xl: 1.4rem; // 22px
+$txt-xxl: 1.8rem; // 40px
+
+// ─── Espaciado ────────────────────────────────────────────────────────────
+$sp-4: 4px;
+$sp-8: 8px;
+$sp-12: 12px;
+$sp-16: 16px;
+$sp-20: 20px;
+$sp-24: 24px;
+$sp-32: 32px;
+$sp-48: 48px;
+$sp-64: 64px;
+$sp-96: 96px;
+$sp-128: 128px;
+
+// ─── Bordes ───────────────────────────────────────────────────────────────
+$radius-sm: 4px;
+$radius-md: 6px;
+$radius-lg: 12px;
+
+// ─── Breakpoints ──────────────────────────────────────────────────────────
+$bp-480: 480px;
+$bp-768: 768px;
+$bp-1024: 1024px;
+$bp-1200: 1200px;

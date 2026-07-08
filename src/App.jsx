@@ -7,7 +7,6 @@ export const App = () => {
   return (
     <>
       <AuthContextProvider>
-        <Navbar />
         <AppRoutes />
       </AuthContextProvider>
     </>

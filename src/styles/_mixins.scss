@@ -1,0 +1,45 @@
+// Flex shortcuts
+@mixin flex($direction: row, $justify: flex-start, $align: stretch) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// Breakpoints — Mobile First
+@mixin bp-480 {
+  @media screen and (min-width: 480px) {
+    @content;
+  }
+}
+
+@mixin bp-768 {
+  @media screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin bp-1024 {
+  @media screen and (min-width: 1024px) {
+    @content;
+  }
+}
+
+// Tipografía
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -6,7 +6,8 @@ import { Home } from "../admin/pages/Home"
 export const AppRoutes = () => {
   return (
     <Routes>
-      <Route path='/' element={<Login />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path='/home' element={<RequireAdmin> <Home /> </RequireAdmin>} />
     </Routes>
   )
