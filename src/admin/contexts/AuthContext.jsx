@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "../config/firebase";
+import { auth } from "../../config/firebase";
 
 const AuthContext = createContext();
 
@@ -9,10 +9,12 @@ export const AuthContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     const checkExistingSession = async () => {
       try {
-        const resp = await fetch(`http://localhost:3000/api/v1/auth/verify`, {
+        const resp = await fetch(`${API_URL}/api/v1/auth/verify`, {
           method: "GET",
           credentials: "include"
         });
@@ -44,7 +46,7 @@ export const AuthContextProvider = ({ children }) => {
     setError(null);
     try {
       await signOut(auth);
-      await fetch(`http://localhost:3000/api/v1/auth/logout`, {
+      await fetch(`${API_URL}/api/v1/auth/logout`, {
         method: "POST",
         credentials: "include"
       });

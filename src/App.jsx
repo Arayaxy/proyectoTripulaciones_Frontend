@@ -1,19 +1,14 @@
-
-import { Route, Routes } from 'react-router';
-import { RequireAdmin } from './components/RequireAdmin';
-import { AuthContextProvider } from './contexts/AuthContext';
-import { Home } from './pages/Home';
-import { Login } from './pages/Login';
+import { Navbar } from './admin/components/Navbar';
+import { AuthContextProvider } from './admin/contexts/AuthContext';
 import './App.css';
+import { AppRoutes } from './routes/AppRoutes';
 
 export const App = () => {
   return (
     <>
       <AuthContextProvider>
-        <Routes>
-          <Route path='/' element={<Login />} />
-          <Route path='/home' element={<RequireAdmin> <Home /> </RequireAdmin>} />
-        </Routes>
+        <Navbar />
+        <AppRoutes />
       </AuthContextProvider>
     </>
   )
