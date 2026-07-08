@@ -1,7 +1,7 @@
 
 import { Route, Routes } from 'react-router';
 import { RequireAdmin } from './components/RequireAdmin';
-import { AuthContextProvider } from './context/AuthContext';
+import { AuthContextProvider } from './contexts/AuthContext';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
 import './App.css';
