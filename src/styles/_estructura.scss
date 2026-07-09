@@ -1,0 +1,30 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+body {
+  font-family: $font-primary;
+}
+
+#root {
+  min-height: 100svh;
+  @include flex(column);
+}
+
+.container {
+  width: 100%;
+  padding: 0 $sp-16;
+  box-sizing: border-box;
+
+  @include bp-768 {
+    max-width: 768px;
+    margin: 0 auto;
+  }
+
+  @include bp-1024 {
+    max-width: 1024px;
+  }
+}
+
+main {
+  flex: 1;
+}
