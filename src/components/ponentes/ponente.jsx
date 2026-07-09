@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const ClientesPage = () => {
+export const ponente = () => {
   return (
     <div>
-      <h1>ClientesPage</h1>
+      <h1>ponente</h1>
     </div>
   )
 }
