@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from 'react-router';
-import { useAuth } from "../../admin/contexts/AuthContext";
+import { useAuth } from "../../contexts/AuthContext";
 
 export const Login = () => {
   const { googleSignIn, user, setUser, loading, setLoading, error, setError } = useAuth();
@@ -56,12 +56,30 @@ export const Login = () => {
   }
 
   return (
-    <div>
-      {error && import.meta.env.VITE_MODE === 'developement' && <p>{error}</p>}
-      {error && import.meta.env.VITE_MODE === 'production' && <p>Error conectarse. Por favor intenta de nuevo.</p>}
-      <button onClick={handleGoogleSignIn} disabled={loading}>
-        {loading ? "Loggeando..." : "Iniciar Session con Google"}
-      </button>
-    </div>
+    <>
+      <div>
+        {error && import.meta.env.VITE_MODE === 'developement' && <p>{error}</p>}
+        {error && import.meta.env.VITE_MODE === 'production' && <p>Error conectarse. Por favor intenta de nuevo.</p>}
+
+      </div>
+      <main className="login">
+        <header className="login__header">
+          <a href="/">
+            <img src={heroLogo} alt="MITÜMI Backstage" /> </a>
+        </header>
+        <div className="login__hero">
+          <img src={heroImg} alt="MITÜMI Backstage" className="login__hero-img" />
+        </div>
+        <Login />
+        <button onClick={handleGoogleSignIn} disabled={loading}>
+          {loading ? "Loggeando..." : "Iniciar Session con Google"}
+        </button>
+        <footer className="login__footer">
+          © MITÜMI 2026
+        </footer>
+      </main>
+    </>
+
+
   );
 };
