@@ -113,10 +113,11 @@ proyectoTripulaciones_Frontend/
 ├── index.html
 ├── vite.config.js
 ├── eslint.config.js
-├── .env.example
-├── .gitignore
 ├── package.json
-├── README.md
+├── .env / .env.example
+├── .gitignore / .npmrc
+├── README.md / PLAN-DE-DESARROLLO.md / AGENTS.md
+├── redeploy
 ├── public/
 │   └── favicon.svg
 └── src/
