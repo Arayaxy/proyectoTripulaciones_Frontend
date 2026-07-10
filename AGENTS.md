@@ -11,11 +11,12 @@
 ## 2. STACK TECNOLÓGICO
 
 ### Frontend
-- React 19 (componentes funcionales + Hooks)
+- React 19 (componentes funcionales + Hooks, **React Compiler** habilitado via `babel-plugin-react-compiler` + `@rolldown/plugin-babel`)
 - Vite 8 (empaquetador y HMR)
 - React Router 8 (librería `react-router`)
 - SASS/SCSS (`sass ^1.101.0`) — YA IMPLEMENTADO
 - JavaScript ES2021+ (lenguaje)
+- ESLint con `eslint-plugin-react-hooks` + `eslint-plugin-react-refresh`
 
 ### Estilos
 - **SASS** con metodología **BEM** obligatoria.
