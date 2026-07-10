@@ -1,6 +1,6 @@
-@use 'fonts';
-@use 'reset';
-@use 'variables' as *;
-@use 'mixins' as *;
-@use 'estructura';
-@use 'elements';
+@forward 'variables';
+@forward 'mixins';
+@forward 'reset';
+@forward 'fonts';
+@forward 'estructura';
+@forward 'elements';

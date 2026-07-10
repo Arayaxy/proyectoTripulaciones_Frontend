@@ -1,5 +1,6 @@
 import { Navigate } from 'react-router';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext.jsx';
+import { Navbar } from '../navbar/Navbar.jsx';
 
 export const RequireAdmin = ({ children }) => {
   const { user, loading } = useAuth();
@@ -12,5 +13,12 @@ export const RequireAdmin = ({ children }) => {
     return <Navigate to="/" replace />;
   }
 
-  return children;
+  console.log("require admin", user)
+  return (
+    <>
+      <Navbar />
+      <p>Cosa... mucha cosa</p>
+      {children}
+    </>
+  );
 };

@@ -1,15 +1,14 @@
 import { Navigate, Route, Routes } from "react-router"
 import { Login } from "../pages/auth/Login"
-import { RequireAdmin } from "../admin/components/RequireAdmin"
-import { Home } from "../admin/pages/Home"
-import { LoginPage } from "../pages/LoginPage"
+import { Home } from "../pages/admin/Home"
+import { RequireAdmin } from "../components/requireAdmin/RequireAdmin"
+
 
 export const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/" element={<Navigate to="/login" replace />} />
-      <Route path='/home' element={<RequireAdmin> <Home /> </RequireAdmin>} />
+      <Route path='/' element={<Login />} />
+      <Route path='/home' element={<RequireAdmin> <Home/> </RequireAdmin>} />
     </Routes>
   )
 }
