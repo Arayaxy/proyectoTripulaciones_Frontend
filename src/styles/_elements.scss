@@ -1,0 +1,87 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'sass:color';
+
+// ─── Botones ──────────────────────────────────────────────────────────────
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $sp-8 $sp-20;
+  border-radius: $radius-md;
+  font-family: $font-primary;
+  font-size: $txt-base;
+  font-weight: $fw-medium;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+
+  &--primary {
+    background: $color-primary;
+    color: #fff;
+
+    &:hover {
+      background: color.adjust($color-primary, $lightness: -8%);
+    }
+  }
+
+  &--outline {
+    background: transparent;
+    color: $color-primary;
+    border-color: $color-primary;
+
+    &:hover {
+      background: $color-primary;
+      color: #fff;
+    }
+  }
+
+  &--sm {
+    font-size: $txt-xs;
+    padding: $sp-4 $sp-12;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// ─── Inputs ───────────────────────────────────────────────────────────────
+.input {
+  width: 100%;
+  padding: $sp-12 $sp-16;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  font-family: $font-primary;
+  font-size: $txt-base;
+  font-weight: $fw-semibold;
+  color: $color-text;
+  background: #fff;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    font-weight: $fw-semibold;
+    color: $color-text;
+  }
+
+  &:focus {
+    border-color: $color-primary;
+  }
+
+  &--error {
+    border-color: $color-error;
+  }
+}
+
+// ─── Cards ────────────────────────────────────────────────────────────────
+.card {
+  background: #fff;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  padding: $sp-16;
+  @include flex(column, flex-start, flex-start);
+  gap: $sp-8;
+}

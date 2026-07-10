@@ -1,0 +1,45 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-primary;
+  font-weight: $fw-bold;
+  color: $color-text;
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.75rem;
+}
+
+h2 {
+  font-size: 1.375rem;
+}
+
+h3 {
+  font-size: 1.125rem;
+}
+
+p {
+  font-family: $font-secondary;
+  font-size: $txt-base;
+  color: $color-text;
+  margin: 0;
+  line-height: 1.5;
+}
+
+a {
+  font-family: $font-primary;
+  color: inherit;
+  text-decoration: none;
+}
+
+small {
+  font-size: $txt-xs;
+  color: $color-text-muted;
+}
