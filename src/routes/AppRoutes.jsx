@@ -8,7 +8,8 @@ export const AppRoutes = () => {
   return (
     <Routes>
       <Route path='/' element={<Login />} />
-      <Route path='/home' element={<RequireAdmin> <Home/> </RequireAdmin>} />
+      <Route path='/home' element={<RequireAdmin> <Home /> </RequireAdmin>} />
+
     </Routes>
   )
 }

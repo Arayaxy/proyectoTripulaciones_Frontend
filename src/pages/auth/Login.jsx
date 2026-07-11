@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
-import { Navbar } from "../../components/navbar/Navbar";
 import heroLogo from '../../assets/logo_2026_Backstage.svg'
 import heroImg from '../../assets/heroImg.jpg'
 import './_login.scss'

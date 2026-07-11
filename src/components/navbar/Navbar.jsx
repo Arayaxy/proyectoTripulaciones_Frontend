@@ -12,8 +12,7 @@ export const Navbar = () => {
     navigate("/");
   }
 
-  return
-  (
+  return (
     <nav className="main-navbar">
       <ul>
 
