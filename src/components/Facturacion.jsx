@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const AgentePage = () => {
+export const Facturacion = () => {
   return (
     <div>
-      <h1>AgentePage</h1>
+      <h1>Facturacion</h1>
     </div>
   )
 }

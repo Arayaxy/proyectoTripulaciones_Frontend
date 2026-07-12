@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const AgentePage = () => {
+export const EventoInfo = () => {
   return (
     <div>
-      <h1>AgentePage</h1>
+      <h1>EventoInfo</h1>
     </div>
   )
 }

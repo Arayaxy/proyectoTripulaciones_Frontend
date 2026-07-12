@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const AgentePage = () => {
+export const LugarPage = () => {
   return (
     <div>
-      <h1>AgentePage</h1>
+      <h1>LugarPage</h1>
     </div>
   )
 }

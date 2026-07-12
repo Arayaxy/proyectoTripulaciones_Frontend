@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const ponentePage = () => {
+export const EventoDetail = () => {
   return (
     <div>
-      <h1>ponentePage</h1>
+      <h1>EventoDetail</h1>
     </div>
   )
 }
