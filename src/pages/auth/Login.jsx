@@ -60,10 +60,12 @@ export const Login = () => {
         <img src={heroImg} alt="MITÜMI Backstage" className="login__hero-img" />
       </div>
 
-      <div>
+      <div className="login__body">
+        <h2>¡Hola!</h2>
+        <p>Usa tu cuenta de Google para entrar en <strong>The Backstage</strong></p>
         {error && import.meta.env.VITE_MODE === "development" && <p>{error}</p>}
         {error && import.meta.env.VITE_MODE === "production" && <p>Error al conectarse. Por favor intenta de nuevo.</p>}
-        <button onClick={handleGoogleSignIn} disabled={loading}>
+        <button className="login__submit" onClick={handleGoogleSignIn} disabled={loading}>
           {loading ? "Loggeando..." : "Iniciar Sesión con Google"}
         </button>
       </div>
