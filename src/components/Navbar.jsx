@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router"
-import '../styles/Navbar.scss'
+// import '../styles/Navbar.scss'
 import { useAuth } from "../contexts/AuthContext"
 
 export const Navbar = () => {
@@ -17,27 +17,27 @@ export const Navbar = () => {
       <ul>
 
         <li>
-          <NavLink to="/#" > Eventos </NavLink>
+          <NavLink to="/eventos" > Eventos </NavLink>
         </li>
 
         <li>
-          <NavLink to="/#" > Clientes </NavLink>
+          <NavLink to="/clientes" > Clientes </NavLink>
         </li>
 
         <li>
-          <NavLink to="/#" > Espacios </NavLink>
+          <NavLink to="/espacios" > Espacios </NavLink>
         </li>
 
         <li>
-          <NavLink to="/#" > Ponentes </NavLink>
+          <NavLink to="/ponentes" > Ponentes </NavLink>
         </li>
 
         <li>
-          <NavLink to="/#" > Agente consultas internas </NavLink>
+          <NavLink to="/consultas" > Agente consultas internas </NavLink>
         </li>
 
         <li>
-          <NavLink to="/#" > Concursos Públicos </NavLink>
+          <NavLink to="/concursos" > Concursos Públicos </NavLink>
         </li>
 
         <li>

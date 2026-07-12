@@ -6,11 +6,10 @@ import { Navbar } from './components/Navbar';
 export const App = () => {
 
   return (
-    <>
-      <AuthContextProvider>
-        <Navbar />
-        <AppRoutes />
-      </AuthContextProvider>
-    </>
+
+    <AuthContextProvider>
+      <AppRoutes />
+    </AuthContextProvider>
+
   )
 };
