@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router"
 import { Login } from "../pages/auth/Login"
 import { Home } from "../pages/admin/Home"
-import { RequireAdmin } from "../components/requireAdmin/RequireAdmin"
+import { RequireAdmin } from "../components/RequireAdmin"
 
 
 export const AppRoutes = () => {
