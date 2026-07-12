@@ -24,31 +24,45 @@ export const Navbar = () => {
       <ul>
 
         <li>
-          <NavLink to="/eventos" > Eventos </NavLink>
+          <Link to="/eventos" >
+            Eventos
+          </Link>
         </li>
 
         <li>
-          <NavLink to="/clientes" > Clientes </NavLink>
+          <Link to="/clientes" >
+            Clientes
+          </Link>
         </li>
 
         <li>
-          <NavLink to="/espacios" > Espacios </NavLink>
+          <Link to="/espacios" >
+            Espacios
+          </Link>
         </li>
 
         <li>
-          <NavLink to="/ponentes" > Ponentes </NavLink>
+          <Link to="/ponentes" >
+            Ponentes
+          </Link>
         </li>
 
         <li>
-          <NavLink to="/consultas" > Agente consultas internas </NavLink>
+          <Link to="/consultas" >
+            Agente consultas internas
+          </Link>
         </li>
 
         <li>
-          <NavLink to="/concursos" > Concursos Públicos </NavLink>
+          <Link to="/concursos" >
+            Concursos Públicos
+          </Link>
         </li>
 
         <li>
-          <NavLink onClick={handleLogout} > Cerrar sesion </NavLink>
+          <Link onClick={handleLogout} >
+            Cerrar sesion
+          </Link>
         </li>
 
       </ul>
