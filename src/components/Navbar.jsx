@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router"
-// import '../styles/Navbar.scss'
+import './partials/_navbar.scss'
 import { useAuth } from "../contexts/AuthContext"
 
 export const Navbar = () => {
