@@ -1,4 +1,4 @@
-import { NavLink } from "react-router"
+import { Link } from "react-router"
 
 export const NavbarInterno = () => {
   return (
@@ -6,23 +6,33 @@ export const NavbarInterno = () => {
       <ul>
 
         <li>
-          <NavLink to="/datos" > Datos </NavLink>
+          <Link to="/datos" >
+            Datos
+          </Link>
         </li>
 
         <li>
-          <NavLink to="/ponencias" > Ponencias </NavLink>
+          <Link to="/ponencias" >
+            Ponencias
+          </Link>
         </li>
 
         <li>
-          <NavLink to="/lugar" > Lugar </NavLink>
+          <Link to="/lugar" >
+            Lugar
+          </Link>
         </li>
 
-        <li>
-          <NavLink to="/servicios" > Servicios </NavLink>
-        </li>
+        {/* <li>
+          <Link to="/servicios" >
+            Servicios
+          </Link>
+        </li> */}
 
         <li>
-          <NavLink to="/presupuestos" > Presupuestos </NavLink>
+          <Link to="/presupuestos" >
+            Presupuestos
+          </Link>
         </li>
 
       </ul>
