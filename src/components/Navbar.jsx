@@ -1,8 +1,15 @@
 import { NavLink, useNavigate } from "react-router"
+import React, { useState } from 'react';
 import './partials/_navbar.scss'
 import { useAuth } from "../contexts/AuthContext"
 
 export const Navbar = () => {
+
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  const handleMenuOpen = () => {
+    setMenuOpen(prev => !prev)
+  }
 
   const { logOut } = useAuth()
   const navigate = useNavigate()
