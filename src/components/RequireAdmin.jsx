@@ -1,6 +1,7 @@
 import { Navigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext.jsx';
 import { Navbar } from './Navbar.jsx';
+import './partials/_requireAdmin.scss'
 
 export const RequireAdmin = ({ children }) => {
   const { user, loading } = useAuth();

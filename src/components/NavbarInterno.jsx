@@ -1,4 +1,5 @@
-import { Link } from "react-router"
+import { Link, NavLink } from "react-router"
+import './partials/_navbar.scss'
 
 export const NavbarInterno = () => {
   return (
@@ -6,21 +7,21 @@ export const NavbarInterno = () => {
       <ul>
 
         <li>
-          <Link to="/datos" >
+          <NavLink to="/datos" >
             Datos
-          </Link>
+          </NavLink>
         </li>
 
         <li>
-          <Link to="/ponencias" >
+          <NavLink to="/ponencias" >
             Ponencias
-          </Link>
+          </NavLink>
         </li>
 
         <li>
-          <Link to="/lugar" >
+          <NavLink to="/lugar" >
             Lugar
-          </Link>
+          </NavLink>
         </li>
 
         {/* <li>
@@ -30,9 +31,9 @@ export const NavbarInterno = () => {
         </li> */}
 
         <li>
-          <Link to="/presupuestos" >
+          <NavLink to="/presupuestos" >
             Presupuestos
-          </Link>
+          </NavLink>
         </li>
 
       </ul>

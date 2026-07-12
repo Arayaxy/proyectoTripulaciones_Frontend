@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router"
+import { Link, NavLink, useNavigate } from "react-router"
 import React, { useState } from 'react';
 import './partials/_navbar.scss'
 import { useAuth } from "../contexts/AuthContext"
@@ -24,50 +24,51 @@ export const Navbar = () => {
       <ul>
 
         <li>
-          <Link to="/eventos" >
+          <NavLink to="/eventos" >
             Eventos
-          </Link>
+          </NavLink>
         </li>
 
+
         <li>
-          <Link to="/clientes" >
+          <NavLink to="/clientes" >
             Clientes
-          </Link>
+          </NavLink>
         </li>
 
         <li>
-          <Link to="/espacios" >
+          <NavLink to="/espacios" >
             Espacios
-          </Link>
+          </NavLink>
         </li>
 
         <li>
-          <Link to="/ponentes" >
+          <NavLink to="/ponentes" >
             Ponentes
-          </Link>
+          </NavLink>
         </li>
 
         <li>
-          <Link to="/consultas" >
+          <NavLink to="/consultas" >
             Agente consultas internas
-          </Link>
+          </NavLink>
         </li>
 
         <li>
-          <Link to="/concursos" >
+          <NavLink to="/concursos" >
             Concursos Públicos
-          </Link>
+          </NavLink>
         </li>
 
         <li>
-          <Link onClick={handleLogout} >
+          <NavLink onClick={handleLogout} >
             Cerrar sesion
-          </Link>
+          </NavLink>
         </li>
 
-        <Link to="/detalle">
+        <NavLink to="/detalle">
           Ir a detalle (prueba)
-        </Link>
+        </NavLink>
 
       </ul>
     </nav>

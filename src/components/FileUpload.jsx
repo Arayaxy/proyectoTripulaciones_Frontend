@@ -1,4 +1,5 @@
 import React from 'react'
+import './partials/_fileUploads.scss'
 
 export const FileUpload = () => {
   return (

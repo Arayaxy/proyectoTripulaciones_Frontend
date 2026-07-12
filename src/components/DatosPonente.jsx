@@ -1,4 +1,6 @@
 import React from 'react'
+import './partials/_eventos.scss'
+
 
 export const DatosPonente = () => {
   return (

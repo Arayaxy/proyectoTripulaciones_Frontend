@@ -1,19 +1,21 @@
-@use '../../styles/variables' as v;
-@use '../../styles/mixins' as m;
-
+@use '../../styles/fonts';
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+@use '../../styles/elements';
+@use '../../styles/reset';
 
 .login {
   min-height: 100svh;
-  @include m.flex(column);
-  background: v.$color-bg;
+  @include flex(column);
+  background: $color-bg;
   max-width: 480px;
   margin: 0 auto;
   width: 100%;
 }
 
 .login__header {
-  padding: v.$sp-16 v.$sp-20;
-  @include m.flex-center;
+  padding: $sp-16 $sp-20;
+  @include flex-center;
 }
 
 .login__hero {
@@ -31,29 +33,30 @@
 
 .login__body {
   flex: 1;
-  padding: v.$sp-64 v.$sp-24 v.$sp-24;
-  @include m.flex(column);
-  gap: v.$sp-24;
+  padding: $sp-32 $sp-24 $sp-24;
+  @include flex(column);
+  gap: $sp-24;
+  text-align: center;
 }
 
 .login__google-btn {
-  @include m.flex-center;
-  gap: v.$sp-8;
+  @include flex-center;
+  gap: $sp-8;
   width: 100%;
-  padding: 13px v.$sp-16;
-  background: v.$color-bg;
-  border: 1px solid v.$color-border;
-  border-radius: v.$radius-md;
-  font-size: v.$txt-base;
-  font-weight: v.$fw-medium;
+  padding: 13px $sp-16;
+  background: $color-bg;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  font-size: $txt-base;
+  font-weight: $fw-medium;
   cursor: pointer;
 }
 
 .login__divider {
-  @include m.flex-center;
-  gap: v.$sp-12;
-  font-size: v.$txt-sm;
-  color: v.$color-text-muted;
+  @include flex-center;
+  gap: $sp-12;
+  font-size: $txt-sm;
+  color: $color-text-muted;
   margin: 0;
 
   &::before,
@@ -61,55 +64,55 @@
     content: '';
     flex: 1;
     height: 1px;
-    background: v.$color-border;
+    background: $color-border;
   }
 }
 
 .login__form {
-  @include m.flex(column);
-  gap: v.$sp-24;
+  @include flex(column);
+  gap: $sp-24;
 }
 
 .login__input {
   width: 100%;
-  padding: v.$sp-12 v.$sp-16;
-  border: 1px solid v.$color-border;
-  border-radius: v.$radius-md;
-  font-size: v.$txt-base;
-  font-weight: v.$fw-semibold;
-  color: v.$color-text;
-  background: v.$color-black-5;
+  padding: $sp-12 $sp-16;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  font-size: $txt-base;
+  font-weight: $fw-semibold;
+  color: $color-text;
+  background: $color-black-5;
   outline: none;
   box-sizing: border-box;
   transition: border-color 0.2s ease;
 
   &::placeholder {
-    font-weight: v.$fw-semibold;
-    color: v.$color-text;
+    font-weight: $fw-semibold;
+    color: $color-text;
   }
 
   &:focus {
-    border-color: v.$color-primary;
+    border-color: $color-primary;
   }
 }
 
 .login__submit {
   width: 100%;
-  padding: v.$sp-12 v.$sp-16;
-  background: v.$color-primary;
+  padding: $sp-12 $sp-16;
+  background: $color-primary;
   color: #fff;
   border: none;
-  border-radius: v.$radius-md;
-  font-size: v.$txt-md;
-  font-weight: v.$fw-medium;
+  border-radius: $radius-md;
+  font-size: $txt-md;
+  font-weight: $fw-medium;
   cursor: pointer;
-  margin-top: v.$sp-4;
+  margin-top: $sp-4;
 }
 
 .login__forgot {
   text-align: center;
-  font-size: v.$txt-sm;
-  color: v.$color-text;
+  font-size: $txt-sm;
+  color: $color-text;
   background: none;
   border: none;
   cursor: pointer;
@@ -117,10 +120,10 @@
 }
 
 .login__footer {
-  padding: v.$sp-20;
+  padding: $sp-20;
   text-align: center;
-  font-size: v.$txt-xs;
-  color: v.$color-text-muted;
+  font-size: $txt-xs;
+  color: $color-text-muted;
   background: #F5F5F5;
   border-top: 1px solid #EBEBEB;
 }
