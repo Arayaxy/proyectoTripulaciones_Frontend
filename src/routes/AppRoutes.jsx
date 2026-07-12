@@ -1,18 +1,18 @@
-import { Route, Routes } from "react-router"
-import { Login } from "../pages/auth/Login"
-import { Home } from "../pages/admin/Home"
-import { RequireAdmin } from "../components/RequireAdmin"
-import { Navbar } from "../components/Navbar"
+import { PonenteRoutes } from "./PonenteRoutes"
+import { AdminRoutes } from "./AdminRoutes"
+import { PublicRoutes } from "./PublicRoutes"
 
 
 export const AppRoutes = () => {
   return (
     <>
-      <Navbar />
-      <Routes>
-        <Route path='/' element={<Login />} />
-        <Route path='/home' element={<RequireAdmin> <Home /> </RequireAdmin>} />
-      </Routes>
+      {/* {!user && <PublicRoutes />}
+      {user && role === 'admin' && <AdminRoutes />}
+      {user && role === 'ponente' && <PonenteRoutes />} */}
+      <PublicRoutes />
+      <AdminRoutes />
+
     </>
+
   )
 }

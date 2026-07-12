@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router"
+import { Link, useNavigate } from "react-router"
 import React, { useState } from 'react';
 import './partials/_navbar.scss'
 import { useAuth } from "../contexts/AuthContext"
