@@ -8,7 +8,7 @@ export const getClientes = async () => {
 };
 
 export const createCliente = async (formData) => {
-  const res = await fetch(`${API_URL}/api/v1/clientes`, {
+  const res = await fetch(`${API_URL}/clientes`, {
     method: 'POST',
     credentials: 'include',
     body: formData
