@@ -12,7 +12,7 @@ export const Login = () => {
 
   useEffect(() => {
     if (user && user.role === "admin") {
-      navigate("/home", { replace: true });
+      navigate("/eventos", { replace: true });
     }
   }, [user, navigate]);
 
@@ -38,7 +38,7 @@ export const Login = () => {
       const data = await resp.json();
 
       setUser(data.user);
-      navigate("/home");
+      navigate("/eventos");
     } catch (err) {
       console.error(err.message);
       setError(err.message);

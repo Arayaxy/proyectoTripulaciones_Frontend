@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router"
 import { Login } from "../pages/auth/Login"
-import { EventosPage } from "../pages/admin/EventosPage"
+// import { EventosPage } from "../pages/admin/EventosPage"
 import { ClientePage } from "../pages/admin/clientePage"
 import { EspaciosPage } from "../pages/admin/EspaciosPage"
 import { PonentesPage } from "../pages/admin/PonentesPage"
@@ -12,6 +12,8 @@ import { DatosEventoPage } from "../pages/admin/DatosEventoPage"
 import { PonenciasPage } from "../pages/admin/PonenciasPage"
 import { LugarPage } from "../pages/admin/LugarPage"
 import { EventoDetailPage } from "../pages/admin/EventoDetailPage"
+import { Eventos } from "../components/Eventos"
+import { CrearEvento } from "../pages/admin/CrearEvento"
 
 export const AppRoutes = () => {
   return (
@@ -24,7 +26,8 @@ export const AppRoutes = () => {
       {/* <Route path='/servicios' element={<RequireAdmin><ServiciosPage /></RequireAdmin>} />
       <Route path='/presupuestos' element={<RequireAdmin><PrespuestosPage /></RequireAdmin>} /> */}
 
-      <Route path='/eventos' element={<RequireAdmin><EventosPage /></RequireAdmin>} />
+      <Route path='/crear' element={<RequireAdmin><CrearEvento /></RequireAdmin>} />
+      <Route path='/eventos' element={<RequireAdmin><Eventos /></RequireAdmin>} />
       <Route path='/clientes' element={<RequireAdmin><ClientePage /></RequireAdmin>} />
       <Route path='/espacios' element={<RequireAdmin><EspaciosPage /></RequireAdmin>} />
       <Route path='/ponentes' element={<RequireAdmin><PonentesPage /></RequireAdmin>} />
@@ -32,7 +35,7 @@ export const AppRoutes = () => {
       <Route path='/concursos' element={<RequireAdmin><ConcursosPage /></RequireAdmin>} />
       <Route path='/ponencia' element={<FichaPonente />} />
       <Route path='/' element={<Login />} />
-      <Route path='/*' element={<Navigate to='/eventos' />} />
+      {/* <Route path='/*' element={<Navigate to='/eventos' />} /> */}
     </Routes>
 
 
