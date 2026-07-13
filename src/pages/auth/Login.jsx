@@ -65,7 +65,7 @@ export const Login = () => {
         {error && import.meta.env.VITE_MODE === "development" && <p>{error}</p>}
         {error && import.meta.env.VITE_MODE === "production" && <p>Error al conectarse. Por favor intenta de nuevo.</p>}
         <button className="login__submit" onClick={handleGoogleSignIn} disabled={loading}>
-          {loading ? "Loggeando..." : "Iniciar Sesión con Google"}
+          {loading ? "Logeando..." : "Iniciar Sesión con Google"}
         </button>
       </section>
 

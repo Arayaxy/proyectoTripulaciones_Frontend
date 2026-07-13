@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from "react-router"
 import { Login } from "../pages/auth/Login"
+import { ClientePage } from "../pages/admin/ClientePage"
 import { EspaciosPage } from "../pages/admin/EspaciosPage"
 import { PonentesPage } from "../pages/admin/PonentesPage"
 import { AgentePage } from "../pages/admin/AgentePage"
@@ -10,35 +11,30 @@ import { DatosEventoPage } from "../pages/admin/DatosEventoPage"
 import { PonenciasPage } from "../pages/admin/PonenciasPage"
 import { LugarPage } from "../pages/admin/LugarPage"
 import { EventoDetailPage } from "../pages/admin/EventoDetailPage"
-import { Eventos } from "../components/Eventos"
-
-import { ClientePage } from "../pages/admin/ClientePage"
+import { Layout } from "../components/Layout"
 import { CrearEventoPage } from "../pages/admin/CrearEventoPage"
-import { EventoPage } from "../pages/admin/EventoPage"
+import { EventosPage } from "../pages/admin/EventosPage"
 
 export const AppRoutes = () => {
   return (
-
     <Routes>
-      <Route path='/detalle' element={<RequireAdmin><EventoDetailPage /></RequireAdmin>} />
-      <Route path='/datos' element={<RequireAdmin><DatosEventoPage /></RequireAdmin>} />
-      <Route path='/ponencias' element={<RequireAdmin><PonenciasPage /></RequireAdmin>} />
-      <Route path='/lugar' element={<RequireAdmin><LugarPage /></RequireAdmin>} />
-      {/* <Route path='/servicios' element={<RequireAdmin><ServiciosPage /></RequireAdmin>} />
-      <Route path='/presupuestos' element={<RequireAdmin><PrespuestosPage /></RequireAdmin>} /> */}
-
-      <Route path='/crear' element={<RequireAdmin><CrearEventoPage /></RequireAdmin>} />
-      <Route path='/eventos' element={<RequireAdmin><EventoPage /></RequireAdmin>} />
-      <Route path='/clientes' element={<RequireAdmin><ClientePage /></RequireAdmin>} />
-      <Route path='/espacios' element={<RequireAdmin><EspaciosPage /></RequireAdmin>} />
-      <Route path='/ponentes' element={<RequireAdmin><PonentesPage /></RequireAdmin>} />
-      <Route path='/consultas' element={<RequireAdmin><AgentePage /></RequireAdmin>} />
-      <Route path='/concursos' element={<RequireAdmin><ConcursosPage /></RequireAdmin>} />
-      <Route path='/ponencia' element={<FichaPonente />} />
       <Route path='/' element={<Login />} />
-      {/* <Route path='/*' element={<Navigate to='/eventos' />} /> */}
+      <Route path='/ponencia' element={<FichaPonente />} />
+
+      <Route element={<RequireAdmin><Layout /></RequireAdmin>}>
+        <Route path='/eventos' element={<EventosPage />} />
+        <Route path='/crear' element={<CrearEventoPage />} />
+        <Route path='/clientes' element={<ClientePage />} />
+        <Route path='/espacios' element={<EspaciosPage />} />
+        <Route path='/ponentes' element={<PonentesPage />} />
+        <Route path='/consultas' element={<AgentePage />} />
+        <Route path='/concursos' element={<ConcursosPage />} />
+        <Route path='/detalle' element={<EventoDetailPage />} />
+        <Route path='/datos' element={<DatosEventoPage />} />
+        <Route path='/ponencias' element={<PonenciasPage />} />
+        <Route path='/lugar' element={<LugarPage />} />
+      </Route>
+      {/* <Route path='/*' element={<Navigate to='/NotFound' />} /> */}
     </Routes>
-
-
   )
 }
