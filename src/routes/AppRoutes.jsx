@@ -14,6 +14,7 @@ import { EventoDetailPage } from "../pages/admin/EventoDetailPage"
 import { Layout } from "../components/Layout"
 import { CrearEventoPage } from "../pages/admin/CrearEventoPage"
 import { EventosPage } from "../pages/admin/EventosPage"
+import { CrearClientePage } from '../pages/admin/crearClientePage'
 
 export const AppRoutes = () => {
   return (
@@ -25,6 +26,7 @@ export const AppRoutes = () => {
         <Route path='/eventos' element={<EventosPage />} />
         <Route path='/crear' element={<CrearEventoPage />} />
         <Route path='/clientes' element={<ClientePage />} />
+        <Route path='/clientes/nuevo' element={<CrearClientePage />} />
         <Route path='/espacios' element={<EspaciosPage />} />
         <Route path='/ponentes' element={<PonentesPage />} />
         <Route path='/consultas' element={<AgentePage />} />
