@@ -41,7 +41,7 @@ export const AuthContextProvider = ({ children }) => {
 
       await signOut(auth);
 
-      await fetch(`${API_URL}/api/v1/auth/logout`, {
+      await fetch(`${API_URL}/auth/logout`, {
         method: "POST",
         credentials: "include",
       });

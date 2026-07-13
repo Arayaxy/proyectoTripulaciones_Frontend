@@ -10,6 +10,8 @@ export const ClientCard = ({ cliente }) => {
       <p className="client-card__detail"><span className="client-card__label">Empresa:</span> {cliente.empresa}</p>
       <p className="client-card__detail"><span className="client-card__label">Sector:</span> {cliente.sector}</p>
       <p className="client-card__detail"><span className="client-card__label">Ciudad:</span> {cliente.ciudad}</p>
+      <button className="btn btn--outline btn--sm" onClick={handleDelete}>Eliminar</button>
+      <button className="btn btn--outline btn--sm" onClick={() => onDelete(cliente.id)}>Eliminar</button>
     </article>
   );
 };
