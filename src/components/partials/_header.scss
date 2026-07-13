@@ -49,9 +49,9 @@
   cursor: pointer;
   color: $color-primary;
 
-  @include bp-1024 {
-    display: none;
-  }
+  // @include bp-990 {
+  //   display: none;
+  // }
 }
 
 
@@ -64,10 +64,22 @@ Responsive768
 /* ===========================================
 Responsive 990
 ============================================== */
-@media screen and (min-width:990px) {}
+@media screen and (min-width:990px) {
+  .header__hamburger {
+    display: none;
+  }
+  .header__logout {
+    order: 2;
+  }
+}
 
 /*cierra 990 */
 /* ===========================================
 Responsive 1200
 ============================================== */
-@media screen and (min-width:1200px) {}
+@media screen and (min-width:1200px) {
+  .headerContainer {
+      @include flex-between;
+      padding: $sp-24 $sp-32;
+    }
+}
