@@ -14,7 +14,7 @@ export const ClienteFormulario = ({ onSubmit }) => {
     e.preventDefault()
     const formData = new FormData()
     Object.entries(form).forEach(([key, value]) => formData.append(key, value))
-    if (ficha) formData.append('ficha', ficha)
+    *//if (ficha) formData.append('ficha', ficha)
     onSubmit(formData)
   }
 
@@ -22,32 +22,27 @@ export const ClienteFormulario = ({ onSubmit }) => {
     <form onSubmit={handleSubmit}>
       <label>
         Nombre
-        <input name="cliente" placeholder="Nombre" value={form.cliente} onChange={handleChange} required />
+        <input name="cliente" placeholder="Nombre" onChange={handleChange} required />
       </label>
       <label>
         Email
-        <input name="email" type="email" placeholder="Email" value={form.email} onChange={handleChange} required />
+        <input name="email" type="email" placeholder="Email" onChange={handleChange} required />
       </label>
       <label>
         Teléfono
-        <input name="telefono" placeholder="Teléfono" value={form.telefono} onChange={handleChange} />
+        <input name="telefono" placeholder="Teléfono" onChange={handleChange} />
       </label>
       <label>
         Empresa
-        <input name="empresa" placeholder="Empresa" value={form.empresa} onChange={handleChange} />
+        <input name="empresa" placeholder="Empresa" onChange={handleChange} />
       </label>
       <label>
         Sector
-        <input name="sector" placeholder="Sector" value={form.sector} onChange={handleChange} />
+        <input name="sector" placeholder="Sector" onChange={handleChange} />
       </label>
       <label>
         Ciudad
-        <input name="ciudad" placeholder="Ciudad" value={form.ciudad} onChange={handleChange} />
-      </label>
-
-      <label>
-        Ficha del cliente
-        <input type="file" name="ficha" accept=".pdf" onChange={(e) => setFicha(e.target.files[0])} />
+        <input name="ciudad" placeholder="Ciudad" onChange={handleChange} />
       </label>
 
       <button className="btn btn--primary" type="submit">Guardar</button>
