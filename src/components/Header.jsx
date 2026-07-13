@@ -28,7 +28,7 @@ export const Header = () => {
         </div>
         <div className='botonyMenu'>
           <button onClick={handleLogOut}>Logout</button>
-          <button onClick={() => setIsOpen(prev => !prev)} aria-label="Abrir menú">
+          <button className='header__hamburger' onClick={() => setIsOpen(prev => !prev)} aria-label="Abrir menú">
             ☰
           </button>
           <Navbar isOpen={isOpen} onClose={() => setIsOpen(false)} />
