@@ -1,0 +1,30 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.client-card {
+  background: $color-bg;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  padding: $sp-16;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.client-card__name {
+  font-family: $font-primary;
+  font-size: $txt-lg;
+  font-weight: $fw-semibold;
+  color: $color-primary;
+  margin: 0 0 $sp-12;
+}
+
+.client-card__detail {
+  font-family: $font-secondary;
+  font-size: $txt-sm;
+  color: $color-text;
+  margin: 0 0 $sp-4;
+}
+
+.client-card__label {
+  font-weight: $fw-semibold;
+  color: $color-text-muted;
+}

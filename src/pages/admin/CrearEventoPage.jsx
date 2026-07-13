@@ -21,7 +21,11 @@ export const CrearEventoPage = () => {
   const [shouldSend, setShouldSend] = useState(false);
 
   const { data, loading, error, setData, setError } = useFetch(
+
     shouldSend ? `${API_URL}/api/v1/eventos` : null,
+
+    // shouldSend ? `${API_URL}/eventos` : null,
+
     "POST",
     shouldSend ? formValues : null
   );
