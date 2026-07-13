@@ -4,10 +4,13 @@ import { Eventos } from '../../components/Eventos'
 export const EventosPage = () => {
   return (
     <>
-      <main>
-        <h1>EventosPage</h1>
+    <header className='titlePage'>
+      <h1>Eventos</h1>
+      <button className="btn btn--outline" onClick={() => navigate('/eventos/nuevo')}>Nuevo Evento</button>
+    </header>
+    <section className='container'>
         <Eventos />
-      </main>
+    </section>
     </>
   )
 }

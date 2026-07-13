@@ -1,11 +1,21 @@
 import React from 'react'
 import { NavbarInterno } from '../../components/navbarInterno'
+import { EventoInfo } from '../../components/EventoInfo'
+import { EventoDetail } from '../../components/EventoDetail'
 
 export const EventoDetailPage = () => {
   return (
-    <div>
+    <>
+    <header className='titlePage'>
+      <h1>Eventos</h1>
+
+    </header>
+    <section className='container'>
       <NavbarInterno />
-      <h1>EventoDetailPage</h1>
-    </div>
+      <EventoInfo/>
+      <EventoDetail/>
+    </section>
+  </>
+
   )
 }

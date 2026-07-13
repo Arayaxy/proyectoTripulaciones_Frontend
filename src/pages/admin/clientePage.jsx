@@ -1,17 +1,18 @@
 import React from 'react'
-import { Cliente } from '../../components/Cliente'
+import { ClienteForm } from '../../components/ClienteForm'
+import { FileUpload } from '../../components/FileUpload'
 
 export const ClientePage = () => {
   return (
     <>
     <header className='titlePage'>
       <h1>Clientes</h1>
-
       <button className="btn btn--outline" onClick={() => navigate('/clientes/nuevo')}>Añadir Cliente</button>
-      <Cliente />
-
     </header>
-    <Cliente/>
+    <section className='container'>
+    <ClienteForm/>
+    <FileUpload/>
+    </section>
     </>
   )
 }

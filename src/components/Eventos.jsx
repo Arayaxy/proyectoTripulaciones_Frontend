@@ -5,10 +5,10 @@ import { EventoCard } from './EventoCard'
 export const Eventos = () => {
   return (
     <>
-    <div>
-      <h1>Eventos</h1>
-      <EventoCard />
-    </div>
+
+      Esta es la página de Eventos
+      <EventoCard/>
+
     </>
   )
 }

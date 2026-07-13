@@ -3,8 +3,10 @@ import './partials/_eventos.scss'
 
 export const Facturacion = () => {
   return (
-    <div>
-      <h1>Facturacion</h1>
-    </div>
+    <>
+    <section className='container'>
+    Esta es la página de FActuración
+    </section>
+    </>
   )
 }

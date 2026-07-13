@@ -1,10 +1,11 @@
 import React from 'react'
 import './partials/_eventos.scss'
+import { NavbarInterno } from './navbarInterno'
 
 export const EventoInfo = () => {
   return (
-    <div>
-      <h1>EventoInfo</h1>
-    </div>
+    <>
+      Este es el componente de Info Evento
+    </>
   )
 }

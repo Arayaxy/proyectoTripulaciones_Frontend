@@ -1,10 +1,10 @@
 import React from 'react'
-import './partials/_fileUploads.scss'
+import './partials/_fileUpload.scss'
 
 export const FileUpload = () => {
   return (
     <div>
-      <h1>FileUpload</h1>
+      <h1>File Upload</h1>
     </div>
   )
 }

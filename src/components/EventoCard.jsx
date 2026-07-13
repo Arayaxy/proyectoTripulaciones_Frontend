@@ -1,10 +1,11 @@
 import React from 'react'
 import './partials/_eventos.scss'
+import { NavbarInterno } from './navbarInterno'
 
 export const EventoCard = () => {
   return (
-    <div>
-      <h1>EventoCard</h1>
-    </div>
+    <>
+      Esta es la página de Tarjeta Evento
+    </>
   )
 }
