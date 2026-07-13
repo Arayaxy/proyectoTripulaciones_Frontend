@@ -7,6 +7,6 @@ export const Eventos = () => {
     <>
       Esta es la página de Eventos
       <EventoCard/>
-  </>
+    </>
   )
 }
