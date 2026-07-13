@@ -1,18 +1,25 @@
 import React from 'react';
 import { useFetch } from '../../hooks/useFetch';
 import { ClientCard } from './ClientCard';
+import { deleteCliente } from '../../services/clienteService'
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const cliente = () => {
-  const { data } = useFetch(`${API_URL}/clientes`, 'GET');
-
+  const { data, setData } = useFetch(`${API_URL}/clientes`, 'GET');
+  const handleDelete = async (id) => {
+    if (!window.confirm('¿Estás seguro de eliminar este cliente?')) return
+    const res = await deleteCliente(id)
+    if (res.ok) {
+      setData({ ...data, data: data.data.filter(c => c.id !== id) })
+    }
+  }
   return (
     <div>
       <h1>cliente</h1>
 
       {data?.ok && data.data.map((cli) => (
-        <ClientCard key={cli.id} cliente={cli} />
+        <ClientCard key={cli.id} cliente={cli} onDelete={handleDelete} />
       ))}
     </div>
   );

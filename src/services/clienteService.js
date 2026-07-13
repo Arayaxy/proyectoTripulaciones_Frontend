@@ -15,3 +15,11 @@ export const createCliente = async (formData) => {
   });
   return await res.json();
 };
+
+export const deleteCliente = async (id) => {
+  const res = await fetch(`${API_URL}/clientes/${id}`, {
+    method: 'DELETE',
+    credentials: 'include'
+  });
+  return await res.json();
+};
