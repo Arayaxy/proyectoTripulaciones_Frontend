@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import React from 'react'
+=======
+>>>>>>> 24f4f91 (fix NavbarInterno imports)
 import { NavbarInterno } from '../../components/NavbarInterno'
 import { EventoInfo } from '../../components/EventoInfo'
 import { EventoDetail } from '../../components/EventoDetail'
