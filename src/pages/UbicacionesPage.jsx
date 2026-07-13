@@ -1,4 +1,4 @@
-import CrearUbicacion from "../components/CrearUbicacion"
+import { CrearUbicacion } from "../components/CrearUbicacion"
 
 export const UbicacionesPage = () => {
   return (
