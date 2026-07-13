@@ -1,10 +1,8 @@
 import { Routes, Route, Navigate } from "react-router"
 import { Login } from "../pages/auth/Login"
-// import { EventosPage } from "../pages/admin/EventosPage"
-import { ClientePage } from "../pages/admin/clientePage"
 import { EspaciosPage } from "../pages/admin/EspaciosPage"
 import { PonentesPage } from "../pages/admin/PonentesPage"
-import { AgentePage } from "../pages/admin/agentePage"
+import { AgentePage } from "../pages/admin/AgentePage"
 import { ConcursosPage } from "../pages/admin/ConcursosPage"
 import { RequireAdmin } from "../components/RequireAdmin"
 import { FichaPonente } from "../pages/ponente/FichaPonente"
@@ -13,7 +11,10 @@ import { PonenciasPage } from "../pages/admin/PonenciasPage"
 import { LugarPage } from "../pages/admin/LugarPage"
 import { EventoDetailPage } from "../pages/admin/EventoDetailPage"
 import { Eventos } from "../components/Eventos"
-import { CrearEvento } from "../pages/admin/CrearEvento"
+
+import { ClientePage } from "../pages/admin/ClientePage"
+import { CrearEventoPage } from "../pages/admin/CrearEventoPage"
+import { EventoPage } from "../pages/admin/EventoPage"
 
 export const AppRoutes = () => {
   return (
@@ -26,8 +27,8 @@ export const AppRoutes = () => {
       {/* <Route path='/servicios' element={<RequireAdmin><ServiciosPage /></RequireAdmin>} />
       <Route path='/presupuestos' element={<RequireAdmin><PrespuestosPage /></RequireAdmin>} /> */}
 
-      <Route path='/crear' element={<RequireAdmin><CrearEvento /></RequireAdmin>} />
-      <Route path='/eventos' element={<RequireAdmin><Eventos /></RequireAdmin>} />
+      <Route path='/crear' element={<RequireAdmin><CrearEventoPage /></RequireAdmin>} />
+      <Route path='/eventos' element={<RequireAdmin><EventoPage /></RequireAdmin>} />
       <Route path='/clientes' element={<RequireAdmin><ClientePage /></RequireAdmin>} />
       <Route path='/espacios' element={<RequireAdmin><EspaciosPage /></RequireAdmin>} />
       <Route path='/ponentes' element={<RequireAdmin><PonentesPage /></RequireAdmin>} />

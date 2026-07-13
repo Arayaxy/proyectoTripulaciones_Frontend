@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import "./CrearEvento.css";
 import { useFetch } from "../../hooks/useFetch";
 
-export const CrearEvento = () => {
+export const CrearEventoPage = () => {
     const API_URL = import.meta.env.VITE_API_URL;
 
     const initialValues = {
