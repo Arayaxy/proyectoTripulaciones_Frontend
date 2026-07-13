@@ -1,7 +1,6 @@
 import { Link, NavLink, useNavigate } from "react-router"
 import React, { useState } from 'react';
-// import './partials/_navbar.scss'
-import './_navbar.css'
+import './partials/_navbar.scss'
 import { useAuth } from "../contexts/AuthContext"
 
 export const Navbar = () => {
@@ -15,8 +14,8 @@ export const Navbar = () => {
   const { logOut } = useAuth()
   const navigate = useNavigate()
 
-  const handleLogout = () => {
-    logOut();
+  const handleLogout = async() => {
+    await logOut();
     navigate("/");
   }
 

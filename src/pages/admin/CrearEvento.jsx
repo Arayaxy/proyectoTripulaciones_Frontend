@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useFetch } from "./useFetch";
 import "./CrearEvento.css";
+import { useFetch } from "../../hooks/useFetch";
 
 export const CrearEvento = () => {
     const API_URL = import.meta.env.VITE_API_URL;
@@ -36,7 +36,7 @@ export const CrearEvento = () => {
         e.preventDefault();
         const errors = validate(formValues);
         setFormErrors(errors);
-        
+
         if (Object.keys(errors).length === 0) {
             setShouldSend(true);
         }
@@ -58,23 +58,23 @@ export const CrearEvento = () => {
 
     const validate = (values) => {
         const errors = {};
-        
+
         if (!values.nombre?.trim()) {
             errors.nombre = "El nombre del evento es obligatorio";
         }
-        
+
         if (!values.cliente?.trim()) {
             errors.cliente = "El cliente es obligatorio";
         }
-        
+
         if (!values.ciudad?.trim()) {
             errors.ciudad = "La ciudad es obligatoria";
         }
-        
+
         if (!values.fecha) {
             errors.fecha = "La fecha es obligatoria";
         }
-        
+
         if (!values.assistentes || parseInt(values.assistentes) <= 0) {
             errors.assistentes = "El número de asistentes debe ser mayor a 0";
         }
