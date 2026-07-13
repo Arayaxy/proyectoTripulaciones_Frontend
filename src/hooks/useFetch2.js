@@ -33,6 +33,7 @@ export const useFetch = (url = null, options = {}) => {
       const headers = {
 
         'Content-Type': 'application/json',
+        'credentials': 'include',
         ...config.headers
 
       };
