@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from "react-router"
 import { Login } from "../pages/auth/Login"
+
 import { ClientePage } from "../pages/admin/ClientePage"
 import { EspaciosPage } from "../pages/admin/EspaciosPage"
 import { PonentesPage } from "../pages/admin/PonentesPage"
