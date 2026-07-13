@@ -24,7 +24,7 @@ export const Login = () => {
       const result = await googleSignIn();
       const firebaseIdToken = await result.user.getIdToken();
 
-      const resp = await fetch(`${API_URL}/api/v1/auth/login`, {
+      const resp = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${firebaseIdToken}`,

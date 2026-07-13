@@ -12,7 +12,7 @@ export const AuthContextProvider = ({ children }) => {
   const API_URL = import.meta.env.VITE_API_URL;
 
   const hasCookie = checkCookieExists("is_logged_in");
-  const verifyUrl = hasCookie ? `${API_URL}/api/v1/auth/verify` : null;
+  const verifyUrl = hasCookie ? `${API_URL}/auth/verify` : null;
 
   const {
     data: verifyData,
@@ -41,7 +41,7 @@ export const AuthContextProvider = ({ children }) => {
 
       await signOut(auth);
 
-      await fetch(`${API_URL}/api/v1/auth/logout`, {
+      await fetch(`${API_URL}/auth/logout`, {
         method: "POST",
         credentials: "include",
       });
