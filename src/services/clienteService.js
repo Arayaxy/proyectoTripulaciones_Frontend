@@ -7,11 +7,13 @@ export const getClientes = async () => {
   return await res.json();
 };
 
-export const createCliente = async (formData) => {
+export const createCliente = async (data) => {
+  console.log("Los datos del formulario de crear son: ", data)
   const res = await fetch(`${API_URL}/clientes`, {
     method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
-    body: formData
+    body: JSON.stringify(data)
   });
   return await res.json();
 };

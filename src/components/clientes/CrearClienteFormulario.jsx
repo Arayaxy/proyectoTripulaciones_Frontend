@@ -12,10 +12,10 @@ export const ClienteFormulario = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const formData = new FormData()
-    Object.entries(form).forEach(([key, value]) => formData.append(key, value))
-    *//if (ficha) formData.append('ficha', ficha)
-    onSubmit(formData)
+    // const formData = new FormData()
+    // Object.entries(form).forEach(([key, value]) => formData.append(key, value))
+    // if (ficha) formData.append('ficha', ficha)
+    onSubmit(form)
   }
 
   return (

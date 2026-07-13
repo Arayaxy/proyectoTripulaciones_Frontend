@@ -6,6 +6,7 @@ export const CrearClientePage = () => {
   const navigate = useNavigate()
 
   const handleSubmit = async (data) => {
+    console.log("data recibido en handleSubmit", data)
     const res = await createCliente(data)
     if (res.ok) navigate('/clientes')
   }
