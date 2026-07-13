@@ -4,7 +4,7 @@ export const UbicacionesPage = () => {
   return (
     <>
       <section>
-<CrearUbicacion/>
+        <CrearUbicacion />
       </section>
       <section>
         <form action="">
