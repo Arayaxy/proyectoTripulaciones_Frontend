@@ -1,24 +1,15 @@
 import { Navigate } from 'react-router';
-import { useAuth } from '../../contexts/AuthContext.jsx';
-import { Navbar } from '../navbar/Navbar.jsx';
+import { useAuth } from '../contexts/AuthContext.jsx';
+import './partials/_eventos.scss'
 
 export const RequireAdmin = ({ children }) => {
   const { user, loading } = useAuth();
-
   if (loading) {
     return <div>Verificando...</div>;
   }
-
   if (!user || user.role !== 'admin') {
     return <Navigate to="/" replace />;
   }
-
   console.log("require admin", user)
-  return (
-    <>
-      <Navbar />
-      <p>Cosa... mucha cosa</p>
-      {children}
-    </>
-  );
+  return children;
 };

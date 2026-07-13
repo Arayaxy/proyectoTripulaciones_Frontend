@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
-import { Navbar } from "../../components/navbar/Navbar";
 import heroLogo from '../../assets/logo_2026_Backstage.svg'
 import heroImg from '../../assets/heroImg.jpg'
 import './_login.scss'
@@ -60,13 +59,15 @@ export const Login = () => {
         <img src={heroImg} alt="MITÜMI Backstage" className="login__hero-img" />
       </div>
 
-      <div>
+      <section className="login__body">
+        <h2>¡Hola!</h2>
+        <p>Usa tu cuenta de Google para entrar en <strong>The Backstage</strong></p>
         {error && import.meta.env.VITE_MODE === "development" && <p>{error}</p>}
         {error && import.meta.env.VITE_MODE === "production" && <p>Error al conectarse. Por favor intenta de nuevo.</p>}
-        <button onClick={handleGoogleSignIn} disabled={loading}>
+        <button className="login__submit" onClick={handleGoogleSignIn} disabled={loading}>
           {loading ? "Loggeando..." : "Iniciar Sesión con Google"}
         </button>
-      </div>
+      </section>
 
       <footer className="login__footer">
         © MITÜMI {new Date().getFullYear()}

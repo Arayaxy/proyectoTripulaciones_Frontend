@@ -1,0 +1,56 @@
+@use '../../styles/fonts';
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+@use '../../styles/elements';
+@use '../../styles/reset';
+
+
+.headerContainer {
+  @include flex-between;
+  padding: $sp-12 $sp-20;
+  background: $color-white;
+  border-bottom: 1px solid $color-border;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  img {
+    height: 40px;
+    width: auto;
+  }
+}
+
+.botonyMenu {
+  @include flex(row, flex-end, center);
+  gap: $sp-12;
+}
+
+.header__logout {
+  padding: $sp-8 $sp-16;
+  border: 1px solid $color-primary;
+  border-radius: $radius-md;
+  color: $color-primary;
+  font-size: $txt-sm;
+  font-weight: $fw-medium;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: $color-primary;
+    color: $color-white;
+  }
+}
+
+.header__hamburger {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: $color-text;
+  padding: $sp-4;
+
+  @include bp-1024 {
+    display: none;
+  }
+}
