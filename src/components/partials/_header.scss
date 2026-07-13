@@ -7,7 +7,7 @@
 
 .headerContainer {
   @include flex-between;
-  padding: $sp-12 $sp-20;
+  padding: $sp-12 $sp-16;
   background: $color-white;
   border-bottom: 1px solid $color-border;
   position: sticky;
@@ -15,21 +15,21 @@
   z-index: 100;
 
   img {
-    height: 40px;
+    height: 39px;
     width: auto;
   }
 }
 
 .botonyMenu {
   @include flex(row, flex-end, center);
-  gap: $sp-12;
+  gap: $sp-8;
 }
 
 .header__logout {
   padding: $sp-8 $sp-16;
-  border: 1px solid $color-primary;
+  border: 1px solid $color-black-25;
   border-radius: $radius-md;
-  color: $color-primary;
+  color: $color-logout;
   font-size: $txt-sm;
   font-weight: $fw-medium;
   background: transparent;
@@ -37,7 +37,7 @@
   transition: all 0.2s ease;
 
   &:hover {
-    background: $color-primary;
+    background: $color-logout;
     color: $color-white;
   }
 }
@@ -45,12 +45,29 @@
 .header__hamburger {
   background: none;
   border: none;
-  font-size: 22px;
+  font-size: 2.4rem;
   cursor: pointer;
-  color: $color-text;
-  padding: $sp-4;
+  color: $color-primary;
 
   @include bp-1024 {
     display: none;
   }
 }
+
+
+/*====================================
+Responsive768
+============================================== */
+@media screen and (min-width:768px) {}
+
+/*cierra 768 */
+/* ===========================================
+Responsive 990
+============================================== */
+@media screen and (min-width:990px) {}
+
+/*cierra 990 */
+/* ===========================================
+Responsive 1200
+============================================== */
+@media screen and (min-width:1200px) {}

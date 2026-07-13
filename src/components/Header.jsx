@@ -22,12 +22,12 @@ export const Header = () => {
   return (
     <>
       <section className='headerContainer'>
-        <div className="login__header">
+        <div>
           <a href="/">
            <img src={heroLogo} alt="MITÜMI Backstage" /> </a>
         </div>
         <div className='botonyMenu'>
-          <button onClick={handleLogOut}>Logout</button>
+          <button className='header__logout' onClick={handleLogOut}>Logout</button>
           <button className='header__hamburger' onClick={() => setIsOpen(prev => !prev)} aria-label="Abrir menú">
             ☰
           </button>
