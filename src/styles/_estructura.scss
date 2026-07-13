@@ -20,11 +20,20 @@ body {
     margin: 0 auto;
   }
 
-  @include bp-1024 {
-    max-width: 1024px;
+  @include bp-990 {
+    max-width: 990px;
   }
 }
 
 main {
   flex: 1;
+}
+header.titlePage {
+  background-color: $color-primary;
+  padding: $sp-12 $sp-16;
+  @include flex-between;
+  h1 {
+    color: $color-white;
+    text-transform: uppercase;
+  }
 }

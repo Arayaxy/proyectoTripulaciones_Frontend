@@ -31,8 +31,13 @@
   }
 }
 
-@mixin bp-1024 {
-  @media screen and (min-width: 1024px) {
+@mixin bp-990 {
+  @media screen and (min-width: 990px) {
+    @content;
+  }
+}
+@mixin bp-1200 {
+  @media screen and (min-width: 1200px) {
     @content;
   }
 }

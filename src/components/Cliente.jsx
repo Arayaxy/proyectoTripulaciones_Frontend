@@ -1,10 +1,9 @@
 import React from 'react'
-import './partials/_clientes.scss'
+import './partials/_cliente.scss'
 
 export const Cliente = () => {
   return (
-    <div>
-      <h1>Cliente</h1>
-    </div>
+    <>
+    </>
   )
 }

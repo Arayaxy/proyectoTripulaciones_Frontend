@@ -3,18 +3,20 @@
 @use 'sass:color';
 
 // ─── Botones ──────────────────────────────────────────────────────────────
+
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: $sp-8 $sp-20;
+  padding: $sp-8 $sp-16;
   border-radius: $radius-md;
   font-family: $font-primary;
   font-size: $txt-base;
   font-weight: $fw-medium;
   cursor: pointer;
   transition: all 0.2s ease;
-  border: 2px solid transparent;
+  border: 1px solid $color-black-25;
+  background-color: $color-white;
 
   &--primary {
     background: $color-primary;
@@ -26,12 +28,11 @@
   }
 
   &--outline {
-    background: transparent;
     color: $color-primary;
     border-color: $color-primary;
 
     &:hover {
-      background: $color-primary;
+      background: color.adjust($color-primary, $lightness: -8%);
       color: #fff;
     }
   }
