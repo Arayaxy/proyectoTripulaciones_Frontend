@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useFetch } from "../hooks/useFetch";
 
-export const EspacioEditarForm = ({ espacio, setEspacioEnEdicion }) => {
+export const EspacioEditarForm = ({ espacio }) => {
   const API_URL = import.meta.env.VITE_API_URL;
   const [request, setRequest] = useState(null);
 
@@ -55,8 +55,6 @@ export const EspacioEditarForm = ({ espacio, setEspacioEnEdicion }) => {
       body: datosEspacio,
     });
     console.log(datosEspacio);
-
-    setEspacioEnEdicion(null);
   };
 
   return (

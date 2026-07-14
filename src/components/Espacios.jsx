@@ -74,7 +74,7 @@ export const Espacios = () => {
                 <p><strong>Email:</strong> {espacio.emailContacto}</p>
               </>
               :
-              <EspacioEditarForm espacio={espacio} setEspacioEnEdicion={setEspacioEnEdicion} />
+              <EspacioEditarForm espacio={espacio} />
             }
 
             {espacio.salas?.length > 0 && (
