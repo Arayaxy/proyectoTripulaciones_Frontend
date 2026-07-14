@@ -14,7 +14,7 @@ import { EventoDetailPage } from "../pages/admin/EventoDetailPage"
 import { Layout } from "../components/Layout"
 import { CrearEventoPage } from "../pages/admin/CrearEventoPage"
 import { EventosPage } from "../pages/admin/EventosPage"
-import { CrearClientePage } from '../pages/admin/crearClientePage'
+import { CrearClientePage } from '../pages/admin/CrearClientePage'
 import { EditarClientePage } from "../pages/admin/EditarClientePage"
 
 export const AppRoutes = () => {
