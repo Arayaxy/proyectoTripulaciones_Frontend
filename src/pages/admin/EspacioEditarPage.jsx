@@ -17,7 +17,7 @@ export const EspacioEditarPage = () => {
   const [shouldSubmit, setShouldSubmit] = useState(false)
   const [formValues, setFormValues] = useState(null)
 
-  const { data: updateData, loading: updateLoading, error, setData: setUpdateData, setError } = useFetch(
+  const { data: updateData, loading: updateLoading, error, setError } = useFetch(
     shouldSubmit ? `${API_URL}/espacios/${id}` : null,
     "PATCH",
     shouldSubmit ? formValues : null

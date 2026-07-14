@@ -1,18 +1,25 @@
 import { useState, useEffect } from "react"
 import { useNavigate, useParams } from "react-router"
 import { useFetch } from "../../hooks/useFetch"
-import { SalaForm } from "../../components/SalaForm"
+import { EspacioSalaForm } from "../../components/EspacioSalaForm"
 
 const API_URL = import.meta.env.VITE_API_URL
 
 export const EspacioSalaCrearPage = () => {
   const { id: espacioId } = useParams()
   const navigate = useNavigate()
+
+  const { data: espacioData } = useFetch(
+    espacioId ? `${API_URL}/espacios/${espacioId}` : null
+  )
+  const nombreEspacio = espacioData?.data?.nombreEspacio
+  const haySalas = (espacioData?.data?.salas?.length || 0) > 0
+
   const [shouldSubmit, setShouldSubmit] = useState(false)
   const [formValues, setFormValues] = useState(null)
   const [message, setMessage] = useState("")
 
-  const { data, loading, error, setData, setError } = useFetch(
+  const { data, loading, error, setError } = useFetch(
     shouldSubmit ? `${API_URL}/salas` : null,
     "POST",
     shouldSubmit ? formValues : null
@@ -43,7 +50,7 @@ export const EspacioSalaCrearPage = () => {
   return (
     <>
       <header className="titlePage">
-        <h1>Nueva sala</h1>
+        <h1>Nueva sala{nombreEspacio ? ` en ${nombreEspacio}` : ""}</h1>
       </header>
 
       {message && (
@@ -53,10 +60,10 @@ export const EspacioSalaCrearPage = () => {
       )}
 
       <section className="container">
-        <SalaForm
+        <EspacioSalaForm
           onSubmit={handleSubmit}
           loading={loading}
-          onCancel={() => navigate(`/espacios/${espacioId}/salas`)}
+          onCancel={() => navigate(haySalas ? `/espacios/${espacioId}/salas` : `/espacios`)}
         />
       </section>
     </>

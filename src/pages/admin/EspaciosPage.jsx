@@ -30,8 +30,19 @@ export const EspaciosPage = () => {
     }
   }, [deleteData])
 
+  const handleGestionarSalas = (id) => navigate(`/espacios/${id}/salas`)
+  const handleAnadirSala = (id) => navigate(`/espacios/${id}/salas/nuevo`)
+  const handleEditarEspacio = (id) => navigate(`/espacios/editar/${id}`)
+
   const handleDelete = (id) => {
-    if (!window.confirm("¿Estás seguro de eliminar este espacio?")) return
+    const espacio = data?.data?.find((e) => e.id === id)
+    const numSalas = espacio?.salas?.length || 0
+    const msg = numSalas === 1
+      ? "¿Estás seguro de eliminar este espacio y su sala?"
+      : numSalas > 1
+        ? `¿Estás seguro de eliminar este espacio y sus ${numSalas} salas?`
+        : "¿Estás seguro de eliminar este espacio?"
+    if (!window.confirm(msg)) return
     setDeleteId(id)
     setShouldDelete(true)
   }
@@ -95,14 +106,29 @@ export const EspaciosPage = () => {
                   <span className="presupuesto-card__value">{espacio.emailContacto}</span>
                 </div>
 
-                {espacio.salas?.length > 0 && (
-                  <div className="presupuesto-card__row">
-                    <span className="presupuesto-card__label">Salas:</span>
-                    <span className="presupuesto-card__value">
-                      {espacio.salas.map((s) => `${s.nombreSala} (${s.capacidadMaxSala} pers.)`).join(", ")}
-                    </span>
+                <hr />
+
+                <h4>Salas ({espacio.salas?.length || 0})</h4>
+                {espacio.salas?.map((s) => (
+                  <div className="presupuesto-card__row" key={s.id}>
+                    <span className="presupuesto-card__label">{s.nombreSala}:</span>
+                    <span className="presupuesto-card__value">{s.tipoSala} - {s.capacidadMaxSala} pers.</span>
                   </div>
-                )}
+                ))}
+
+                <div>
+                  {espacio.salas?.length > 0 ? (
+                    <button className="btn btn--anadir" onClick={() => handleGestionarSalas(espacio.id)}>
+                      Gestionar salas
+                    </button>
+                  ) : (
+                    <button className="btn btn--anadir" onClick={() => handleAnadirSala(espacio.id)}>
+                      Añadir sala
+                    </button>
+                  )}
+                </div>
+
+                <hr />
 
                 <div className="presupuesto-card__actions">
                   <button
@@ -112,11 +138,8 @@ export const EspaciosPage = () => {
                   >
                     {deleteLoading && deleteId === espacio.id ? "Eliminando..." : "Eliminar"}
                   </button>
-                  <button className="btn btn--primary" onClick={() => navigate(`/espacios/editar/${espacio.id}`)}>
+                  <button className="btn btn--primary" onClick={() => handleEditarEspacio(espacio.id)}>
                     Editar
-                  </button>
-                  <button className="btn btn--primary" onClick={() => navigate(`/espacios/${espacio.id}/salas`)}>
-                    Salas
                   </button>
                 </div>
               </div>

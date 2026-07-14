@@ -1,13 +1,19 @@
 import { useState, useEffect } from "react"
 import { useNavigate, useParams } from "react-router"
 import { useFetch } from "../../hooks/useFetch"
-import { SalaForm } from "../../components/SalaForm"
+import { EspacioSalaForm } from "../../components/EspacioSalaForm"
 
 const API_URL = import.meta.env.VITE_API_URL
 
 export const EspacioSalaEditarPage = () => {
   const { id: espacioId, salaId } = useParams()
   const navigate = useNavigate()
+
+  const { data: espacioData } = useFetch(
+    espacioId ? `${API_URL}/espacios/${espacioId}` : null
+  )
+  const nombreEspacio = espacioData?.data?.nombreEspacio
+
   const [message, setMessage] = useState("")
 
   const { data: salaData, loading: salaLoading } = useFetch(
@@ -17,7 +23,7 @@ export const EspacioSalaEditarPage = () => {
   const [shouldSubmit, setShouldSubmit] = useState(false)
   const [formValues, setFormValues] = useState(null)
 
-  const { data: updateData, loading: updateLoading, error, setData: setUpdateData, setError } = useFetch(
+  const { data: updateData, loading: updateLoading, error, setError } = useFetch(
     shouldSubmit ? `${API_URL}/salas/${salaId}` : null,
     "PATCH",
     shouldSubmit ? formValues : null
@@ -51,7 +57,7 @@ export const EspacioSalaEditarPage = () => {
   return (
     <>
       <header className="titlePage">
-        <h1>Editar sala</h1>
+        <h1>Editar sala{nombreEspacio ? ` en ${nombreEspacio}` : ""}</h1>
       </header>
 
       {message && (
@@ -61,7 +67,7 @@ export const EspacioSalaEditarPage = () => {
       )}
 
       <section className="container">
-        <SalaForm
+        <EspacioSalaForm
           initialValues={salaData.data}
           onSubmit={handleSubmit}
           loading={updateLoading}

@@ -11,7 +11,7 @@ export const EspacioCrearPage = () => {
   const [formValues, setFormValues] = useState(null)
   const [message, setMessage] = useState("")
 
-  const { data, loading, error, setData, setError } = useFetch(
+  const { data, loading, error, setError } = useFetch(
     shouldSubmit ? `${API_URL}/espacios` : null,
     "POST",
     shouldSubmit ? formValues : null

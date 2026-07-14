@@ -1,4 +1,5 @@
 import { useState } from "react"
+import './partials/_presupuestoForm.scss'
 
 const defaultValues = {
   nombreSala: "",
@@ -7,7 +8,7 @@ const defaultValues = {
   notaSala: "",
 }
 
-export const SalaForm = ({ initialValues, onSubmit, loading, onCancel }) => {
+export const EspacioSalaForm = ({ initialValues, onSubmit, loading, onCancel }) => {
   const [values, setValues] = useState(initialValues ?? defaultValues)
   const [errors, setErrors] = useState({})
 

@@ -39,6 +39,9 @@ export const EspacioSalasPage = () => {
     }
   }, [deleteData])
 
+  const handleNuevaSala = () => navigate(`/espacios/${espacioId}/salas/nuevo`)
+  const handleEditarSala = (salaId) => navigate(`/espacios/${espacioId}/salas/editar/${salaId}`)
+
   const handleDelete = (salaId) => {
     if (!window.confirm("¿Estás seguro de eliminar esta sala?")) return
     setDeleteId(salaId)
@@ -57,7 +60,7 @@ export const EspacioSalasPage = () => {
           <h1>Salas de {nombreEspacio}</h1>
         </div>
         <div>
-          <button className="btn btn--anadir" onClick={() => navigate(`/espacios/${espacioId}/salas/nuevo`)}>
+          <button className="btn btn--anadir" onClick={handleNuevaSala}>
             Añadir sala
           </button>
           <button className="btn btn--primary" onClick={() => navigate(`/espacios`)}>
@@ -103,7 +106,7 @@ export const EspacioSalasPage = () => {
                   >
                     {deleteLoading && deleteId === sala.id ? "Eliminando..." : "Eliminar"}
                   </button>
-                  <button className="btn btn--primary" onClick={() => navigate(`/espacios/${espacioId}/salas/editar/${sala.id}`)}>
+                  <button className="btn btn--primary" onClick={() => handleEditarSala(sala.id)}>
                     Editar
                   </button>
                 </div>
