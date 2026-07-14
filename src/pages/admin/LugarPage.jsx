@@ -1,5 +1,5 @@
 import React from 'react'
-// import { NavbarInterno } from '../../components/navbarInterno'
+// import { NavbarInterno } from '../../components/NavbarInterno'
 
 export const LugarPage = () => {
   return (
