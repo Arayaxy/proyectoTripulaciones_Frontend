@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useFetch } from '../hooks/useFetch';
 
-export const TodosLosEspacios = () => {
+export const Espacios = () => {
   const API_URL = import.meta.env.VITE_API_URL;
 
   const [request, setRequest] = useState(null);
@@ -26,6 +26,17 @@ export const TodosLosEspacios = () => {
     setRequest({
       url: `${API_URL}/espacios/${espacioId}`,
       method: "DELETE",
+    });
+  };
+
+  const handleActualizarEspacio = (espacioId) => {
+    console.log("Espacio a actualizar:", espacioId);
+
+    // DELETE /espacios
+    setRequest({
+      url: `${API_URL}/espacios/${espacioId}`,
+      method: "PATCH",
+      body: '',
     });
   };
 

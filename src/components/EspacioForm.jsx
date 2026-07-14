@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useFetch } from "../hooks/useFetch";
 
-export const CrearUbicacion = () => {
+export const EspacioForm = () => {
   const API_URL = import.meta.env.VITE_API_URL;
   const [mostrarEspacio, setMostrarEspacio] = useState(false);
   const [mostrarSala, setMostrarSala] = useState(false);
