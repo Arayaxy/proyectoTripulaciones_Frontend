@@ -63,6 +63,7 @@ header.titlePage {
   @include bp-990 {
     grid-template-columns: repeat(3, 1fr);
   }
+
   @include bp-1200 {
     grid-template-columns: repeat(4, 1fr);
   }
