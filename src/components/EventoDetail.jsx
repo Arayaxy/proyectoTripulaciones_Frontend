@@ -7,8 +7,6 @@ export const EventoDetail = () => {
     <>
       <NavbarInterno />
       Este es el componente de Detalle Evento
-
-
     </>
   )
 }

@@ -1,4 +1,4 @@
-
+import React from 'react'
 import { NavbarInterno } from '../../components/NavbarInterno'
 import { EventoInfo } from '../../components/EventoInfo'
 import { EventoDetail } from '../../components/EventoDetail'

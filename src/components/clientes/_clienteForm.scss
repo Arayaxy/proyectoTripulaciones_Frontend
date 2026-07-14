@@ -1,8 +1,5 @@
-@use '../../styles/fonts';
 @use '../../styles/variables' as *;
 @use '../../styles/mixins' as *;
-@use '../../styles/elements';
-@use '../../styles/reset';
 
 
 .form-cliente {
@@ -26,7 +23,14 @@
     span {
       font-size: $txt-sm;
       font-weight: $fw-medium;
-      color: $color-text-muted;
+      color: $color-primary;
+      padding-left: $sp-12;
     }
+  }
+  h2 {
+    font-size: $txt-lg;
+    text-align: center;
+    padding: $sp-8 0 0 0;
+    font-weight: $fw-medium;
   }
 }

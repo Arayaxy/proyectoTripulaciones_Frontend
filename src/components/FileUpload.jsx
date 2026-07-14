@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './partials/_fileUpload.scss';
 
-export const FileUpload = ({ uploadUrl, onSuccess, onError, accept = "*", label = "Seleccionar archivo" }) => {
+export const FileUpload = ({ uploadUrl, onSuccess, onError, accept = "*", label = "Seleccionar archivo", withCredentials = true }) => {
   const [file, setFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [dragOver, setDragOver] = useState(false);
@@ -28,7 +28,7 @@ export const FileUpload = ({ uploadUrl, onSuccess, onError, accept = "*", label 
     try {
       const res = await fetch(uploadUrl, {
         method: "POST",
-        credentials: "include",
+        credentials: withCredentials ? "include" : "omit",
         body: formData,
       });
       const json = await res.json();

@@ -1,4 +1,8 @@
+@use 'variables' as *;
+
 // Flex shortcuts
+
+
 @mixin flex($direction: row, $justify: flex-start, $align: stretch) {
   display: flex;
   flex-direction: $direction;
@@ -18,12 +22,13 @@
   align-items: center;
 }
 
-// Breakpoints — Mobile First
-@mixin bp-480 {
-  @media screen and (min-width: 480px) {
-    @content;
-  }
+@mixin grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $sp-16;
 }
+
+// Breakpoints — Mobile First
 
 @mixin bp-768 {
   @media screen and (min-width: 768px) {

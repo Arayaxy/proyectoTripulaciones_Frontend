@@ -1,5 +1,5 @@
 
- import { NavbarInterno } from '../../components/NavbarInterno'
+import { NavbarInterno } from '../../components/NavbarInterno'
 
 export const DatosEventoPage = () => {
   return (

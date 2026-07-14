@@ -12,7 +12,7 @@ body {
 
 .container {
   width: 100%;
-  padding: $sp-20;
+  padding: $sp-24;
   box-sizing: border-box;
 
   @include bp-768 {
@@ -28,12 +28,29 @@ body {
 main {
   flex: 1;
 }
+
 header.titlePage {
   background-color: $color-primary;
   padding: $sp-12 $sp-16;
   @include flex-between;
+
   h1 {
     color: $color-white;
     text-transform: uppercase;
   }
 }
+
+<<<<<<< HEAD=======.gridClientes {
+  @include grid;
+
+  @include bp-768 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include bp-990 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+}
+
+>>>>>>>clientes

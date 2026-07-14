@@ -5,7 +5,8 @@ import { NavbarInterno } from './NavbarInterno'
 export const EventoInfo = () => {
   return (
     <>
-    <NavbarInterno/>
+      <NavbarInterno />
+      clientes
       Este es el componente de Info Evento
     </>
   )

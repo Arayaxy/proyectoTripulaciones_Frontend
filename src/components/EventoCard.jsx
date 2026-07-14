@@ -4,8 +4,8 @@ import { NavbarInterno } from './NavbarInterno'
 export const EventoCard = () => {
   return (
     <>
-
-    <NavbarInterno/>
+      <NavbarInterno />
+      clientes
       Esta es la página de Tarjeta Evento
     </>
   )

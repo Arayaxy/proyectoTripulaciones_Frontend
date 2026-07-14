@@ -27,7 +27,7 @@ export const Header = () => {
            <img src={heroLogo} alt="MITÜMI Backstage" /> </a>
         </div>
         <div className='botonyMenu'>
-          <button className='header__logout' onClick={handleLogOut}>Logout</button>
+          <button className='btn btn--logout' onClick={handleLogOut}>Logout</button>
           <button className='header__hamburger' onClick={() => setIsOpen(prev => !prev)} aria-label="Abrir menú">
             ☰
           </button>
