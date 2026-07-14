@@ -55,9 +55,10 @@ export const PresupuestoForm = ({ initialValues, onSubmit, loading, onCancel, re
     const errs = validate(values)
     setErrors(errs)
     if (Object.keys(errs).length === 0) {
+      const { id, evento, ...cleanValues } = values
       const payload = {
-        ...values,
-        total: parseFloat(values.total) || 0,
+        ...cleanValues,
+        total: parseFloat(cleanValues.total) || 0,
         precioUbicacion: parseFloat(values.precioUbicacion) || 0,
         precioCatering: parseFloat(values.precioCatering) || 0,
         precioAudiovisuales: parseFloat(values.precioAudiovisuales) || 0,
@@ -132,7 +133,11 @@ export const PresupuestoForm = ({ initialValues, onSubmit, loading, onCancel, re
       {renderField("total", "Total *", "number", { min: 0, step: "0.01" })}
       {renderField("fecha", "Fecha", "date")}
 
-      {renderSection("Ubicación", "catering", "precioUbicacion", "notaUbicacion")}
+      <fieldset className="presupuesto-form__section">
+        <legend>Ubicación</legend>
+        {renderField("precioUbicacion", "Precio", "number", { min: 0, step: "0.01" })}
+        {renderField("notaUbicacion", "Nota")}
+      </fieldset>
       {renderSection("Catering", "catering", "precioCatering", "notaCatering")}
       {renderSection("Audiovisuales", "audiovisuales", "precioAudiovisuales", "notaAudiovisuales")}
       {renderSection("Otros", "otros", "precioOtros", "notaOtros")}

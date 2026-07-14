@@ -1,35 +1,42 @@
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router"
+import { useNavigate, useParams } from "react-router"
 import { useFetch } from "../../hooks/useFetch"
 import { PresupuestoForm } from "../../components/PresupuestoForm"
 
 const API_URL = import.meta.env.VITE_API_URL
 
-export const CrearPresupuestoPage = () => {
+export const EditarPresupuestoPage = () => {
+  const { id } = useParams()
   const navigate = useNavigate()
-  const [shouldSubmit, setShouldSubmit] = useState(false)
-  const [formValues, setFormValues] = useState(null)
   const [message, setMessage] = useState("")
 
-  const { data, loading, error, setData, setError } = useFetch(
-    shouldSubmit ? `${API_URL}/presupuestos` : null,
-    "POST",
+  const { data: presupuestoData, loading: presupuestoLoading } = useFetch(
+    id ? `${API_URL}/presupuestos/${id}` : null
+  )
+
+  const [shouldSubmit, setShouldSubmit] = useState(false)
+  const [formValues, setFormValues] = useState(null)
+
+  const { data: updateData, loading: updateLoading, error, setData: setUpdateData, setError } = useFetch(
+    shouldSubmit ? `${API_URL}/presupuestos/${id}` : null,
+    "PATCH",
     shouldSubmit ? formValues : null
   )
 
   useEffect(() => {
-    if (data) {
-      setMessage("Presupuesto creado correctamente")
+    if (updateData) {
+      setMessage("Presupuesto actualizado correctamente")
       setShouldSubmit(false)
       setFormValues(null)
       setTimeout(() => navigate("/presupuestos"), 1000)
     }
-  }, [data])
+  }, [updateData])
 
   useEffect(() => {
     if (error) {
       setMessage(`Error: ${error}`)
       setShouldSubmit(false)
+      setFormValues(null)
       setError(null)
     }
   }, [error])
@@ -39,10 +46,13 @@ export const CrearPresupuestoPage = () => {
     setShouldSubmit(true)
   }
 
+  if (presupuestoLoading) return <div className="presupuestos__loading">Cargando presupuesto...</div>
+  if (!presupuestoData?.data) return <div className="presupuestos__error">Presupuesto no encontrado</div>
+
   return (
     <div className="presupuestos">
       <header className="presupuestos__header">
-        <h1>Crear Presupuesto</h1>
+        <h1>Editar Presupuesto</h1>
       </header>
 
       {message && (
@@ -52,8 +62,9 @@ export const CrearPresupuestoPage = () => {
       )}
 
       <PresupuestoForm
+        initialValues={presupuestoData.data}
         onSubmit={handleSubmit}
-        loading={loading}
+        loading={updateLoading}
         onCancel={() => navigate("/presupuestos")}
       />
     </div>

@@ -16,6 +16,7 @@ import { CrearEventoPage } from "../pages/admin/CrearEventoPage"
 import { EventosPage } from "../pages/admin/EventosPage"
 import { PresupuestosPage } from "../pages/admin/PresupuestoPage"
 import { CrearPresupuestoPage } from "../pages/admin/CrearPresupuestoPage"
+import { EditarPresupuestoPage } from "../pages/admin/EditarPresupuestoPage"
 
 export const AppRoutes = () => {
   return (
@@ -38,6 +39,7 @@ export const AppRoutes = () => {
         <Route path='/ponencias' element={<PonenciasPage />} />
         <Route path='/presupuestos' element={<PresupuestosPage />} />
         <Route path='/presupuestos/crear' element={<CrearPresupuestoPage />} />
+        <Route path='/presupuestos/editar/:id' element={<EditarPresupuestoPage />} />
         <Route path='/lugar' element={<LugarPage />} />
       </Route>
       {/* <Route path='/*' element={<Navigate to='/NotFound' />} /> */}

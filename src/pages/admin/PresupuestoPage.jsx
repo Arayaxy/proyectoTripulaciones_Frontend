@@ -8,7 +8,7 @@ const API_URL = import.meta.env.VITE_API_URL
 export const PresupuestosPage = () => {
 
   const navigate = useNavigate()
-  const { data, loading, setData } = useFetch(`${API_URL}/api/v1/presupuestos`)
+  const { data, loading, setData } = useFetch(`${API_URL}/presupuestos`)
 
   const [mode, setMode] = useState("list")
   const [message, setMessage] = useState("")
@@ -25,7 +25,7 @@ export const PresupuestosPage = () => {
   const [deleteId, setDeleteId] = useState(null)
 
   const { data: createData, loading: createLoading } = useFetch(
-    shouldCreate ? `${API_URL}/api/v1/presupuestos` : null,
+    shouldCreate ? `${API_URL}/presupuestos` : null,
     "POST",
     shouldCreate ? newValues : null
   )
@@ -37,7 +37,7 @@ export const PresupuestosPage = () => {
   )
 
   const { data: deleteData, loading: deleteLoading } = useFetch(
-    shouldDelete ? `${API_URL}/api/v1/presupuestos/${deleteId}` : null,
+    shouldDelete ? `${API_URL}/presupuestos/${deleteId}` : null,
     "DELETE"
   )
 
@@ -87,15 +87,14 @@ export const PresupuestosPage = () => {
     setShouldUpdate(true)
   }
 
-  const handleDelete = (id) => {
+const handleDelete = (id) => {
+    if (!window.confirm('¿Estás seguro de eliminar este presupuesto?')) return
     setDeleteId(id)
     setShouldDelete(true)
-  }
+}
 
   const openEdit = (presupuesto) => {
-    setFormValues(presupuesto)
-    setUpdateId(presupuesto.id)
-    setMode("edit")
+    navigate(`/presupuestos/editar/${presupuesto.id}`)
   }
 
   if (loading) return <div className="presupuestos__loading">Cargando presupuestos...</div>
