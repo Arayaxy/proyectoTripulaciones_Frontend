@@ -1,95 +1,109 @@
 import { useState, useEffect } from "react"
-import { useSearchParams } from "react-router"
+import { useNavigate } from "react-router"
 import { useFetch } from "../../hooks/useFetch"
 import { PresupuestoForm } from "../../components/PresupuestoForm"
 
 const API_URL = import.meta.env.VITE_API_URL
 
 export const PresupuestosPage = () => {
-  const [searchParams] = useSearchParams()
-  const eventoId = searchParams.get("eventoId")
 
-  const { data: eventoData, loading: eventoLoading } = useFetch(
-    eventoId ? `${API_URL}/api/v1/eventos/${eventoId}` : null
-  )
+  const navigate = useNavigate()
+  const { data, loading, setData } = useFetch(`${API_URL}/api/v1/presupuestos`)
 
-  const presupuestoId = eventoData?.data?.idPresupuesto
-
-  const { data: presupuestoData, loading: presupuestoLoading, setData: setPresupuestoData } = useFetch(
-    presupuestoId ? `${API_URL}/api/v1/presupuestos/${presupuestoId}` : null
-  )
-
-  const [mode, setMode] = useState("view")
-  const [shouldSubmit, setShouldSubmit] = useState(false)
-  const [submitConfig, setSubmitConfig] = useState(null)
-  const [shouldDelete, setShouldDelete] = useState(false)
+  const [mode, setMode] = useState("list")
   const [message, setMessage] = useState("")
+  const [formValues, setFormValues] = useState(null)
 
-  const { data: submitData, loading: submitLoading, error: submitError, setData: setSubmitData, setError: setSubmitError } = useFetch(
-    shouldSubmit ? submitConfig?.url : null,
-    submitConfig?.method,
-    shouldSubmit ? submitConfig?.body : null
+  const [shouldCreate, setShouldCreate] = useState(false)
+  const [newValues, setNewValues] = useState(null)
+
+  const [shouldUpdate, setShouldUpdate] = useState(false)
+  const [updateId, setUpdateId] = useState(null)
+  const [updateValues, setUpdateValues] = useState(null)
+
+  const [shouldDelete, setShouldDelete] = useState(false)
+  const [deleteId, setDeleteId] = useState(null)
+
+  const { data: createData, loading: createLoading } = useFetch(
+    shouldCreate ? `${API_URL}/api/v1/presupuestos` : null,
+    "POST",
+    shouldCreate ? newValues : null
+  )
+
+  const { data: updateData, loading: updateLoading } = useFetch(
+    shouldUpdate ? `${API_URL}/presupuestos/${updateId}` : null,
+    "PATCH",
+    shouldUpdate ? updateValues : null
   )
 
   const { data: deleteData, loading: deleteLoading } = useFetch(
-    shouldDelete ? `${API_URL}/api/v1/presupuestos/${presupuestoId}` : null,
+    shouldDelete ? `${API_URL}/api/v1/presupuestos/${deleteId}` : null,
     "DELETE"
   )
 
   useEffect(() => {
-    if (submitData) {
-      setMessage(presupuestoId ? "Presupuesto actualizado" : "Presupuesto creado")
-      setPresupuestoData(submitData)
-      setMode("view")
-      setShouldSubmit(false)
-      setSubmitData(null)
+    if (createData) {
+      setData(prev => ({ ...prev, data: [...(prev?.data || []), createData.data] }))
+      setShouldCreate(false)
+      setNewValues(null)
+      setMode("list")
+      setMessage("Presupuesto creado correctamente")
     }
-  }, [submitData])
+  }, [createData])
 
   useEffect(() => {
-    if (submitError) {
-      setMessage(`Error: ${submitError}`)
-      setShouldSubmit(false)
-      setSubmitError(null)
+    if (updateData) {
+      setData(prev => ({
+        ...prev,
+        data: prev.data.map(p => p.id === updateId ? updateData.data : p)
+      }))
+      setShouldUpdate(false)
+      setUpdateValues(null)
+      setUpdateId(null)
+      setMode("list")
+      setMessage("Presupuesto actualizado correctamente")
     }
-  }, [submitError])
+  }, [updateData])
 
   useEffect(() => {
     if (deleteData) {
-      setMessage("Presupuesto eliminado")
-      setPresupuestoData(null)
-      setMode("view")
+      setData(prev => ({
+        ...prev,
+        data: prev.data.filter(p => p.id !== deleteId)
+      }))
       setShouldDelete(false)
+      setDeleteId(null)
+      setMessage("Presupuesto eliminado correctamente")
     }
   }, [deleteData])
 
   const handleCreate = (values) => {
-    setSubmitConfig({ url: `${API_URL}/api/v1/presupuestos`, method: "POST", body: values })
-    setShouldSubmit(true)
+    setNewValues(values)
+    setShouldCreate(true)
   }
 
   const handleUpdate = (values) => {
-    setSubmitConfig({ url: `${API_URL}/api/v1/presupuestos/${presupuestoId}`, method: "PATCH", body: values })
-    setShouldSubmit(true)
+    setUpdateValues(values)
+    setShouldUpdate(true)
   }
 
-  const handleDelete = () => {
+  const handleDelete = (id) => {
+    setDeleteId(id)
     setShouldDelete(true)
   }
 
-  if (eventoLoading || presupuestoLoading) {
-    return <div className="presupuestos__loading">Cargando...</div>
+  const openEdit = (presupuesto) => {
+    setFormValues(presupuesto)
+    setUpdateId(presupuesto.id)
+    setMode("edit")
   }
 
-  if (!eventoData?.ok) {
-    return <div className="presupuestos__error">Evento no encontrado</div>
-  }
+  if (loading) return <div className="presupuestos__loading">Cargando presupuestos...</div>
 
   return (
     <div className="presupuestos">
       <header className="presupuestos__header">
-        <h1>Presupuesto</h1>
-        <p className="presupuestos__evento">Evento: {eventoData.data.nombreEvento}</p>
+        <h1>Presupuestos</h1>
       </header>
 
       {message && (
@@ -98,45 +112,67 @@ export const PresupuestosPage = () => {
         </div>
       )}
 
-      {mode === "view" && !presupuestoData && (
-        <div className="presupuestos__empty">
-          <p>No hay presupuesto para este evento</p>
-          <button className="presupuestos__btn" onClick={() => setMode("create")}>
-            Crear Presupuesto
-          </button>
-        </div>
-      )}
-
-      {mode === "view" && presupuestoData?.data && (
-        <div className="presupuestos__detail">
-          <PresupuestoForm
-            initialValues={presupuestoData.data}
-            readOnly
-          />
-          <div className="presupuestos__actions">
-            <button
-              className="presupuestos__btn presupuestos__btn--edit"
-              onClick={() => setMode("edit")}
-            >
-              Editar
-            </button>
-            <button
-              className="presupuestos__btn presupuestos__btn--delete"
-              onClick={handleDelete}
-              disabled={deleteLoading}
-            >
-              {deleteLoading ? "Eliminando..." : "Eliminar"}
-            </button>
+      {mode === "list" && (
+        <>
+          <div className="presupuestos__toolbar">
+            <button className="presupuestos__btn" onClick={() => navigate("/presupuestos/crear")}>Crea nuevo presupuesto</button>
           </div>
-        </div>
+
+          {data?.data?.length > 0 ? (
+            <div className="presupuestos__list">
+              {data.data.map(p => (
+                <div className="presupuesto-card" key={p.id}>
+                  <div className="presupuesto-card__row">
+                    <span className="presupuesto-card__label">Total:</span>
+                    <span className="presupuesto-card__value">{p.total}€</span>
+                  </div>
+                  <div className="presupuesto-card__row">
+                    <span className="presupuesto-card__label">Estado:</span>
+                    <span className={`presupuesto-card__value ${p.estadoPresupuesto ? "presupuesto-card__value--aprobado" : "presupuesto-card__value--pendiente"}`}>
+                      {p.estadoPresupuesto ? "Aprobado" : "Pendiente"}
+                    </span>
+                  </div>
+                  <div className="presupuesto-card__row">
+                    <span className="presupuesto-card__label">Fecha:</span>
+                    <span className="presupuesto-card__value">{new Date(p.fecha).toLocaleDateString()}</span>
+                  </div>
+                  <div className="presupuesto-card__row">
+                    <span className="presupuesto-card__label">Servicios:</span>
+                    <span className="presupuesto-card__value">
+                      {["Catering", "Audiovisuales", "Otros"]
+                        .filter(s => p[s.toLowerCase()])
+                        .join(", ") || "Ninguno"}
+                    </span>
+                  </div>
+                  <div className="presupuesto-card__actions">
+                    <button className="presupuestos__btn presupuestos__btn--edit" onClick={() => openEdit(p)}>
+                      Editar
+                    </button>
+                    <button
+                      className="presupuestos__btn presupuestos__btn--delete"
+                      onClick={() => handleDelete(p.id)}
+                      disabled={deleteLoading && deleteId === p.id}
+                    >
+                      {deleteLoading && deleteId === p.id ? "Eliminando..." : "Eliminar"}
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="presupuestos__empty">
+              <p>No hay presupuestos</p>
+            </div>
+          )}
+        </>
       )}
 
       {(mode === "create" || mode === "edit") && (
         <PresupuestoForm
-          initialValues={mode === "edit" ? presupuestoData?.data : null}
+          initialValues={mode === "edit" ? formValues : null}
           onSubmit={mode === "create" ? handleCreate : handleUpdate}
-          loading={submitLoading}
-          onCancel={() => setMode("view")}
+          loading={mode === "create" ? createLoading : updateLoading}
+          onCancel={() => { setMode("list"); setMessage("") }}
         />
       )}
     </div>
