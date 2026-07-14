@@ -115,6 +115,9 @@ export const EspaciosPage = () => {
                   <button className="btn btn--primary" onClick={() => navigate(`/espacios/editar/${espacio.id}`)}>
                     Editar
                   </button>
+                  <button className="btn btn--primary" onClick={() => navigate(`/espacios/${espacio.id}/salas`)}>
+                    Salas
+                  </button>
                 </div>
               </div>
             ))}

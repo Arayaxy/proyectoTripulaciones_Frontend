@@ -4,6 +4,9 @@ import { ClientePage } from "../pages/admin/ClientePage"
 import { EspaciosPage } from "../pages/admin/EspaciosPage"
 import { EspacioCrearPage } from "../pages/admin/EspacioCrearPage"
 import { EspacioEditarPage } from "../pages/admin/EspacioEditarPage"
+import { EspacioSalasPage } from "../pages/admin/EspacioSalasPage"
+import { EspacioSalaCrearPage } from "../pages/admin/EspacioSalaCrearPage"
+import { EspacioSalaEditarPage } from "../pages/admin/EspacioSalaEditarPage"
 import { PonentesPage } from "../pages/admin/PonentesPage"
 import { AgentePage } from "../pages/admin/AgentePage"
 import { ConcursosPage } from "../pages/admin/ConcursosPage"
@@ -37,6 +40,9 @@ export const AppRoutes = () => {
         <Route path='/espacios' element={<EspaciosPage />} />
         <Route path='/espacios/nuevo' element={<EspacioCrearPage />} />
         <Route path='/espacios/editar/:id' element={<EspacioEditarPage />} />
+        <Route path='/espacios/:id/salas' element={<EspacioSalasPage />} />
+        <Route path='/espacios/:id/salas/nuevo' element={<EspacioSalaCrearPage />} />
+        <Route path='/espacios/:id/salas/editar/:salaId' element={<EspacioSalaEditarPage />} />
         <Route path='/ponentes' element={<PonentesPage />} />
         <Route path='/consultas' element={<AgentePage />} />
         <Route path='/concursos' element={<ConcursosPage />} />

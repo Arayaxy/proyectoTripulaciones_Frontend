@@ -1,36 +1,31 @@
 import { useState, useEffect } from "react"
 import { useNavigate, useParams } from "react-router"
 import { useFetch } from "../../hooks/useFetch"
-import { EspacioForm } from "../../components/EspacioForm"
+import { SalaForm } from "../../components/SalaForm"
 
 const API_URL = import.meta.env.VITE_API_URL
 
-export const EspacioEditarPage = () => {
-  const { id } = useParams()
+export const EspacioSalaCrearPage = () => {
+  const { id: espacioId } = useParams()
   const navigate = useNavigate()
-  const [message, setMessage] = useState("")
-
-  const { data: espacioData, loading: espacioLoading } = useFetch(
-    id ? `${API_URL}/espacios/${id}` : null
-  )
-
   const [shouldSubmit, setShouldSubmit] = useState(false)
   const [formValues, setFormValues] = useState(null)
+  const [message, setMessage] = useState("")
 
-  const { data: updateData, loading: updateLoading, error, setData: setUpdateData, setError } = useFetch(
-    shouldSubmit ? `${API_URL}/espacios/${id}` : null,
-    "PATCH",
+  const { data, loading, error, setData, setError } = useFetch(
+    shouldSubmit ? `${API_URL}/salas` : null,
+    "POST",
     shouldSubmit ? formValues : null
   )
 
   useEffect(() => {
-    if (updateData) {
-      setMessage("Espacio actualizado correctamente")
+    if (data) {
+      setMessage("Sala creada correctamente")
       setShouldSubmit(false)
       setFormValues(null)
-      setTimeout(() => navigate("/espacios"), 1000)
+      setTimeout(() => navigate(`/espacios/${espacioId}/salas`), 1000)
     }
-  }, [updateData])
+  }, [data])
 
   useEffect(() => {
     if (error) {
@@ -41,17 +36,14 @@ export const EspacioEditarPage = () => {
   }, [error])
 
   const handleSubmit = (values) => {
-    setFormValues(values)
+    setFormValues({ ...values, idEspacio: espacioId })
     setShouldSubmit(true)
   }
-
-  if (espacioLoading) return <div className="presupuestos__loading">Cargando espacio...</div>
-  if (!espacioData?.data) return <div className="presupuestos__error">Espacio no encontrado</div>
 
   return (
     <>
       <header className="titlePage">
-        <h1>Editar espacio</h1>
+        <h1>Nueva sala</h1>
       </header>
 
       {message && (
@@ -61,14 +53,12 @@ export const EspacioEditarPage = () => {
       )}
 
       <section className="container">
-        <EspacioForm
-          initialValues={espacioData.data}
+        <SalaForm
           onSubmit={handleSubmit}
-          loading={updateLoading}
-          onCancel={() => navigate("/espacios")}
+          loading={loading}
+          onCancel={() => navigate(`/espacios/${espacioId}/salas`)}
         />
       </section>
-
     </>
   )
 }
