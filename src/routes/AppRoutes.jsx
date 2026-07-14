@@ -36,7 +36,6 @@ export const AppRoutes = () => {
         <Route path='/eventos' element={<EventosPage />} />
         <Route path='/eventos/nuevo' element={<CrearEventoPage />} />
         <Route path='/eventos/editar/:id' element={<EditarEventoPage />} />
-        <Route path='/crear' element={<CrearEventoPage />} />
         <Route path='/clientes' element={<ClientePage />} />
         <Route path='/clientes/nuevo' element={<CrearClientePage />} />
         <Route path='/clientes/editar/:id' element={<EditarClientePage />} />
