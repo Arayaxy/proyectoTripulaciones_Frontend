@@ -15,7 +15,8 @@ export const EditarClientePage = () => {
   }, [id])
 
   const handleSubmit = async (data) => {
-    const res = await updateCliente(id, data)
+    const { id: _, eventos, ...cleanData } = data;
+    const res = await updateCliente(id, cleanData)
     if (res.ok) navigate('/clientes')
   }
 
