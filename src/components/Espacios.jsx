@@ -56,20 +56,26 @@ export const Espacios = () => {
       <div>
         {espacios.map((espacio) => (
           <div key={espacio.id}>
-            <h3>{espacio.nombreEspacio}</h3> {espacioEnEdicion === espacio.id && <h4>Editando este espacio</h4>}
-            <button onClick={() => handleEditarEspacio(espacio.id)}>Editar espacio</button>
-            <button onClick={() => handleBorrarEspacio(espacio.id)}>Eliminar espacio</button>
-            <p>Ciudad: {espacio.ciudad}</p>
-            <p>Direccion: {espacio.direccion}</p>
-            <p>Aforo: {espacio.aforo}</p>
+            {espacioEnEdicion !== espacio.id ?
+              <>
+                <h3>{espacio.nombreEspacio}</h3>
+                <button onClick={() => handleEditarEspacio(espacio.id)}>Editar espacio</button>
+                <button onClick={() => handleBorrarEspacio(espacio.id)}>Eliminar espacio</button>
+                <p>Ciudad: {espacio.ciudad}</p>
+                <p>Direccion: {espacio.direccion}</p>
+                <p>Aforo: {espacio.aforo}</p>
 
-            {espacio.nota && (
-              <p><strong>Nota:</strong> {espacio.nota}</p>
-            )}
+                {espacio.nota && (
+                  <p><strong>Nota:</strong> {espacio.nota}</p>
+                )}
 
-            <p><strong>Contacto:</strong> {espacio.nombreContacto}</p>
-            <p><strong>Telefono:</strong> {espacio.telefonoContacto}</p>
-            <p><strong>Email:</strong> {espacio.emailContacto}</p>
+                <p><strong>Contacto:</strong> {espacio.nombreContacto}</p>
+                <p><strong>Telefono:</strong> {espacio.telefonoContacto}</p>
+                <p><strong>Email:</strong> {espacio.emailContacto}</p>
+              </>
+              :
+              <EspacioEditarForm espacio={espacio} setEspacioEnEdicion={setEspacioEnEdicion} />
+            }
 
             {espacio.salas?.length > 0 && (
               <div>
