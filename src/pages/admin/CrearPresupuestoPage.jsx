@@ -40,8 +40,8 @@ export const CrearPresupuestoPage = () => {
   }
 
   return (
-    <div className="presupuestos">
-      <header className="presupuestos__header">
+    <>
+      <header className='titlePage'>
         <h1>Crear Presupuesto</h1>
       </header>
 
@@ -50,12 +50,13 @@ export const CrearPresupuestoPage = () => {
           {message}
         </div>
       )}
-
+      <section  className='container'>
       <PresupuestoForm
         onSubmit={handleSubmit}
         loading={loading}
         onCancel={() => navigate("/presupuestos")}
       />
-    </div>
+      </section>
+    </>
   )
 }

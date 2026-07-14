@@ -50,8 +50,8 @@ export const EditarPresupuestoPage = () => {
   if (!presupuestoData?.data) return <div className="presupuestos__error">Presupuesto no encontrado</div>
 
   return (
-    <div className="presupuestos">
-      <header className="presupuestos__header">
+    <>
+      <header className='titlePage'>
         <h1>Editar Presupuesto</h1>
       </header>
 
@@ -60,13 +60,14 @@ export const EditarPresupuestoPage = () => {
           {message}
         </div>
       )}
-
-      <PresupuestoForm
-        initialValues={presupuestoData.data}
-        onSubmit={handleSubmit}
-        loading={updateLoading}
-        onCancel={() => navigate("/presupuestos")}
-      />
-    </div>
+      <section  className='container'>
+        <PresupuestoForm
+          initialValues={presupuestoData.data}
+          onSubmit={handleSubmit}
+          loading={updateLoading}
+          onCancel={() => navigate("/presupuestos")}
+        />
+      </section>
+    </>
   )
 }

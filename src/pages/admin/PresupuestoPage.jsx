@@ -1,3 +1,4 @@
+import '../../components/partials/_presupuestos.scss'
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router"
 import { useFetch } from "../../hooks/useFetch"
@@ -100,9 +101,10 @@ const handleDelete = (id) => {
   if (loading) return <div className="presupuestos__loading">Cargando presupuestos...</div>
 
   return (
-    <div className="presupuestos">
-      <header className="presupuestos__header">
+    <div>
+      <header className='titlePage'>
         <h1>Presupuestos</h1>
+        <button className="btn btn--anadir" onClick={() => navigate("/presupuestos/crear")}>Crear presupuesto</button>
       </header>
 
       {message && (
@@ -113,11 +115,9 @@ const handleDelete = (id) => {
 
       {mode === "list" && (
         <>
-          <div className="presupuestos__toolbar">
-            <button className="presupuestos__btn" onClick={() => navigate("/presupuestos/crear")}>Crea nuevo presupuesto</button>
-          </div>
 
           {data?.data?.length > 0 ? (
+            <section  className='container'>
             <div className="presupuestos__list">
               {data.data.map(p => (
                 <div className="presupuesto-card" key={p.id}>
@@ -144,20 +144,23 @@ const handleDelete = (id) => {
                     </span>
                   </div>
                   <div className="presupuesto-card__actions">
-                    <button className="presupuestos__btn presupuestos__btn--edit" onClick={() => openEdit(p)}>
-                      Editar
-                    </button>
+
                     <button
-                      className="presupuestos__btn presupuestos__btn--delete"
+                      className="btn btn--logout"
                       onClick={() => handleDelete(p.id)}
                       disabled={deleteLoading && deleteId === p.id}
                     >
                       {deleteLoading && deleteId === p.id ? "Eliminando..." : "Eliminar"}
                     </button>
+                    <button className="btn btn--primary" onClick={() => openEdit(p)}>
+                      Editar
+                    </button>
                   </div>
                 </div>
+
               ))}
             </div>
+            </section>
           ) : (
             <div className="presupuestos__empty">
               <p>No hay presupuestos</p>

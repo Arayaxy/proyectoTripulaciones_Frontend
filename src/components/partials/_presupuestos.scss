@@ -1,0 +1,100 @@
+@use 'sass:color';
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.presupuestos {
+  &__loading {
+    @include flex-center;
+    padding: $sp-48;
+    color: $color-text-muted;
+    font-size: $txt-base;
+  }
+
+  &__message {
+    padding: $sp-12 $sp-16;
+    border-radius: $radius-md;
+    margin-bottom: $sp-20;
+    font-size: $txt-sm;
+    font-weight: $fw-medium;
+
+    &--success {
+      background: rgba(90, 200, 90, 0.1);
+      color: #2e7d32;
+      border: 1px solid #2e7d32;
+    }
+
+    &--error {
+      background: rgba(211, 47, 47, 0.1);
+      color: $color-error;
+      border: 1px solid $color-error;
+    }
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $sp-16;
+
+    @include bp-768 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include bp-990 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__empty {
+    @include flex-center;
+    padding: $sp-48;
+    color: $color-text-muted;
+    font-size: $txt-base;
+  }
+}
+
+.presupuesto-card {
+  background-color: rgba(0, 0, 0, 0.02);
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  padding: $sp-20;
+  @include flex(column, flex-start, stretch);
+  gap: $sp-12;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  &__row {
+    @include flex-between;
+    gap: $sp-8;
+  }
+
+  &__label {
+    font-size: $txt-sm;
+    color: $color-text-muted;
+    font-weight: $fw-medium;
+  }
+
+  &__value {
+    font-size: $txt-sm;
+    color: $color-text;
+    font-weight: $fw-semibold;
+
+    &--aprobado {
+      color: $color-dot;
+    }
+
+    &--pendiente {
+      color: $color-text-muted;
+    }
+  }
+
+  &__actions {
+    @include flex(row, center, center);
+    gap: $sp-8;
+    margin-top: $sp-8;
+    padding-top: $sp-12;
+    border-top: 1px solid $color-border;
+  }
+}
