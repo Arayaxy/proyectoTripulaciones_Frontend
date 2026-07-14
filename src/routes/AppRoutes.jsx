@@ -2,6 +2,8 @@ import { Routes, Route, Navigate } from "react-router"
 import { Login } from "../pages/auth/Login"
 import { ClientePage } from "../pages/admin/ClientePage"
 import { EspaciosPage } from "../pages/admin/EspaciosPage"
+import { EspacioCrearPage } from "../pages/admin/EspacioCrearPage"
+import { EspacioEditarPage } from "../pages/admin/EspacioEditarPage"
 import { PonentesPage } from "../pages/admin/PonentesPage"
 import { AgentePage } from "../pages/admin/AgentePage"
 import { ConcursosPage } from "../pages/admin/ConcursosPage"
@@ -33,6 +35,8 @@ export const AppRoutes = () => {
         <Route path='/clientes/nuevo' element={<CrearClientePage />} />
         <Route path='/clientes/editar/:id' element={<EditarClientePage />} />
         <Route path='/espacios' element={<EspaciosPage />} />
+        <Route path='/espacios/nuevo' element={<EspacioCrearPage />} />
+        <Route path='/espacios/editar/:id' element={<EspacioEditarPage />} />
         <Route path='/ponentes' element={<PonentesPage />} />
         <Route path='/consultas' element={<AgentePage />} />
         <Route path='/concursos' element={<ConcursosPage />} />
