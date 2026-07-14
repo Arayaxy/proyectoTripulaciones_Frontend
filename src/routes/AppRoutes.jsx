@@ -1,6 +1,5 @@
 import { Routes, Route, Navigate } from "react-router"
 import { Login } from "../pages/auth/Login"
-
 import { ClientePage } from "../pages/admin/ClientePage"
 import { EspaciosPage } from "../pages/admin/EspaciosPage"
 import { PonentesPage } from "../pages/admin/PonentesPage"
@@ -15,8 +14,11 @@ import { EventoDetailPage } from "../pages/admin/EventoDetailPage"
 import { Layout } from "../components/Layout"
 import { CrearEventoPage } from "../pages/admin/CrearEventoPage"
 import { EventosPage } from "../pages/admin/EventosPage"
-import { CrearClientePage } from '../pages/admin/CrearClientePage'
+import { CrearClientePage } from "../pages/admin/CrearClientePage"
 import { EditarClientePage } from "../pages/admin/EditarClientePage"
+import { PresupuestosPage } from "../pages/admin/PresupuestoPage"
+import { CrearPresupuestoPage } from "../pages/admin/CrearPresupuestoPage"
+import { EditarPresupuestoPage } from "../pages/admin/EditarPresupuestoPage"
 
 export const AppRoutes = () => {
   return (
@@ -37,6 +39,9 @@ export const AppRoutes = () => {
         <Route path='/detalle' element={<EventoDetailPage />} />
         <Route path='/datos' element={<DatosEventoPage />} />
         <Route path='/ponencias' element={<PonenciasPage />} />
+        <Route path='/presupuestos' element={<PresupuestosPage />} />
+        <Route path='/presupuestos/crear' element={<CrearPresupuestoPage />} />
+        <Route path='/presupuestos/editar/:id' element={<EditarPresupuestoPage />} />
         <Route path='/lugar' element={<LugarPage />} />
       </Route>
       {/* <Route path='/*' element={<Navigate to='/NotFound' />} /> */}

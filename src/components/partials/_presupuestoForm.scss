@@ -1,0 +1,125 @@
+@use 'sass:color';
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.presupuesto-form {
+  @include flex(column, flex-start, stretch);
+  gap: $sp-16;
+  max-width: 640px;
+
+  &__field {
+    @include flex(column, flex-start, stretch);
+    gap: $sp-8;
+  }
+
+  &__label {
+    font-size: $txt-sm;
+    font-weight: $fw-medium;
+    color: $color-text-muted;
+
+    &--checkbox {
+      @include flex(row, flex-start, center);
+      gap: $sp-8;
+      font-size: $txt-base;
+      font-weight: $fw-medium;
+      color: $color-text;
+      cursor: pointer;
+
+      input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        accent-color: $color-primary;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__input {
+    width: 100%;
+    padding: $sp-8 $sp-12;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    font-size: $txt-base;
+    color: $color-text;
+    background: $color-white;
+    transition: border-color 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $color-primary;
+    }
+
+    &:disabled {
+      background: $color-black-5;
+      cursor: not-allowed;
+      color: $color-text-muted;
+    }
+
+    &--textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+  }
+
+  &__error {
+    font-size: $txt-xs;
+    color: $color-error;
+    margin-top: $sp-4;
+  }
+
+  &__section {
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    padding: $sp-16;
+    @include flex(column, flex-start, stretch);
+    gap: $sp-12;
+
+    legend {
+      padding: 0 $sp-8;
+      font-size: $txt-sm;
+      font-weight: $fw-semibold;
+      color: $color-text;
+    }
+  }
+
+  &__actions {
+    @include flex(row, flex-start, center);
+    gap: $sp-12;
+    margin-top: $sp-8;
+  }
+
+  &__btn {
+    padding: $sp-8 $sp-24;
+    border-radius: $radius-md;
+    font-size: $txt-sm;
+    font-weight: $fw-medium;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &--submit {
+      background: $color-primary;
+      color: $color-white;
+      border: none;
+
+      &:hover {
+        background: color.adjust($color-primary, $lightness: -8%);
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+
+    &--cancel {
+      background: transparent;
+      border: 1px solid $color-border;
+      color: $color-text-muted;
+
+      &:hover {
+        border-color: $color-text-muted;
+        color: $color-text;
+      }
+    }
+  }
+}
