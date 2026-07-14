@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useFetch } from '../hooks/useFetch';
+import { EspacioEditarForm } from './EspacioEditarForm';
 
 export const Espacios = () => {
   const API_URL = import.meta.env.VITE_API_URL;
@@ -16,6 +17,8 @@ export const Espacios = () => {
     loading: loadingInitial,
     error: errorInitial,
   } = useFetch(`${API_URL}/espacios`);
+
+  const [espacioEnEdicion, setEspacioEnEdicion] = useState(null);
 
   const espacios = dataInitial?.data || [];
 
@@ -40,6 +43,10 @@ export const Espacios = () => {
     });
   };
 
+  const handleEditarEspacio = (espacioId) => {
+    setEspacioEnEdicion(espacioId);
+  };
+
   if (loadingInitial) return <p>Cargando espacios...</p>;
   if (errorInitial) return <p>Error al cargar los espacios: {error}</p>;
 
@@ -49,7 +56,8 @@ export const Espacios = () => {
       <div>
         {espacios.map((espacio) => (
           <div key={espacio.id}>
-            <h3>{espacio.nombreEspacio}</h3>
+            <h3>{espacio.nombreEspacio}</h3> {espacioEnEdicion === espacio.id && <h4>Editando este espacio</h4>}
+            <button onClick={() => handleEditarEspacio(espacio.id)}>Editar espacio</button>
             <button onClick={() => handleBorrarEspacio(espacio.id)}>Eliminar espacio</button>
             <p>Ciudad: {espacio.ciudad}</p>
             <p>Direccion: {espacio.direccion}</p>
