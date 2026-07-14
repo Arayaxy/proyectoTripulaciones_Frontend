@@ -11,19 +11,13 @@ export const TodosLosEspacios = () => {
     request?.body
   );
 
-  // DELETE /espacios
-  setRequest({
-    url: `${API_URL}/espacios`,
-    method: "GET",
-  });
+  const {
+    data: dataInitial,
+    loading: loadingInitial,
+    error: errorInitial,
+  } = useFetch(`${API_URL}/espacios`);
 
-  // const {
-  //   data: dataInitial,
-  //   loading: loadingInitial,
-  //   error: errorInitial,
-  // } = useFetch(`${API_URL}/espacios`);
-
-  const espacios = data?.data || [];
+  const espacios = dataInitial?.data || [];
 
   const handleBorrarEspacio = (espacioId) => {
     console.log("Espacio a borrar:", espacioId);
@@ -35,8 +29,8 @@ export const TodosLosEspacios = () => {
     });
   };
 
-  if (loading) return <p>Cargando espacios...</p>;
-  if (error) return <p>Error al cargar los espacios: {error}</p>;
+  if (loadingInitial) return <p>Cargando espacios...</p>;
+  if (errorInitial) return <p>Error al cargar los espacios: {error}</p>;
 
   return (
     <section>
