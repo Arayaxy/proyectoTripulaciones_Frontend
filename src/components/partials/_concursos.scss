@@ -1,0 +1,122 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.concurso__error {
+  color: $color-error;
+  font-size: $txt-sm;
+}
+.concursos__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $sp-12;
+
+  @include bp-990 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include bp-1200 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.concurso-card {
+  background: $color-white;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  padding: $sp-20;
+  @include flex(column, flex-start, stretch);
+  gap: $sp-12;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  &__header {
+    @include flex-between;
+    gap: $sp-8;
+  }
+
+  &__id {
+    font-size: $txt-xs;
+    color: $color-text-muted;
+    font-weight: $fw-medium;
+  }
+
+  &__urgencia {
+    font-size: $txt-xs;
+    font-weight: $fw-semibold;
+    padding: $sp-4 $sp-8;
+    border-radius: $radius-sm;
+    text-transform: uppercase;
+
+    &--alta {
+      background: rgba(211, 47, 47, 0.1);
+      color: $color-error;
+    }
+
+    &--media {
+      background: rgba(255, 152, 0, 0.1);
+      color: #e65100;
+    }
+
+    &--baja {
+      background: rgba(90, 200, 90, 0.1);
+      color: #2e7d32;
+    }
+  }
+
+  &__organismo {
+    font-size: $txt-base;
+    font-weight: $fw-semibold;
+    color: $color-text;
+
+    span {
+      font-weight: $fw-regular;
+      color: $color-text-muted;
+    }
+  }
+
+  &__objeto {
+    font-size: $txt-sm;
+    color: $color-text;
+    line-height: 1.5;
+  }
+
+  &__motivo {
+    font-size: $txt-sm;
+    color: $color-text-muted;
+    background: $color-black-5;
+    border-radius: $radius-md;
+    padding: $sp-12;
+    line-height: 1.5;
+  }
+
+  &__footer {
+    @include flex(column, flex-start, stretch);
+    gap: $sp-12;
+    padding-top: $sp-12;
+    border-top: 1px solid $color-border;
+  }
+
+  &__meta {
+    @include flex(row, flex-start, center);
+    gap: $sp-20;
+    font-size: $txt-sm;
+    color: $color-text-muted;
+  }
+
+  &__tags {
+    @include flex(row, flex-start, center);
+    flex-wrap: wrap;
+    gap: $sp-8;
+  }
+
+  &__tag {
+    font-size: $txt-xs;
+    font-weight: $fw-medium;
+    padding: $sp-4 $sp-8;
+    border-radius: $radius-sm;
+    background: rgba(43, 122, 142, 0.1);
+    color: $color-primary;
+  }
+}

@@ -1,3 +1,4 @@
+import '../../components/partials/_agente.scss'
 import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -38,23 +39,33 @@ export const AgentePage = () => {
   };
 
   return (
-    <div>
-      <h1>Agentes de consultas internas</h1>
-
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={pregunta}
-          onChange={(e) => setPregunta(e.target.value)}
-          placeholder="Escribe tu pregunta..."
-        />
-        <button type="submit" disabled={loading || !pregunta.trim()}>
-          {loading ? "Enviando..." : "Preguntar"}
-        </button>
+    <>
+    <header className='titlePage'>
+      <h1>Agentes de consultas </h1>
+    </header>
+    <section className='container'>
+      <form className="agente-form" onSubmit={handleSubmit}>
+        <div className="agente-form__search">
+          <input
+            className="input"
+            type="text"
+            value={pregunta}
+            onChange={(e) => setPregunta(e.target.value)}
+            placeholder="Escribe tu pregunta..."
+          />
+          <button className="btn btn--primary" type="submit" disabled={loading || !pregunta.trim()}>
+            {loading ? "Enviando..." : "Preguntar"}
+          </button>
+        </div>
       </form>
-
-      {error && <p style={{ color: "red" }}>Error: {error}</p>}
-      {data && <p>{data.resumen}</p>}
-    </div>
+      {error && <p className="agente__error">Error: {error}</p>}
+      {data && (
+        <div className="agente__response">
+          <p className="agente__response__label">Respuesta</p>
+          {data.resumen}
+        </div>
+      )}
+    </section>
+    </>
   );
 };
