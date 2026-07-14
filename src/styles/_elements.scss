@@ -50,6 +50,10 @@
     color: $color-logout;
     border-color: $color-black-25;
 
+    @include bp-990 {
+        order: 2;
+      }
+
     &:hover {
       background: $color-logout;
       color: $color-white;

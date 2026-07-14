@@ -1,5 +1,5 @@
 import React from 'react'
-import './partials/_opcionesAgentes.scss'
+import './partials/_opcionesAgente.scss'
 
 export const OpcionesAgente = () => {
   return (
