@@ -22,6 +22,11 @@ body {
 
   @include bp-990 {
     max-width: 990px;
+    padding: $sp-32;
+  }
+  @include bp-1200 {
+    max-width: 1200px;
+    padding: $sp-48;
   }
 }
 
@@ -32,6 +37,17 @@ header.titlePage {
   background-color: $color-primary;
   padding: $sp-12 $sp-16;
   @include flex-between;
+
+  @include bp-768 {
+      padding: $sp-12 $sp-24;
+  }
+  @include bp-990 {
+      padding: $sp-12 $sp-48;
+  }
+  @include bp-1200 {
+      padding: $sp-12 $sp-64;
+  }
+
   h1 {
     color: $color-white;
     text-transform: uppercase;
@@ -41,11 +57,14 @@ header.titlePage {
   @include grid;
 
   @include bp-768 {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   @include bp-990 {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @include bp-1200 {
+    grid-template-columns: repeat(4, 1fr);
   }
 
 }

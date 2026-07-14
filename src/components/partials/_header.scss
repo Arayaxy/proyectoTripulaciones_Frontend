@@ -13,8 +13,11 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  @include bp-990 {
+      padding: $sp-24 $sp-24;
+    }
   @include bp-1200 {
-      padding: $sp-24 $sp-32;
+      padding: $sp-24 $sp-64;
     }
   img {
     height: 39px;
@@ -26,13 +29,6 @@
 .botonyMenu {
   @include flex(row, flex-end, center);
   gap: $sp-8;
-}
-
-.header__logout {
-
-  @include bp-990 {
-    order: 2;
-  }
 }
 
 .header__hamburger {
