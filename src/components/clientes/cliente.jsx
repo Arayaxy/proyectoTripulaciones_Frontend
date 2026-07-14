@@ -15,12 +15,12 @@ export const cliente = () => {
     }
   }
   return (
-    <div>
-      <h1>cliente</h1>
-
+      <>
+      <section className='gridClientes'>
       {data?.ok && data.data.map((cli) => (
         <ClientCard key={cli.id} cliente={cli} onDelete={handleDelete} />
       ))}
-    </div>
+      </section>
+    </>
   );
 };

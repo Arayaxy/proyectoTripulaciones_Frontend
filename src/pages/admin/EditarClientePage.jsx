@@ -23,9 +23,13 @@ export const EditarClientePage = () => {
   if (!cliente) return <div>Cargando...</div>
 
   return (
-    <div>
+    <>
+    <header className='titlePage'>
       <h1>Editar Cliente</h1>
+    </header>
+    <section className='container'>
       <EditarClienteFormulario initialData={cliente} onSubmit={handleSubmit} />
-    </div>
+    </section>
+    </>
   )
 }

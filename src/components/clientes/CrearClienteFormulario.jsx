@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './_clienteForm.scss';
 
 const initialForm = { cliente: '', email: '', telefono: '', empresa: '', sector: '', ciudad: '' }
 
@@ -16,33 +17,38 @@ export const ClienteFormulario = ({ onSubmit }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Nombre
-        <input name="cliente" placeholder="Nombre" onChange={handleChange} required />
-      </label>
-      <label>
-        Email
-        <input name="email" type="email" placeholder="Email" onChange={handleChange} required />
-      </label>
-      <label>
-        Teléfono
-        <input name="telefono" placeholder="Teléfono" onChange={handleChange} />
-      </label>
-      <label>
-        Empresa
-        <input name="empresa" placeholder="Empresa" onChange={handleChange} />
-      </label>
-      <label>
-        Sector
-        <input name="sector" placeholder="Sector" onChange={handleChange} />
-      </label>
-      <label>
-        Ciudad
-        <input name="ciudad" placeholder="Ciudad" onChange={handleChange} />
-      </label>
+    <>
 
+    <form className="form-cliente" onSubmit={handleSubmit} noValidate>
+      <h2>Datos del Cliente</h2>
+      <div className="form-cliente__grid">
+        <label className="form-cliente__field">
+          <span>Nombre</span>
+          <input className="input" name="cliente" placeholder="Nombre" onChange={handleChange} required />
+        </label>
+        <label className="form-cliente__field">
+          <span>Email</span>
+          <input className="input" name="email" type="email" placeholder="Email" onChange={handleChange} required />
+        </label>
+        <label className="form-cliente__field">
+          <span>Teléfono</span>
+          <input className="input" name="telefono" placeholder="Teléfono" onChange={handleChange} />
+        </label>
+        <label className="form-cliente__field">
+          <span>Empresa</span>
+          <input className="input" name="empresa" placeholder="Empresa" onChange={handleChange} />
+        </label>
+        <label className="form-cliente__field">
+          <span>Sector</span>
+          <input className="input" name="sector" placeholder="Sector" onChange={handleChange} />
+        </label>
+        <label className="form-cliente__field">
+          <span>Ciudad</span>
+          <input className="input" name="ciudad" placeholder="Ciudad" onChange={handleChange} />
+        </label>
+      </div>
       <button className="btn btn--primary" type="submit">Guardar</button>
     </form>
+  </>
   )
 }

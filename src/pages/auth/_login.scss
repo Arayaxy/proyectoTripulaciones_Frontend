@@ -8,7 +8,7 @@
   min-height: 100svh;
   @include flex(column);
   background: $color-bg;
-  max-width: 480px;
+  max-width: 100%;
   margin: 0 auto;
   width: 100%;
 }
@@ -20,8 +20,14 @@
 
 .login__hero {
   width: 100%;
-  height: 180px;
+  height: 190px;
   overflow: hidden;
+  @include bp-990 {
+    height: 280px;
+  }
+  @include bp-1200 {
+    height: 385px;
+  }
 }
 
 .login__hero-img {
@@ -117,6 +123,29 @@
   border: none;
   cursor: pointer;
   text-decoration: underline;
+}
+
+.login__google-btn {
+  @include flex(row, center, center);
+  gap: $sp-12;
+  padding: $sp-12 $sp-24;
+  background: $color-white;
+  border: 1px solid #dadce0;
+  border-radius: $radius-lg;
+  color: #3c4043;
+  font-size: $txt-base;
+  font-weight: $fw-medium;
+  font-family: $font-primary;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  max-width: 350px;
+  margin: 15px auto;
+
+  &:hover {
+    background: #f8f9fa;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  }
 }
 
 .login__footer {

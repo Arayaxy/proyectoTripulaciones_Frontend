@@ -4,10 +4,14 @@ import { cliente as Cliente } from '../../components/clientes/cliente'
 export const ClientePage = () => {
   const navigate = useNavigate()
   return (
-    <div>
-            <button className="btn btn--primary" onClick={() => navigate('/clientes/nuevo')}>+ Nuevo Cliente</button>
-      <Cliente />
-    </div>
+    <>
+      <header className='titlePage'>
+        <h1>Clientes</h1>
+        <button className="btn btn--anadir" onClick={() => navigate('/clientes/nuevo')}>Añadir Cliente</button>
+      </header>
+      <section className='container'>
+        <Cliente />
+      </section>
+    </>
   )
 }
-
