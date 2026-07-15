@@ -12,7 +12,9 @@ export const FileUpload = ({ uploadUrl, onSuccess, onError, accept = "*", label 
     if (selected) setFile(selected);
   };
 
-  const handleUpload = async () => {
+  const handleUpload = async (e) => {
+    e.stopPropagation();
+
     if (!file) return;
     setUploading(true);
     const formData = new FormData();
