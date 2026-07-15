@@ -1,6 +1,6 @@
 import { NavbarInterno } from '../../components/NavbarInterno'
 import { EventoInfo } from '../../components/EventoInfo'
-import { SeccionDetail } from '../../components/SeccionDetail'
+import { seccionDetail as SeccionDetail } from '../../components/seccionDetail'
 import { useParams } from 'react-router'
 
 export const EventoDetailPage = () => {
