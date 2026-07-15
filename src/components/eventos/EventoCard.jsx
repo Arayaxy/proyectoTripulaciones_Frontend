@@ -12,7 +12,6 @@ export const EventoCard = ({ evento }) => {
     <article className="client-card">
       <h2 className="client-card__name">
         {evento.nombreEvento}
-
       </h2>
       <p className="client-card__detail">
         <span className="client-card__label">Ciudad:</span>{' '}
@@ -48,10 +47,6 @@ export const EventoCard = ({ evento }) => {
         <button className="btn btn--primary md" onClick={() => navigate(`/detalle/${evento.id}`)}>
           Ver detalle
         </button>
-        <button className="btn btn--outline sm" onClick={() => navigate(`/detalle/${evento.id}`)}>
-          Detalles
-        </button>
-
       </div>
     </article>
   )

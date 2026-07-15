@@ -1,34 +1,5 @@
+@use '../../styles/fonts';
 @use '../../styles/variables' as *;
 @use '../../styles/mixins' as *;
-
-.navbar-interno {
-  padding: $sp-16 0;
-
-  ul {
-    @include flex(row, flex-start, center);
-    flex-wrap: wrap;
-    gap: $sp-8;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-   li a {
-    display: block;
-    padding: $sp-8 $sp-12;
-    border: 1px solid $color-primary;
-    border-radius: $radius-lg;
-    color: $color-text;
-    font:$fw-medium $txt-sm $font-primary;
-    background: $color-bg-primary;
-    transition: all 0.2s ease;
-    text-decoration: none;
-
-    &:hover {
-      background: $color-primary;
-      color: $color-white;
-    }
-
-
-  }
-}
+@use '../../styles/elements';
+@use '../../styles/reset';

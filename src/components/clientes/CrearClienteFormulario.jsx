@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react'
 import './_clienteForm.scss';
-import { useNavigate } from 'react-router'
 
 const initialForm = { cliente: '', email: '', telefono: '', empresa: '', sector: '', ciudad: '' }
 
 export const ClienteFormulario = ({ onSubmit, initialData }) => {
   const [form, setForm] = useState(initialForm)
   const [ficha, setFicha] = useState(null)
-  const navigate = useNavigate()
 
   useEffect(() => {
     if (initialData) {
@@ -57,10 +55,6 @@ export const ClienteFormulario = ({ onSubmit, initialData }) => {
       </div>
       <button className="btn btn--primary" type="submit">Guardar</button>
     </form>
-    <div className="btnVolver">
-        <button className="btn btn--nobg" onClick={() => navigate('/clientes')}>&laquo; Volver a Clientes
-        </button>
-      </div>
   </>
   )
 }
