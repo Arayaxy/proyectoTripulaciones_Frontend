@@ -37,13 +37,13 @@ export const FileUpload = ({ uploadUrl, onSuccess, onError, accept = "*", label 
   return (
     <div className="file-upload">
       <input ref={inputRef} type="file" accept={accept} onChange={handleSelect} hidden />
-      <button className="file-upload__select" onClick={() => inputRef.current?.click()}>
+      <button className="btn btn--outline" onClick={() => inputRef.current?.click()}>
         {label}
       </button>
       {file && (
         <div className="file-upload__info">
           <p className="file-upload__filename">{file.name}</p>
-          <button className="file-upload__submit" onClick={handleUpload} disabled={uploading}>
+          <button className="btn btn--outline" onClick={handleUpload} disabled={uploading}>
             {uploading ? "Subiendo..." : "Enviar"}
           </button>
         </div>

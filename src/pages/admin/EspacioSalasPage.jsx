@@ -79,10 +79,7 @@ export const EspacioSalasPage = () => {
           <div className="presupuestos__list">
             {salas.map((sala) => (
               <div className="presupuesto-card" key={sala.id}>
-                <div className="presupuesto-card__row">
-                  <span className="presupuesto-card__label">Nombre:</span>
-                  <span className="presupuesto-card__value">{sala.nombreSala}</span>
-                </div>
+                <h2>{sala.nombreSala}</h2>
                 <div className="presupuesto-card__row">
                   <span className="presupuesto-card__label">Tipo:</span>
                   <span className="presupuesto-card__value">{sala.tipoSala}</span>
