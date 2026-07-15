@@ -105,7 +105,7 @@ export const CrearEventoFormulario = ({ onSubmit, clientes, estados }) => {
             <span>Cliente</span>
             <select className="input" name="idCliente" value={form.idCliente} onChange={handleChange} required>
               <option value="">Seleccionar cliente</option>
-              {clientes?.map((c) => (<option key={c.id} value={c.id}>{c.cliente}</option>))}
+              {clientes?.map((c) => (<option key={c.id} value={c.id}>{`${c.cliente} - ${c.empresa}`}</option>))}
             </select>
           </label>
           <label className="form-cliente__field">
