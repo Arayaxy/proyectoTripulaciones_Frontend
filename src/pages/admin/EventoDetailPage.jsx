@@ -11,14 +11,16 @@ export const EventoDetailPage = () => {
   const API_URL = import.meta.env.VITE_API_URL
 
   const { data, loading, error } = useFetch(
-    evento ? `${API_URL}/eventos/${id}` : null,
+    `${API_URL}/eventos/${id}`,
     "GET"
   )
+
+  const evento = data?.data
 
   if (loading) return <div className="event_info_cargando">Cargando...</div>
   if (error) return <div className="evento_info_error">Error: {error}</div>
 
-  const evento = data?.data
+
 
   if (!evento) return null
 

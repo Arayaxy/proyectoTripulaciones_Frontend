@@ -59,8 +59,8 @@ export const AppRoutes = () => {
         <Route path='/presupuestos' element={<PresupuestosPage />} />
         <Route path='/presupuestos/crear' element={<CrearPresupuestoPage />} />
         <Route path='/presupuestos/editar/:id' element={<EditarPresupuestoPage />} />
-        <Route path='/lugar' element={<LugarPage />} />
-        <Route path='/presupuesto' element={<PresupuestoPage />} />
+
+        <Route path='/eventos/lugar/:id' element={<LugarPage />} />
       </Route>
       {/* <Route path='/*' element={<Navigate to='/NotFound' />} /> */}
     </Routes>
