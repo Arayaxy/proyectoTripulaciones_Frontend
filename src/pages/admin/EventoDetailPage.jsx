@@ -3,7 +3,7 @@ import { EventoInfo } from '../../components/EventoInfo'
 
 import { useParams } from 'react-router'
 import { useFetch } from '../../hooks/useFetch'
-import { SeccionDetail } from '../../components/seccionDetail'
+import { SeccionDetail } from '../../components/SeccionDetail'
 
 export const EventoDetailPage = () => {
   const { id } = useParams()
