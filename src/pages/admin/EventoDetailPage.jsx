@@ -2,7 +2,7 @@ import { NavbarInterno } from '../../components/NavbarInterno'
 import { EventoInfo } from '../../components/EventoInfo'
 
 import { useParams } from 'react-router'
-import { SeccionDetail } from '../../components/seccionDetail'
+import { SeccionDetail } from '../../components/SeccionDetail'
 
 export const EventoDetailPage = () => {
   const { id } = useParams()

@@ -1,5 +1,4 @@
 import React from 'react'
-import { EventoDetail } from './EventoDetail'
 import { LugarDetail } from './LugarDetail'
 import { PresupuestoDetail } from './PresupuestoDetail'
 
