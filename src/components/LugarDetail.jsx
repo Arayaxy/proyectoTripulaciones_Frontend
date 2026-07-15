@@ -12,7 +12,7 @@ export const LugarDetail = (evento) => {
       <p className="detail_card_nota">{evento.nota}</p>
       <div>
         <button className="btn_lugar" onClick={() => navigate(`/eventos/lugar/${evento.id}`)}>
-          Editar
+          Ir a Lugar
         </button>
       </div>
     </article>
