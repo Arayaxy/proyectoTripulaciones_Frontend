@@ -30,7 +30,7 @@ export const EventoDetailPage = () => {
       <section className='container'>
         <NavbarInterno />
         <EventoInfo evento={evento} />
-        <SeccionDetail />
+        <SeccionDetail evento={evento} />
 
       </section>
     </>
