@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import './partials/_presupuestoForm.scss'
 
 const defaultValues = {
@@ -15,6 +15,7 @@ const defaultValues = {
 export const EspacioForm = ({ initialValues, onSubmit, loading, onCancel, readOnly }) => {
   const [values, setValues] = useState(initialValues ?? defaultValues)
   const [errors, setErrors] = useState({})
+  const [autocompleteData, setAutocompleteData] = useState(null)
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -31,6 +32,28 @@ export const EspacioForm = ({ initialValues, onSubmit, loading, onCancel, readOn
     if (!vals.nombreContacto?.trim()) errs.nombreContacto = "El nombre de contacto es obligatorio"
     if (!vals.emailContacto?.trim()) errs.emailContacto = "El email de contacto es obligatorio"
     return errs
+  }
+
+  useEffect(() => {
+    if (autocompleteData) {
+      setValues((prev) => ({
+        ...prev,
+        nombreEspacio: autocompleteData.nombre_evento || prev.nombreEspacio,
+        ciudad: autocompleteData.ciudad || prev.ciudad,
+        direccion: autocompleteData.direccion || prev.direccion,
+        aforo: autocompleteData.aforo || prev.aforo,
+        nota: autocompleteData.nota || prev.nota,
+        telefonoContacto: autocompleteData.telefono_contacto || prev.telefonoContacto,
+        emailContacto: autocompleteData.email_contacto || prev.emailContacto,
+        nombreContacto: autocompleteData.nombre_contacto || prev.nombreContacto,
+      }))
+    }
+  }, [autocompleteData])
+
+  const handleAutocompleteSuccess = (json) => {
+    if (json?.datos_detectados?.lugar) {
+      setAutocompleteData(json.datos_detectados.lugar)
+    }
   }
 
   const handleSubmit = (e) => {
@@ -77,29 +100,31 @@ export const EspacioForm = ({ initialValues, onSubmit, loading, onCancel, readOn
   )
 
   return (
-    <form className="presupuesto-form" onSubmit={handleSubmit} noValidate>
-      {renderField("nombreEspacio", "Nombre del espacio *")}
-      {renderField("ciudad", "Ciudad *")}
-      {renderField("direccion", "Dirección *")}
-      {renderField("aforo", "Aforo *", "number", { min: "1" })}
-      {renderTextarea("nota", "Nota")}
-      <fieldset className="presupuesto-form__section">
-        <legend>Contacto</legend>
-        {renderField("telefonoContacto", "Teléfono *", "tel")}
-        {renderField("emailContacto", "Email *", "email")}
-        {renderField("nombreContacto", "Nombre contacto *")}
-      </fieldset>
+    <>
+      <form className="presupuesto-form" onSubmit={handleSubmit} noValidate>
+        {renderField("nombreEspacio", "Nombre del espacio *")}
+        {renderField("ciudad", "Ciudad *")}
+        {renderField("direccion", "Dirección *")}
+        {renderField("aforo", "Aforo *", "number", { min: "1" })}
+        {renderTextarea("nota", "Nota")}
+        <fieldset className="presupuesto-form__section">
+          <legend>Contacto</legend>
+          {renderField("telefonoContacto", "Teléfono *", "tel")}
+          {renderField("emailContacto", "Email *", "email")}
+          {renderField("nombreContacto", "Nombre contacto *")}
+        </fieldset>
 
-      {!readOnly && (
-        <div className="presupuesto-form__actions">
-          <button className="presupuesto-form__btn presupuesto-form__btn--submit" type="submit" disabled={loading}>
-            {loading ? "Guardando..." : "Guardar"}
-          </button>
-          <button className="presupuesto-form__btn presupuesto-form__btn--cancel" type="button" onClick={onCancel} disabled={loading}>
-            Cancelar
-          </button>
-        </div>
-      )}
-    </form>
+        {!readOnly && (
+          <div className="presupuesto-form__actions">
+            <button className="presupuesto-form__btn presupuesto-form__btn--submit" type="submit" disabled={loading}>
+              {loading ? "Guardando..." : "Guardar"}
+            </button>
+            <button className="presupuesto-form__btn presupuesto-form__btn--cancel" type="button" onClick={onCancel} disabled={loading}>
+              Cancelar
+            </button>
+          </div>
+        )}
+      </form>
+    </>
   )
 }

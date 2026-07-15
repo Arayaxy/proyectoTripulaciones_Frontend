@@ -9,6 +9,7 @@ import { EspacioSalaCrearPage } from "../pages/admin/EspacioSalaCrearPage"
 import { EspacioSalaEditarPage } from "../pages/admin/EspacioSalaEditarPage"
 import { PonentesPage } from "../pages/admin/PonentesPage"
 import { AgentePage } from "../pages/admin/AgentePage"
+import { BusquedasPage } from "../pages/admin/BusquedasPage"
 import { ConcursosPage } from "../pages/admin/ConcursosPage"
 import { RequireAdmin } from "../components/RequireAdmin"
 import { FichaPonente } from "../pages/ponente/FichaPonente"
@@ -53,6 +54,7 @@ export const AppRoutes = () => {
         <Route path='/ponentes' element={<PonentesPage />} />
         <Route path='/consultas' element={<AgentePage />} />
         <Route path='/concursos' element={<ConcursosPage />} />
+        <Route path='/busquedas' element={<BusquedasPage />} />
         <Route path='/detalle/:id' element={<EventoDetailPage />} />
         <Route path='/datos' element={<DatosEventoPage />} />
         <Route path='/ponencias' element={<PonenciasPage />} />
@@ -60,7 +62,7 @@ export const AppRoutes = () => {
         <Route path='/presupuestos/crear' element={<CrearPresupuestoPage />} />
         <Route path='/presupuestos/editar/:id' element={<EditarPresupuestoPage />} />
         <Route path='/lugar' element={<LugarPage />} />
-        <Route path='/presupuesto' element={<PresupuestoPage />} />
+
       </Route>
       {/* <Route path='/*' element={<Navigate to='/NotFound' />} /> */}
     </Routes>

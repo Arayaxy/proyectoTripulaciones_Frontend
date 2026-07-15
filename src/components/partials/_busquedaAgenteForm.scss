@@ -1,0 +1,74 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.busqueda-agente-form {
+  background: $color-white;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  padding: $sp-24;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $sp-16;
+
+    @include bp-768 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: $sp-4;
+
+    span {
+      font-size: $txt-sm;
+      font-weight: $fw-semibold;
+      color: $color-text;
+    }
+
+    &--full {
+      grid-column: 1 / -1;
+    }
+  }
+
+  &__section {
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    padding: $sp-16;
+    margin-top: $sp-20;
+
+    legend {
+      font-size: $txt-sm;
+      font-weight: $fw-semibold;
+      color: $color-text;
+      padding: 0 $sp-8;
+    }
+  }
+
+  &__checks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $sp-16;
+    margin-top: $sp-8;
+  }
+
+  &__check {
+    display: flex;
+    align-items: center;
+    gap: $sp-8;
+    cursor: pointer;
+    font-size: $txt-sm;
+  }
+
+  &__error {
+    color: $color-error;
+    font-size: $txt-xs;
+    margin-top: $sp-4;
+  }
+
+  .btn {
+    margin-top: $sp-20;
+  }
+}
