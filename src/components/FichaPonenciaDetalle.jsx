@@ -75,7 +75,7 @@ export const FichaPonenciaDetalle = ({ ponencia, isAdmin, onPonenciaActualizada 
       <p>Ciudad: {ponencia.evento?.ciudad}</p>
       <p>Tipo de evento: {ponencia.evento?.tipoEvento}</p>
 
-      {!isAdmin && (
+      {true && (
         <div>
           <button onClick={() => setMostrarSolicitud(!mostrarSolicitud)}>
             Solicitar edicion

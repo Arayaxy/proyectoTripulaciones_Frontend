@@ -1,24 +1,53 @@
 import { useState } from "react"
 
 export const SolicitudEdicionForm = ({ ponencia }) => {
+  const API_URL = import.meta.env.VITE_API_URL
+
   const [campo, setCampo] = useState('')
   const [valorSolicitado, setValorSolicitado] = useState('')
   const [mensaje, setMensaje] = useState('')
+  const [enviando, setEnviando] = useState(false)
+  const [error, setError] = useState(null)
+  const [enviada, setEnviada] = useState(false)
 
-  const handleSubmit = (ev) => {
+  const handleSubmit = async (ev) => {
     ev.preventDefault()
+    setEnviando(true)
+    setError(null)
+    setEnviada(false)
 
     const solicitud = {
-
       idPonencia: ponencia.id,
-      idPonente: ponencia.idPonente,
       campo,
       valorSolicitado,
       mensaje,
-
     }
 
-    console.log('Solicitud de edicion:', solicitud)
+    try {
+      const response = await fetch(`${API_URL}/solicitudes-edicion`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(solicitud),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.message || 'No se pudo enviar la solicitud')
+      }
+
+      setEnviada(true)
+      setCampo('')
+      setValorSolicitado('')
+      setMensaje('')
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setEnviando(false)
+    }
   }
 
   return (
@@ -67,9 +96,12 @@ export const SolicitudEdicionForm = ({ ponencia }) => {
         />
       </div>
 
-      <button type="submit">
-        Enviar solicitud
+      <button type="submit" disabled={enviando}>
+        {enviando ? 'Enviando...' : 'Enviar solicitud'}
       </button>
+
+      {error && <p>{error}</p>}
+      {enviada && <p>Solicitud enviada correctamente</p>}
     </form>
   )
 }

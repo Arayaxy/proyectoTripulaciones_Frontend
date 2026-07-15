@@ -30,6 +30,7 @@ import { CrearPonenciaPage } from "../pages/admin/CrearPonenciaPage"
 import { CrearPonentePage } from "../pages/admin/CrearPonentePage"
 import { PublicRoute } from "../components/PublicRoute"
 import { Backdoor } from "../pages/auth/Backdoor"
+import { SolicitudesEdicionPage } from "../pages/admin/SolicitudesEdicionPage"
 
 export const AppRoutes = () => {
   return (
@@ -55,6 +56,7 @@ export const AppRoutes = () => {
         <Route path='/espacios/:id/salas/editar/:salaId' element={<EspacioSalaEditarPage />} />
         <Route path='/ponentes' element={<PonentesPage />} />
         <Route path='/ponentes/nuevo' element={<CrearPonentePage />} />
+        <Route path='/solicitudes-edicion' element={<SolicitudesEdicionPage />} />
         <Route path='/consultas' element={<AgentePage />} />
         <Route path='/concursos' element={<ConcursosPage />} />
         <Route path='/detalle/:eventoId/ponencias/nuevo' element={<CrearPonenciaPage />} />
@@ -66,7 +68,7 @@ export const AppRoutes = () => {
         <Route path='/presupuestos/crear' element={<CrearPresupuestoPage />} />
         <Route path='/presupuestos/editar/:id' element={<EditarPresupuestoPage />} />
         <Route path='/lugar' element={<LugarPage />} />
-        <Route path='/presupuesto' element={<PresupuestosPage />} />
+
       </Route>
       {/* <Route path='/*' element={<Navigate to='/NotFound' />} /> */}
     </Routes>
