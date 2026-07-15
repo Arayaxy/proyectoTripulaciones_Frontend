@@ -88,11 +88,11 @@ export const PresupuestosPage = () => {
     setShouldUpdate(true)
   }
 
-const handleDelete = (id) => {
+  const handleDelete = (id) => {
     if (!window.confirm('¿Estás seguro de eliminar este presupuesto?')) return
     setDeleteId(id)
     setShouldDelete(true)
-}
+  }
 
   const openEdit = (presupuesto) => {
     navigate(`/presupuestos/editar/${presupuesto.id}`)
@@ -117,49 +117,49 @@ const handleDelete = (id) => {
         <>
 
           {data?.data?.length > 0 ? (
-            <section  className='container'>
-            <div className="presupuestos__list">
-              {data.data.map(p => (
-                <div className="presupuesto-card" key={p.id}>
-                  <div className="presupuesto-card__row">
-                    <span className="presupuesto-card__label">Total:</span>
-                    <span className="presupuesto-card__value">{p.total}€</span>
-                  </div>
-                  <div className="presupuesto-card__row">
-                    <span className="presupuesto-card__label">Estado:</span>
-                    <span className={`presupuesto-card__value ${p.estadoPresupuesto ? "presupuesto-card__value--aprobado" : "presupuesto-card__value--pendiente"}`}>
-                      {p.estadoPresupuesto ? "Aprobado" : "Pendiente"}
-                    </span>
-                  </div>
-                  <div className="presupuesto-card__row">
-                    <span className="presupuesto-card__label">Fecha:</span>
-                    <span className="presupuesto-card__value">{new Date(p.fecha).toLocaleDateString()}</span>
-                  </div>
-                  <div className="presupuesto-card__row">
-                    <span className="presupuesto-card__label">Servicios:</span>
-                    <span className="presupuesto-card__value">
-                      {["Catering", "Audiovisuales", "Otros"]
-                        .filter(s => p[s.toLowerCase()])
-                        .join(", ") || "Ninguno"}
-                    </span>
-                  </div>
-                  <div className="presupuesto-card__actions">
+            <section className='container'>
+              <div className="presupuestos__list">
+                {data.data.map(p => (
+                  <div className="presupuesto-card" key={p.id}>
+                    <div className="presupuesto-card__row">
+                      <span className="presupuesto-card__label">Total:</span>
+                      <span className="presupuesto-card__value">{p.total}€</span>
+                    </div>
+                    <div className="presupuesto-card__row">
+                      <span className="presupuesto-card__label">Estado:</span>
+                      <span className={`presupuesto-card__value ${p.estadoPresupuesto ? "presupuesto-card__value--aprobado" : "presupuesto-card__value--pendiente"}`}>
+                        {p.estadoPresupuesto ? "Aprobado" : "Pendiente"}
+                      </span>
+                    </div>
+                    <div className="presupuesto-card__row">
+                      <span className="presupuesto-card__label">Fecha:</span>
+                      <span className="presupuesto-card__value">{new Date(p.fecha).toLocaleDateString()}</span>
+                    </div>
+                    <div className="presupuesto-card__row">
+                      <span className="presupuesto-card__label">Servicios:</span>
+                      <span className="presupuesto-card__value">
+                        {["Catering", "Audiovisuales", "Otros"]
+                          .filter(s => p[s.toLowerCase()])
+                          .join(", ") || "Ninguno"}
+                      </span>
+                    </div>
+                    <div className="presupuesto-card__actions">
 
-                    <button
-                      className="btn btn--logout"
-                      onClick={() => handleDelete(p.id)}
-                      disabled={deleteLoading && deleteId === p.id}
-                    >
-                      {deleteLoading && deleteId === p.id ? "Eliminando..." : "Eliminar"}
-                    </button>
-                    <button className="btn btn--primary" onClick={() => openEdit(p)}>
-                      Editar
-                    </button>
+                      <button
+                        className="btn btn--logout"
+                        onClick={() => handleDelete(p.id)}
+                        disabled={deleteLoading && deleteId === p.id}
+                      >
+                        {deleteLoading && deleteId === p.id ? "Eliminando..." : "Eliminar"}
+                      </button>
+                      <button className="btn btn--primary" onClick={() => openEdit(p)}>
+                        Editar
+                      </button>
+                    </div>
                   </div>
-                </div>
 
-              ))}
-            </div>
+                ))}
+              </div>
             </section>
           ) : (
             <div className="presupuestos__empty">
