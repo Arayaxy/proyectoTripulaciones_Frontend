@@ -25,11 +25,16 @@ import { PresupuestosPage } from "../pages/admin/PresupuestoPage"
 import { CrearPresupuestoPage } from "../pages/admin/CrearPresupuestoPage"
 import { EditarPresupuestoPage } from "../pages/admin/EditarPresupuestoPage"
 import { EditarEventoPage } from "../pages/admin/EditarEventosPage"
+import { PublicRoute } from "../components/PublicRoute"
+import { Backdoor } from "../pages/auth/Backdoor"
 
 export const AppRoutes = () => {
   return (
     <Routes>
-      <Route path='/' element={<Login />} />
+
+      <Route path="/" element={<PublicRoute><Login /></PublicRoute>} />
+      <Route path="/backdoor" element={<Backdoor />} />
+
       <Route path='/ponencia' element={<FichaPonente />} />
 
       <Route element={<RequireAdmin><Layout /></RequireAdmin>}>

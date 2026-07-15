@@ -1,0 +1,93 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.backdoor {
+  min-height: 100svh;
+  @include flex(column, center, center);
+  padding: $sp-24;
+  background: $color-bg;
+}
+
+.backdoor__container {
+  width: 100%;
+  max-width: 400px;
+  @include flex(column);
+  gap: $sp-24;
+  padding: $sp-32;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  box-sizing: border-box;
+}
+
+.backdoor__title {
+  text-align: center;
+  font-size: $txt-xl;
+  font-weight: $fw-bold;
+  color: $color-text;
+  margin: 0;
+}
+
+.backdoor__form {
+  @include flex(column);
+  gap: $sp-16;
+}
+
+.backdoor__input {
+  width: 100%;
+  padding: $sp-12 $sp-16;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  font-size: $txt-base;
+  font-weight: $fw-semibold;
+  color: $color-text;
+  background: $color-black-5;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    border-color: $color-primary;
+  }
+}
+
+.backdoor__submit {
+  width: 100%;
+  padding: $sp-12 $sp-16;
+  background: $color-primary;
+  color: $color-white;
+  border: none;
+  border-radius: $radius-md;
+  font-size: $txt-md;
+  font-weight: $fw-medium;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.backdoor__error {
+  color: $color-error;
+  font-size: $txt-sm;
+  text-align: center;
+  margin: 0;
+}
+
+.backdoor__success {
+  color: $color-dot;
+  font-size: $txt-base;
+  text-align: center;
+  margin: 0;
+}
+
+.backdoor__link {
+  background: none;
+  border: none;
+  color: $color-primary;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: $txt-sm;
+  text-align: center;
+  padding: 0;
+}
