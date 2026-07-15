@@ -33,14 +33,18 @@
   &__list {
     display: grid;
     grid-template-columns: 1fr;
-    gap: $sp-16;
+    gap: $sp-24;
 
     @include bp-768 {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @include bp-990 {
+    @include bp-1200 {
       grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include bp-1900 {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 
@@ -60,6 +64,12 @@
   @include flex(column, flex-start, stretch);
   gap: $sp-12;
   transition: box-shadow 0.2s ease;
+  h2 {
+    color: $color-primary;
+    font: $fw-bold $txt-lg $font-primary;
+    text-transform: uppercase;
+    margin-bottom: $sp-8;
+  }
 
   &:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -68,6 +78,8 @@
   &__row {
     @include flex-between;
     gap: $sp-8;
+    border-bottom: 1px solid $color-black-10;
+    padding: 0 $sp-12 $sp-8 $sp-12;
   }
 
   &__label {
@@ -77,9 +89,8 @@
   }
 
   &__value {
-    font-size: $txt-sm;
+    font: $fw-semibold $txt-base $font-secondary;
     color: $color-text;
-    font-weight: $fw-semibold;
 
     &--aprobado {
       color: $color-dot;
@@ -93,8 +104,7 @@
   &__actions {
     @include flex(row, center, center);
     gap: $sp-8;
-    margin-top: $sp-8;
+    margin-top: auto;
     padding-top: $sp-12;
-    border-top: 1px solid $color-border;
   }
 }

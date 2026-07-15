@@ -10,7 +10,12 @@ export const EventoCard = ({ evento, onDelete }) => {
 
   return (
     <article className="client-card">
-      <h2 className="client-card__name">{evento.nombreEvento}</h2>
+      <h2 className="client-card__name">
+        {evento.nombreEvento}
+        <button className="btn btn--outline sm" style={{ float: 'right' }} onClick={() => navigate(`/detalle/${evento.id}`)}>
+          Detalles
+        </button>
+      </h2>
       <p className="client-card__detail">
         <span className="client-card__label">Ciudad:</span>{' '}
         <strong>{evento.ciudad}</strong>

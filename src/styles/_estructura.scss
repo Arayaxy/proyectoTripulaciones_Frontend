@@ -19,16 +19,14 @@ body {
   }
 
   @include bp-768 {
-    max-width: 768px;
     margin: 0 auto;
   }
 
   @include bp-990 {
-    max-width: 990px;
     padding: $sp-32;
   }
   @include bp-1200 {
-    max-width: 1200px;
+    max-width: 90%;
     padding: $sp-48;
   }
 }

@@ -60,14 +60,13 @@
     color: $color-logout;
     border-color: $color-black-25;
 
-    @include bp-990 {
-        order: 2;
-      }
-
     &:hover {
       background: $color-logout;
       color: $color-white;
 
+  }
+  @include bp-1200 {
+      order: 2;
     }
   }
 
@@ -118,4 +117,12 @@
   padding: $sp-16;
   @include flex(column, flex-start, flex-start);
   gap: $sp-8;
+}
+
+
+hr {
+  border: 0;
+  height: 2px;
+  background-color: $color-black-10;
+  margin: $sp-12 0;
 }
