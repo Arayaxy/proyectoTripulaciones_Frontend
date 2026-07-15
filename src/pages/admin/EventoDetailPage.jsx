@@ -1,6 +1,6 @@
 import { NavbarInterno } from '../../components/NavbarInterno'
 import { EventoInfo } from '../../components/EventoInfo'
-import { EventoDetail } from '../../components/EventoDetail'
+import { SeccionDetail } from '../../components/SeccionDetail'
 import { useParams } from 'react-router'
 
 export const EventoDetailPage = () => {
@@ -14,7 +14,8 @@ export const EventoDetailPage = () => {
       <section className='container'>
         <NavbarInterno />
         <EventoInfo eventId={id} />
-        <EventoDetail />
+        <SeccionDetail />
+
       </section>
     </>
   )
