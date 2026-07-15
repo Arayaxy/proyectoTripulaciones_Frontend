@@ -3,3 +3,52 @@
 @use '../../styles/mixins' as *;
 @use '../../styles/elements';
 @use '../../styles/reset';
+
+.containerDatosEvento {
+  width: 100%;
+  margin: 0 auto;
+  @include flex(column, center, center);
+  gap: $sp-12 ;
+
+  .evento_info {
+    width: 100%;
+    padding: $sp-24;
+    @include flex(column, flex-start, flex-start);
+    gap: $sp-8;
+    background-color: $color-black-5;
+    border: 1px solid $color-black-10;
+    border-radius: $sp-8;
+
+    &_titulo {
+      font-size: $txt-xl;
+      font-weight: $fw-semibold;
+      color: $color-primary;
+      font-family: $font-primary;
+    }
+
+    &_fecha {
+      font-size: $txt-base;
+      font-weight: $fw-regular;
+      color: $color-text;
+    }
+
+    &_ciudad,
+    &_personas {
+      font-size: $txt-md;
+      font-weight: $fw-bold;
+      color: $color-primary;
+    }
+    .zonaBotones {
+      @include flex(row, flex-start, center);
+      gap: $sp-12;
+      margin-top: $sp-16;
+    }
+    @include bp-990 {
+      width: 75%;
+    }
+    @include bp-1200 {
+      width: 50%;
+    }
+
+  }
+}
