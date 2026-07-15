@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router'
 
-export const PresupuestoDetail = ({ presupuesto }) => {
+export const PresupuestoDetail = ({ presupuesto, eventoId }) => {
   const navigate = useNavigate()
 
   return (
@@ -14,7 +14,7 @@ export const PresupuestoDetail = ({ presupuesto }) => {
       <div>
         <button
           className="btn_presupuesto"
-          onClick={() => presupuesto?.id && navigate(`/presupuestos/editar/${presupuesto.id}`)}
+          onClick={() => navigate(`/detalle/${eventoId}?seccion=presupuesto`)}
         >
           Ir a Presupuesto
         </button>
