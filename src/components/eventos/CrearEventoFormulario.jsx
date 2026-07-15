@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router'
 import { FileUpload } from '../../components/FileUpload'
 
 const AUTOCOMPLETE_URL = import.meta.env.VITE_AUTOCOMPLETE_URL;
@@ -19,6 +20,7 @@ export const CrearEventoFormulario = ({ onSubmit, clientes, estados }) => {
   const [form, setForm] = useState(initialForm)
   const [respuesta, setRespuesta] = useState(null)
   const [autocompleteData, setAutocompleteData] = useState(null)
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -125,6 +127,11 @@ export const CrearEventoFormulario = ({ onSubmit, clientes, estados }) => {
 
 
       <FileUpload uploadUrl={AUTOCOMPLETE_URL} onSuccess={handleAutocompleteSuccess} withCredentials={false} />
+
+      <div className="btnVolver">
+        <button className="btn btn--nobg" onClick={() => navigate('/eventos')}>&laquo; Volver a Eventos
+        </button>
+      </div>
     </>
 
   )
