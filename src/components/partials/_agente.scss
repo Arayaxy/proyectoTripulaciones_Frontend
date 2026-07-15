@@ -1,5 +1,38 @@
-@use '../../styles/fonts';
 @use '../../styles/variables' as *;
 @use '../../styles/mixins' as *;
-@use '../../styles/elements';
-@use '../../styles/reset';
+
+.agente-form {
+  &__search {
+    @include flex(row, flex-start, center);
+    gap: $sp-12;
+
+    .input {
+      flex: 1;
+    }
+  }
+}
+
+.agente__error {
+  color: $color-error;
+  font-size: $txt-sm;
+  margin-top: $sp-12;
+}
+
+.agente__response {
+  margin-top: $sp-24;
+  background: $color-white;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  padding: $sp-20;
+  font-size: $txt-base;
+  font-family: $font-secondary;
+  color: $color-text;
+  line-height: 1.6;
+
+  &__label {
+    font-size: $txt-sm;
+    font-weight: $fw-semibold;
+    color: $color-text-muted;
+    margin-bottom: $sp-8;
+  }
+}

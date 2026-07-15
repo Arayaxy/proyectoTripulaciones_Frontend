@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const useFetch = (url, method = "GET", body = null) => {
+export const useFetch = (url, method = "GET", body = null, agent = false) => {
 
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -18,7 +18,7 @@ export const useFetch = (url, method = "GET", body = null) => {
 
         const config = {
           method: method,
-          credentials: "include",
+          credentials: agent ? "omit" : "include",
           headers: {
             "Content-Type": "application/json",
           },

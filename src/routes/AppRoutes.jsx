@@ -2,6 +2,11 @@ import { Routes, Route, Navigate } from "react-router"
 import { Login } from "../pages/auth/Login"
 import { ClientePage } from "../pages/admin/ClientePage"
 import { EspaciosPage } from "../pages/admin/EspaciosPage"
+import { EspacioCrearPage } from "../pages/admin/EspacioCrearPage"
+import { EspacioEditarPage } from "../pages/admin/EspacioEditarPage"
+import { EspacioSalasPage } from "../pages/admin/EspacioSalasPage"
+import { EspacioSalaCrearPage } from "../pages/admin/EspacioSalaCrearPage"
+import { EspacioSalaEditarPage } from "../pages/admin/EspacioSalaEditarPage"
 import { PonentesPage } from "../pages/admin/PonentesPage"
 import { AgentePage } from "../pages/admin/AgentePage"
 import { ConcursosPage } from "../pages/admin/ConcursosPage"
@@ -19,6 +24,7 @@ import { EditarClientePage } from "../pages/admin/EditarClientePage"
 import { PresupuestosPage } from "../pages/admin/PresupuestoPage"
 import { CrearPresupuestoPage } from "../pages/admin/CrearPresupuestoPage"
 import { EditarPresupuestoPage } from "../pages/admin/EditarPresupuestoPage"
+import { EditarEventoPage } from "../pages/admin/EditarEventosPage"
 
 export const AppRoutes = () => {
   return (
@@ -28,15 +34,21 @@ export const AppRoutes = () => {
 
       <Route element={<RequireAdmin><Layout /></RequireAdmin>}>
         <Route path='/eventos' element={<EventosPage />} />
-        <Route path='/crear' element={<CrearEventoPage />} />
+        <Route path='/eventos/nuevo' element={<CrearEventoPage />} />
+        <Route path='/eventos/editar/:id' element={<EditarEventoPage />} />
         <Route path='/clientes' element={<ClientePage />} />
         <Route path='/clientes/nuevo' element={<CrearClientePage />} />
         <Route path='/clientes/editar/:id' element={<EditarClientePage />} />
         <Route path='/espacios' element={<EspaciosPage />} />
+        <Route path='/espacios/nuevo' element={<EspacioCrearPage />} />
+        <Route path='/espacios/editar/:id' element={<EspacioEditarPage />} />
+        <Route path='/espacios/:id/salas' element={<EspacioSalasPage />} />
+        <Route path='/espacios/:id/salas/nuevo' element={<EspacioSalaCrearPage />} />
+        <Route path='/espacios/:id/salas/editar/:salaId' element={<EspacioSalaEditarPage />} />
         <Route path='/ponentes' element={<PonentesPage />} />
         <Route path='/consultas' element={<AgentePage />} />
         <Route path='/concursos' element={<ConcursosPage />} />
-        <Route path='/detalle' element={<EventoDetailPage />} />
+        <Route path='/detalle/:id' element={<EventoDetailPage />} />
         <Route path='/datos' element={<DatosEventoPage />} />
         <Route path='/ponencias' element={<PonenciasPage />} />
         <Route path='/presupuestos' element={<PresupuestosPage />} />
