@@ -12,6 +12,7 @@ export const CrearClientePage = () => {
   const [autocompleteData, setAutocompleteData] = useState(null)
 
   const handleAutocompleteSuccess = (json) => {
+    console.log(json)
     if (json?.datos_detectados?.cliente) {
       setAutocompleteData(json.datos_detectados.cliente);
     }
