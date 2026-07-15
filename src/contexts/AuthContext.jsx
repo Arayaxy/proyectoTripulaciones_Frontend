@@ -8,6 +8,7 @@ const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [isVerifying, setIsVerifying] = useState(() => checkCookieExists("is_logged_in"));
 
   const API_URL = import.meta.env.VITE_API_URL;
 
@@ -23,10 +24,13 @@ export const AuthContextProvider = ({ children }) => {
   } = useFetch(verifyUrl, "GET");
 
   useEffect(() => {
-    if (verifyData && verifyData.user) {
+    if (verifyData) {
       setUser(verifyData.user);
     }
-  }, [verifyData]);
+    if (verifyData || fetchError) {
+      setIsVerifying(false);
+    }
+  }, [verifyData, fetchError]);
 
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
@@ -54,7 +58,7 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  const finalLoading = hasCookie ? fetchLoading : false;
+  const finalLoading = hasCookie ? (fetchLoading || isVerifying) : false;
 
   return (
     <AuthContext.Provider
