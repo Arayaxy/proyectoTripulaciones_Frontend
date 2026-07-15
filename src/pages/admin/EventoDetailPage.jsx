@@ -3,6 +3,7 @@ import { EventoInfo } from '../../components/EventoInfo'
 
 import { useParams } from 'react-router'
 import { SeccionDetail } from '../../components/SeccionDetail'
+import { useFetch } from '../../hooks/useFetch'
 
 export const EventoDetailPage = () => {
   const { id } = useParams()
@@ -10,7 +11,7 @@ export const EventoDetailPage = () => {
   const API_URL = import.meta.env.VITE_API_URL
 
   const { data, loading, error } = useFetch(
-    eventId ? `${API_URL}/eventos/${id}` : null,
+    evento ? `${API_URL}/eventos/${id}` : null,
     "GET"
   )
 
