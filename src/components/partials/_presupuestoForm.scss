@@ -15,7 +15,7 @@
   &__label {
     font-size: $txt-sm;
     font-weight: $fw-medium;
-    color: $color-text-muted;
+    color: $color-primary;
 
     &--checkbox {
       @include flex(row, flex-start, center);

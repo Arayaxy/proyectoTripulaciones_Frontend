@@ -69,10 +69,7 @@ export const EspaciosPage = () => {
           <div className="presupuestos__list">
             {data.data.map((espacio) => (
               <div className="presupuesto-card" key={espacio.id}>
-                <div className="presupuesto-card__row">
-                  <span className="presupuesto-card__label">Nombre:</span>
-                  <span className="presupuesto-card__value">{espacio.nombreEspacio}</span>
-                </div>
+                <h2>{espacio.nombreEspacio}</h2>
                 <div className="presupuesto-card__row">
                   <span className="presupuesto-card__label">Ciudad:</span>
                   <span className="presupuesto-card__value">{espacio.ciudad}</span>
