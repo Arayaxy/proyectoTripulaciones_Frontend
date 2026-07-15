@@ -62,8 +62,7 @@ export const Login = () => {
       <section className="login__body">
         <h2>¡Hola!</h2>
         <p>Usa tu <strong>cuenta de Google</strong> para entrar en <strong>The Backstage</strong></p>
-        {error && import.meta.env.MODE === "development" && <p>{error}</p>}
-        {error && import.meta.env.MODE === "production" && <p>Error al conectarse. Por favor intenta de nuevo.</p>}
+        {error && <p>{error}</p>}
         <button
           className="login__google-btn"
           onClick={handleGoogleSignIn}
