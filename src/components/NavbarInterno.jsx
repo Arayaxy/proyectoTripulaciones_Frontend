@@ -2,22 +2,21 @@ import { NavLink } from "react-router"
 import './partials/_navbar.scss'
 
 export const NavbarInterno = ({ eventoId }) => {
-  const link = (path) => `${path}?eventoId=${eventoId}`
 
   return (
     <nav className="main-navbar">
       <ul>
         <li>
-          <NavLink to={link("/datos")}>Datos</NavLink>
+          <NavLink to={`/detalle/${eventoId}?seccion=datos`}>Datos</NavLink>
         </li>
         <li>
-          <NavLink to={link("/ponencias")}>Ponencias</NavLink>
+          <NavLink to={`/detalle/${eventoId}?seccion=ponencias`}>Ponencias</NavLink>
         </li>
         <li>
-          <NavLink to={link("/lugar")}>Lugar</NavLink>
+          <NavLink to={`/detalle/${eventoId}?seccion=lugar`}>Lugar</NavLink>
         </li>
         <li>
-          <NavLink to={link("/presupuestos")}>Presupuestos</NavLink>
+          <NavLink to={`/detalle/${eventoId}?seccion=presupuesto`}>Presupuesto</NavLink>
         </li>
       </ul>
     </nav>
