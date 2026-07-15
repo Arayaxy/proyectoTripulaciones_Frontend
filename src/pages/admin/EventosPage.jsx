@@ -1,22 +1,19 @@
-import { useFetch } from "../../hooks/useFetch"
-import { EventoCard } from "../../components/EventoCard"
-import { Navigate } from "react-router"
-import { useAuth } from "../../contexts/AuthContext"
-
-const API_URL = import.meta.env.VITE_API_URL
+import { useNavigate } from 'react-router'
+import { Eventos } from '../../components/eventos/eventos'
 
 export const EventosPage = () => {
-  const { logOut, user, loading, error } = useAuth();
-
+  const navigate = useNavigate()
   return (
     <>
-      <header className='titlePage'>
+      <header className="titlePage">
         <h1>Eventos</h1>
-        <button className="btn btn--outline" onClick={() => Navigate('/eventos/nuevo')}>Nuevo Evento</button>
+        <button className="btn btn--anadir" onClick={() => navigate('/eventos/nuevo')}>
+          Añadir Evento
+        </button>
       </header>
-      <section className='container'>
-        <p>Hola, {user?.name}</p>
+      <section className="container">
+        <Eventos />
       </section>
-      </>
+    </>
   )
 }

@@ -24,6 +24,7 @@ import { EditarClientePage } from "../pages/admin/EditarClientePage"
 import { PresupuestosPage } from "../pages/admin/PresupuestoPage"
 import { CrearPresupuestoPage } from "../pages/admin/CrearPresupuestoPage"
 import { EditarPresupuestoPage } from "../pages/admin/EditarPresupuestoPage"
+import { EditarEventoPage } from "../pages/admin/EditarEventosPage"
 
 export const AppRoutes = () => {
   return (
@@ -33,7 +34,8 @@ export const AppRoutes = () => {
 
       <Route element={<RequireAdmin><Layout /></RequireAdmin>}>
         <Route path='/eventos' element={<EventosPage />} />
-        <Route path='/crear' element={<CrearEventoPage />} />
+        <Route path='/eventos/nuevo' element={<CrearEventoPage />} />
+        <Route path='/eventos/editar/:id' element={<EditarEventoPage />} />
         <Route path='/clientes' element={<ClientePage />} />
         <Route path='/clientes/nuevo' element={<CrearClientePage />} />
         <Route path='/clientes/editar/:id' element={<EditarClientePage />} />
