@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
 import heroLogo from '../../assets/logo_2026_Backstage.svg'
@@ -6,9 +6,10 @@ import heroImg from '../../assets/heroImg.jpg'
 import './_login.scss'
 
 export const Login = () => {
-  const { googleSignIn, user, setUser, loading, setLoading, error, setError } = useAuth();
+  const { googleSignIn, user, setUser, loading, setLoading } = useAuth();
   const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_API_URL;
+  const [loginError, setLoginError] = useState(null);
 
   useEffect(() => {
     if (user && user.role === "admin") {
@@ -17,7 +18,7 @@ export const Login = () => {
   }, [user, navigate]);
 
   const handleGoogleSignIn = async () => {
-    setError(null);
+    setLoginError(null);
     setLoading(true);
 
     try {
@@ -41,7 +42,7 @@ export const Login = () => {
       navigate("/eventos");
     } catch (err) {
       console.error(err.message);
-      setError(err.message);
+      setLoginError("Error al iniciar sesión. Intenta de nuevo.");
     } finally {
       setLoading(false);
     }
@@ -62,8 +63,7 @@ export const Login = () => {
       <section className="login__body">
         <h2>¡Hola!</h2>
         <p>Usa tu <strong>cuenta de Google</strong> para entrar en <strong>The Backstage</strong></p>
-        {error && import.meta.env.MODE === "development" && <p>{error}</p>}
-        {error && import.meta.env.MODE === "production" && <p>Error al conectarse. Por favor intenta de nuevo.</p>}
+        {loginError && <p>{loginError}</p>}
         <button
           className="login__google-btn"
           onClick={handleGoogleSignIn}
