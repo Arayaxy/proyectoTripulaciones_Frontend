@@ -26,6 +26,8 @@ import { PresupuestosPage } from "../pages/admin/PresupuestoPage"
 import { CrearPresupuestoPage } from "../pages/admin/CrearPresupuestoPage"
 import { EditarPresupuestoPage } from "../pages/admin/EditarPresupuestoPage"
 import { EditarEventoPage } from "../pages/admin/EditarEventosPage"
+import { EditarPonenciaPage } from "../pages/admin/EditarPonenciaPage"
+import { CrearPonenciaPage } from "../pages/admin/CrearPonenciaPage"
 import { PublicRoute } from "../components/PublicRoute"
 import { Backdoor } from "../pages/auth/Backdoor"
 
@@ -55,6 +57,8 @@ export const AppRoutes = () => {
         <Route path='/consultas' element={<AgentePage />} />
         <Route path='/concursos' element={<ConcursosPage />} />
         <Route path='/busquedas' element={<BusquedasPage />} />
+        <Route path='/detalle/:eventoId/ponencias/nuevo' element={<CrearPonenciaPage />} />
+        <Route path='/detalle/:eventoId/ponencias/editar/:ponenciaId' element={<EditarPonenciaPage />} />
         <Route path='/detalle/:id' element={<EventoDetailPage />} />
         <Route path='/datos' element={<DatosEventoPage />} />
         <Route path='/ponencias' element={<PonenciasPage />} />
