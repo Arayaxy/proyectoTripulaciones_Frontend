@@ -1,8 +1,12 @@
 import { Routes, Route, Navigate } from "react-router"
 import { Login } from "../pages/auth/Login"
-
 import { ClientePage } from "../pages/admin/ClientePage"
 import { EspaciosPage } from "../pages/admin/EspaciosPage"
+import { EspacioCrearPage } from "../pages/admin/EspacioCrearPage"
+import { EspacioEditarPage } from "../pages/admin/EspacioEditarPage"
+import { EspacioSalasPage } from "../pages/admin/EspacioSalasPage"
+import { EspacioSalaCrearPage } from "../pages/admin/EspacioSalaCrearPage"
+import { EspacioSalaEditarPage } from "../pages/admin/EspacioSalaEditarPage"
 import { PonentesPage } from "../pages/admin/PonentesPage"
 import { AgentePage } from "../pages/admin/AgentePage"
 import { ConcursosPage } from "../pages/admin/ConcursosPage"
@@ -15,8 +19,11 @@ import { EventoDetailPage } from "../pages/admin/EventoDetailPage"
 import { Layout } from "../components/Layout"
 import { CrearEventoPage } from "../pages/admin/CrearEventoPage"
 import { EventosPage } from "../pages/admin/EventosPage"
-import { CrearClientePage } from '../pages/admin/CrearClientePage'
+import { CrearClientePage } from "../pages/admin/CrearClientePage"
 import { EditarClientePage } from "../pages/admin/EditarClientePage"
+import { PresupuestosPage } from "../pages/admin/PresupuestoPage"
+import { CrearPresupuestoPage } from "../pages/admin/CrearPresupuestoPage"
+import { EditarPresupuestoPage } from "../pages/admin/EditarPresupuestoPage"
 
 export const AppRoutes = () => {
   return (
@@ -31,12 +38,20 @@ export const AppRoutes = () => {
         <Route path='/clientes/nuevo' element={<CrearClientePage />} />
         <Route path='/clientes/editar/:id' element={<EditarClientePage />} />
         <Route path='/espacios' element={<EspaciosPage />} />
+        <Route path='/espacios/nuevo' element={<EspacioCrearPage />} />
+        <Route path='/espacios/editar/:id' element={<EspacioEditarPage />} />
+        <Route path='/espacios/:id/salas' element={<EspacioSalasPage />} />
+        <Route path='/espacios/:id/salas/nuevo' element={<EspacioSalaCrearPage />} />
+        <Route path='/espacios/:id/salas/editar/:salaId' element={<EspacioSalaEditarPage />} />
         <Route path='/ponentes' element={<PonentesPage />} />
         <Route path='/consultas' element={<AgentePage />} />
         <Route path='/concursos' element={<ConcursosPage />} />
         <Route path='/detalle' element={<EventoDetailPage />} />
         <Route path='/datos' element={<DatosEventoPage />} />
         <Route path='/ponencias' element={<PonenciasPage />} />
+        <Route path='/presupuestos' element={<PresupuestosPage />} />
+        <Route path='/presupuestos/crear' element={<CrearPresupuestoPage />} />
+        <Route path='/presupuestos/editar/:id' element={<EditarPresupuestoPage />} />
         <Route path='/lugar' element={<LugarPage />} />
       </Route>
       {/* <Route path='/*' element={<Navigate to='/NotFound' />} /> */}

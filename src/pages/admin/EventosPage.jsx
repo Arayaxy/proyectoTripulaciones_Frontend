@@ -1,6 +1,9 @@
-import React from 'react'
-import { useAuth } from '../../contexts/AuthContext';
-import { Navigate } from 'react-router';
+import { useFetch } from "../../hooks/useFetch"
+import { EventoCard } from "../../components/EventoCard"
+import { Navigate } from "react-router"
+import { useAuth } from "../../contexts/AuthContext"
+
+const API_URL = import.meta.env.VITE_API_URL
 
 export const EventosPage = () => {
   const { logOut, user, loading, error } = useAuth();

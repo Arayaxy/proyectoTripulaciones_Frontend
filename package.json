@@ -12,7 +12,6 @@
   "devEngines": {
     "packageManager": {
       "name": "npm",
-      "version": "^11.12.1",
       "onFail": "download"
     }
   },
@@ -40,6 +39,7 @@
   },
   "allowScripts": {
     "@firebase/util@1.15.1": true,
-    "protobufjs@7.6.5": true
+    "protobufjs@7.6.5": true,
+    "@parcel/watcher@2.5.6": true
   }
 }
