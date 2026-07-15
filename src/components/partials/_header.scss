@@ -14,11 +14,17 @@
   top: 0;
   z-index: 100;
   @include bp-990 {
-      padding: $sp-24 $sp-24;
-    }
+      padding: $sp-24 $sp-16;
+  }
   @include bp-1200 {
-      padding: $sp-24 $sp-64;
-    }
+      padding: $sp-24 $sp-20;
+  }
+  @include bp-1400 {
+      padding: $sp-24 $sp-32;
+  }
+  @include bp-1900 {
+      padding: $sp-24 $sp-48;
+  }
   img {
     height: 39px;
     width: auto;
@@ -33,12 +39,10 @@
 
 .header__logout {
 
-  @include bp-990 {
+  @include bp-1200 {
     order: 2;
   }
-  @include bp-990 {
-    order: 2;
-  }
+
 }
 
 .header__hamburger {
@@ -48,7 +52,7 @@
   cursor: pointer;
   color: $color-primary;
 
-  @include bp-990 {
+  @include bp-1200 {
     display: none;
   }
 }
@@ -73,7 +77,7 @@ Responsive 1200
 ============================================== */
 @media screen and (min-width:1200px) {
   .headerContainer {
-      @include flex-between;
+    @include flex-between;
 
     }
 }

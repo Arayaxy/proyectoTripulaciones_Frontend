@@ -8,13 +8,12 @@
   border-radius: $radius-lg;
   padding: $sp-24;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: rgba(0, 0, 0, 0.01);
 }
 
 .client-card__name {
-  font-family: $font-primary;
-  font-size: $txt-lg;
-  font-weight: $fw-semibold;
+  font: $fw-bold $txt-titleCard $font-primary;
+  text-transform: uppercase;
   color: $color-primary;
   margin: 0 0 $sp-12;
   border-bottom: 1px solid $color-black-10;
