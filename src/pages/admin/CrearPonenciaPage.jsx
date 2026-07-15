@@ -299,7 +299,7 @@ export const CrearPonenciaPage = () => {
                     {hotel.enlace_reserva && (
                       <a href={hotel.enlace_reserva} target="_blank" rel="noopener noreferrer" className="btn--reserva">Reservar</a>
                     )}
-                    <button type="button" onClick={() => setForm((prev) => ({ ...prev, nombreHotel: hotel.nombre, localizacionHotel: hotel.direccion || hotel.localizacion || "" }))}>
+                    <button type="button" onClick={() => setForm((prev) => ({ ...prev, nombreHotel: hotel.nombre, localizacionHotel: form.ciudadEvento }))}>
                       Seleccionar
                     </button>
                   </div>
