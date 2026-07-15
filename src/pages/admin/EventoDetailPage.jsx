@@ -37,6 +37,8 @@ export const EventoDetailPage = () => {
   const { id } = useParams()
   const [searchParams] = useSearchParams()
   const seccion = searchParams.get('seccion')
+  const { data } = useFetch(`${API_URL}/eventos/${id}`)
+  const evento = data?.data
 
   return (
     <>
@@ -54,10 +56,7 @@ export const EventoDetailPage = () => {
         ) : seccion === 'lugar' ? (
           <h2>Gestión de Lugar</h2>
         ) : (
-          <>
-            <EventoInfo eventId={id} />
-            <SeccionDetail />
-          </>
+          <SeccionDetail evento={evento} />
         )}
       </section>
     </>
