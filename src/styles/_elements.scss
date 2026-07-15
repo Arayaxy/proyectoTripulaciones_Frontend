@@ -46,6 +46,16 @@
     }
   }
 
+  &--nobg {
+    color: $color-primary;
+    border-color: $color-white;
+    background-color: $color-white;
+
+    &:hover {
+      color: $color-text;
+    }
+  }
+
   &--logout {
     color: $color-logout;
     border-color: $color-black-25;

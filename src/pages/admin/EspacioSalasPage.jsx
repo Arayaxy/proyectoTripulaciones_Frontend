@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useNavigate, useParams } from "react-router"
 import { useFetch } from "../../hooks/useFetch"
+import '../../components/partials/_presupuestos.scss'
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -63,9 +64,7 @@ export const EspacioSalasPage = () => {
           <button className="btn btn--anadir" onClick={handleNuevaSala}>
             Añadir sala
           </button>
-          <button className="btn btn--primary" onClick={() => navigate(`/espacios`)}>
-            Volver a espacios
-          </button>
+
         </div>
       </header>
 
@@ -112,6 +111,11 @@ export const EspacioSalasPage = () => {
                 </div>
               </div>
             ))}
+          </div>
+          <div className="btnVolver">
+            <button className="btn btn--nobg" onClick={() => navigate(`/espacios`)}>
+              &laquo; Volver a espacios
+            </button>
           </div>
         </section>
       ) : (
