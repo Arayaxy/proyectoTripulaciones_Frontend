@@ -1,6 +1,8 @@
 import { useState } from 'react'
 
-export const EditarEventoFormulario = ({ initialData, onSubmit, clientes, estados }) => {
+const ESTADOS = ['Planificado', 'Reservado', 'Confirmado', 'Finalizado', 'Cancelado']
+
+export const EditarEventoFormulario = ({ initialData, onSubmit, clientes }) => {
   const [form, setForm] = useState({
     ...initialData,
     fechaInicio: initialData.fechaInicio ? initialData.fechaInicio.slice(0, 10) : '',
@@ -13,7 +15,7 @@ export const EditarEventoFormulario = ({ initialData, onSubmit, clientes, estado
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const { cliente, estado, sala, presupuesto, ponencias, ...cleanData } = form
+    const { cliente, sala, presupuesto, ponencias, ...cleanData } = form
     onSubmit({
       ...cleanData,
       numeroPersonas: Number(cleanData.numeroPersonas),
@@ -63,9 +65,9 @@ export const EditarEventoFormulario = ({ initialData, onSubmit, clientes, estado
         </label>
         <label className="form-cliente__field">
           <span>Estado</span>
-          <select className="input" name="idEstado" value={form.idEstado || ''} onChange={handleChange} required>
+          <select className="input" name="estado" value={form.estado || ''} onChange={handleChange} required>
             <option value="">Seleccionar estado</option>
-            {estados?.map((e) => (<option key={e.id} value={e.id}>{e.descripcion}</option>))}
+            {ESTADOS.map((e) => (<option key={e} value={e}>{e}</option>))}
           </select>
         </label>
         <label className="form-cliente__field">

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router'
 
-export const EventoCard = ({ evento, onDelete }) => {
+export const EventoCard = ({ evento }) => {
   const navigate = useNavigate()
 
   const formatDate = (dateStr) => {
@@ -12,9 +12,6 @@ export const EventoCard = ({ evento, onDelete }) => {
     <article className="client-card">
       <h2 className="client-card__name">
         {evento.nombreEvento}
-        <button className="btn btn--outline sm" style={{ float: 'right' }} onClick={() => navigate(`/detalle/${evento.id}`)}>
-          Detalles
-        </button>
       </h2>
       <p className="client-card__detail">
         <span className="client-card__label">Ciudad:</span>{' '}
@@ -47,11 +44,8 @@ export const EventoCard = ({ evento, onDelete }) => {
         </p>
       )}
       <div className="client-card__botones">
-        <button className="btn btn--logout md" onClick={() => onDelete(evento.id)}>
-          Eliminar
-        </button>
-        <button className="btn btn--primary md" onClick={() => navigate(`/eventos/editar/${evento.id}`)}>
-          Editar
+        <button className="btn btn--primary md" onClick={() => navigate(`/detalle/${evento.id}`)}>
+          Ver detalle
         </button>
       </div>
     </article>

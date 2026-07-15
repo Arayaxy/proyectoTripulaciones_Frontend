@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { FileUpload } from '../../components/FileUpload'
 
 const AUTOCOMPLETE_URL = import.meta.env.VITE_AUTOCOMPLETE_URL;
+const ESTADOS = ['Planificado', 'Reservado', 'Confirmado', 'Finalizado', 'Cancelado']
+
 const initialForm = {
   nombreEvento: '',
   ciudad: '',
@@ -12,10 +14,10 @@ const initialForm = {
   tipoEvento: '',
   nota: '',
   idCliente: '',
-  idEstado: '',
+  estado: '',
 }
 
-export const CrearEventoFormulario = ({ onSubmit, clientes, estados }) => {
+export const CrearEventoFormulario = ({ onSubmit, clientes }) => {
   const [form, setForm] = useState(initialForm)
   const [respuesta, setRespuesta] = useState(null)
   const [autocompleteData, setAutocompleteData] = useState(null)
@@ -110,9 +112,9 @@ export const CrearEventoFormulario = ({ onSubmit, clientes, estados }) => {
           </label>
           <label className="form-cliente__field">
             <span>Estado</span>
-            <select className="input" name="idEstado" value={form.idEstado} onChange={handleChange} required>
+            <select className="input" name="estado" value={form.estado} onChange={handleChange} required>
               <option value="">Seleccionar estado</option>
-              {estados?.map((e) => (<option key={e.id} value={e.id}>{e.descripcion}</option>))}
+              {ESTADOS.map((e) => (<option key={e} value={e}>{e}</option>))}
             </select>
           </label>
           <label className="form-cliente__field">
@@ -123,9 +125,7 @@ export const CrearEventoFormulario = ({ onSubmit, clientes, estados }) => {
         <button className="btn btn--primary" type="submit">Guardar</button>
       </form>
 
-
       <FileUpload uploadUrl={AUTOCOMPLETE_URL} onSuccess={handleAutocompleteSuccess} withCredentials={false} />
     </>
-
   )
 }
