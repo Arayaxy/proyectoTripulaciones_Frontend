@@ -1,209 +1,53 @@
-import { useState, useEffect } from "react";
-import { useFetch } from "../../hooks/useFetch";
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router'
+import { useFetch } from '../../hooks/useFetch'
+import { CrearEventoFormulario } from '../../components/eventos/CrearEventoFormulario'
+
+const API_URL = import.meta.env.VITE_API_URL
 
 export const CrearEventoPage = () => {
-  const API_URL = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate()
+  const [clientes, setClientes] = useState([])
+  const [estados, setEstados] = useState([])
+  const [shouldSend, setShouldSend] = useState(false)
+  const [payload, setPayload] = useState(null)
 
-  const initialValues = {
-    nombre: "",
-    cliente: "",
-    tipo: "",
-    asistentes: "",
-    ciudad: "",
-    fecha: "",
-    presupuesto: "",
-    objetivo: ""
-  };
+  const { data } = useFetch(
+    shouldSend ? `${API_URL}/eventos` : null,
+    'POST',
+    shouldSend ? payload : null
+  )
 
-  const [formValues, setFormValues] = useState(initialValues);
-  const [formErrors, setFormErrors] = useState({});
-  const [submitMessage, setSubmitMessage] = useState("");
-  const [shouldSend, setShouldSend] = useState(false);
+  useEffect(() => {
+    if (data?.ok) navigate('/eventos')
+  }, [data, navigate])
 
-  const { data, loading, error, setData, setError } = useFetch(
+  useEffect(() => {
+    fetch(`${API_URL}/clientes`, { credentials: 'include' })
+      .then((r) => r.json())
+      .then((res) => { if (res.ok) setClientes(res.data) })
+    fetch(`${API_URL}/estados`, { credentials: 'include' })
+      .then((r) => r.json())
+      .then((res) => { if (res.ok) setEstados(res.data) })
+  }, [])
 
-    shouldSend ? `${API_URL}/api/v1/eventos` : null,
-
-    // shouldSend ? `${API_URL}/eventos` : null,
-
-    "POST",
-    shouldSend ? formValues : null
-  );
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const errors = validate(formValues);
-    setFormErrors(errors);
-
-    if (Object.keys(errors).length === 0) {
-      setShouldSend(true);
-    }
-  };
-
-  if (data) {
-    setSubmitMessage("Evento Creado!");
-    setFormValues(initialValues);
-    setFormErrors({});
-    setShouldSend(false);
-    setData(null);
+  const handleSubmit = (formData) => {
+    setPayload(formData)
+    setShouldSend(true)
   }
-
-  if (error) {
-    setSubmitMessage(`Error: ${error}`);
-    setShouldSend(false);
-    setError(null);
-  }
-
-  const validate = (values) => {
-    const errors = {};
-
-    if (!values.nombre?.trim()) {
-      errors.nombre = "El nombre del evento es obligatorio";
-    }
-
-    if (!values.cliente?.trim()) {
-      errors.cliente = "El cliente es obligatorio";
-    }
-
-    if (!values.ciudad?.trim()) {
-      errors.ciudad = "La ciudad es obligatoria";
-    }
-
-    if (!values.fecha) {
-      errors.fecha = "La fecha es obligatoria";
-    }
-
-    if (!values.assistentes || parseInt(values.assistentes) <= 0) {
-      errors.assistentes = "El número de asistentes debe ser mayor a 0";
-    }
-
-    return errors;
-  };
 
   return (
-    <div className="form-container">
-      {submitMessage && (
-        <div className={`submit-message ${submitMessage.includes("Error") ? "error" : "success"}`}>
-          {submitMessage}
-        </div>
-      )}
-
-      <form onSubmit={handleSubmit}>
-        <h1>Crear Nuevo Evento</h1>
-
-        <div className="form-group">
-          <label>Nombre del Evento *</label>
-          <input
-            type="text"
-            name="nombre"
-            value={formValues.nombre}
-            onChange={handleChange}
-            placeholder="Ingrese el nombre del evento"
-            disabled={loading}
-          />
-          {formErrors.nombre && <p className="error-text">{formErrors.nombre}</p>}
-        </div>
-
-        <div className="form-group">
-          <label>Cliente *</label>
-          <input
-            type="text"
-            name="cliente"
-            value={formValues.cliente}
-            onChange={handleChange}
-            placeholder="Nombre del cliente"
-            disabled={loading}
-          />
-          {formErrors.cliente && <p className="error-text">{formErrors.cliente}</p>}
-        </div>
-
-        <div className="form-group">
-          <label>Tipo</label>
-          <select
-            name="tipo"
-            value={formValues.tipo}
-            onChange={handleChange}
-            disabled={loading}
-          >
-            <option value="">Seleccionar tipo</option>
-            <option value="conferencia">Conferencia</option>
-            <option value="taller">Taller</option>
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label>Asistentes *</label>
-          <input
-            type="number"
-            name="assistentes"
-            value={formValues.assistentes}
-            onChange={handleChange}
-            placeholder="Cantidad de asistentes"
-            min="1"
-            disabled={loading}
-          />
-          {formErrors.assistentes && <p className="error-text">{formErrors.assistentes}</p>}
-        </div>
-
-        <div className="form-group">
-          <label>Ciudad *</label>
-          <input
-            type="text"
-            name="ciudad"
-            value={formValues.ciudad}
-            onChange={handleChange}
-            placeholder="Ciudad del evento"
-            disabled={loading}
-          />
-          {formErrors.ciudad && <p className="error-text">{formErrors.ciudad}</p>}
-        </div>
-
-        <div className="form-group">
-          <label>Fecha *</label>
-          <input
-            type="date"
-            name="fecha"
-            value={formValues.fecha}
-            onChange={handleChange}
-            disabled={loading}
-          />
-          {formErrors.fecha && <p className="error-text">{formErrors.fecha}</p>}
-        </div>
-
-        <div className="form-group">
-          <label>Presupuesto</label>
-          <input
-            type="number"
-            name="presupuesto"
-            value={formValues.presupuesto}
-            onChange={handleChange}
-            placeholder="Presupuesto del evento"
-            min="0"
-            disabled={loading}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Objetivo</label>
-          <textarea
-            name="objetivo"
-            value={formValues.objetivo}
-            onChange={handleChange}
-            placeholder="Objetivo del evento"
-            rows="3"
-            disabled={loading}
-          />
-        </div>
-
-        <button type="submit" disabled={loading}>
-          {loading ? "Creando..." : "Crear Evento"}
-        </button>
-      </form>
-    </div>
-  );
-};
+    <>
+      <header className="titlePage">
+        <h1>Nuevo Evento</h1>
+      </header>
+      <section className="container">
+        <CrearEventoFormulario
+          onSubmit={handleSubmit}
+          clientes={clientes}
+          estados={estados}
+        />
+      </section>
+    </>
+  )
+}
