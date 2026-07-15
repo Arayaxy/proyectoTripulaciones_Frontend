@@ -9,7 +9,7 @@ export const Navbar = ({ isOpen, onClose }) => {
         <li><NavLink to="/clientes" onClick={onClose}>Clientes</NavLink></li>
         <li><NavLink to="/espacios" onClick={onClose}>Espacios</NavLink></li>
         <li><NavLink to="/ponentes" onClick={onClose}>Ponentes</NavLink></li>
-        <li><NavLink to="/consultas" onClick={onClose}>Agente consultas internas</NavLink></li>
+        <li><NavLink to="/consultas" onClick={onClose}>Consultas</NavLink></li>
         <li><NavLink to="/concursos" onClick={onClose}>Concursos Públicos</NavLink></li>
         <li><NavLink to="/presupuestos" onClick={onClose}>Presupuestos</NavLink></li>
       </ul>
