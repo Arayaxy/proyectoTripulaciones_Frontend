@@ -31,7 +31,6 @@ export const CrearClientePage = () => {
       <section className='container'>
         <ClienteFormulario onSubmit={handleSubmit} initialData={autocompleteData} />
         <FileUpload uploadUrl={AUTOCOMPLETE_URL} onSuccess={handleAutocompleteSuccess} withCredentials={false} />
-        {respuesta && <pre>{JSON.stringify(respuesta, null, 2)}</pre>}
       </section>
     </>
   )
