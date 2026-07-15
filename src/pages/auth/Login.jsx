@@ -51,8 +51,7 @@ export const Login = () => {
   return (
     <main className="login">
       <header className="login__header">
-        <a href="/">
-          <img src={heroLogo} alt="MITÜMI Backstage" /> </a>
+        <img src={heroLogo} alt="MITÜMI Backstage" />
       </header>
       <div className="login__hero">
         <img src={heroImg} alt="MITÜMI Backstage" className="login__hero-img" />
