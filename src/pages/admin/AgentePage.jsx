@@ -1,17 +1,20 @@
 import '../../components/partials/_agente.scss'
 import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { BusquedaAgenteForm } from '../../components/BusquedaAgenteForm';
 
 const ENDPOINT_URL = import.meta.env.VITE_AGENTES_URL;
 
 export const AgentePage = () => {
   const { user } = useAuth();
+  const [pregunta, setPregunta] = useState("");
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleSubmit = async (formData) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!pregunta.trim()) return;
+
     setLoading(true);
     setError(null);
     setData(null);
@@ -23,7 +26,7 @@ export const AgentePage = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           sesion_id: user?.role || "prueba-ander",
-          pregunta: JSON.stringify(formData),
+          pregunta: pregunta.trim(),
         }),
       });
       const json = await res.json();
@@ -38,10 +41,23 @@ export const AgentePage = () => {
   return (
     <>
       <header className='titlePage'>
-        <h1>Búsqueda de ponente</h1>
+        <h1>Agentes de consultas </h1>
       </header>
       <section className='container'>
-        <BusquedaAgenteForm onSubmit={handleSubmit} loading={loading} />
+        <form className="agente-form" onSubmit={handleSubmit}>
+          <div className="agente-form__search">
+            <input
+              className="input"
+              type="text"
+              value={pregunta}
+              onChange={(e) => setPregunta(e.target.value)}
+              placeholder="Escribe tu pregunta..."
+            />
+            <button className="btn btn--primary" type="submit" disabled={loading || !pregunta.trim()}>
+              {loading ? "Enviando..." : "Preguntar"}
+            </button>
+          </div>
+        </form>
         {error && <p className="agente__error">Error: {error}</p>}
         {data && (
           <div className="agente__response">
