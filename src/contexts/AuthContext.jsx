@@ -2,18 +2,15 @@ import { createContext, useContext, useState, useEffect } from "react";
 import { signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { useFetch } from "../hooks/useFetch";
-import { checkCookieExists } from "../utils/utils";
 
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isVerifying, setIsVerifying] = useState(() => checkCookieExists("is_logged_in"));
+  const [isVerifying, setIsVerifying] = useState(true);
 
   const API_URL = import.meta.env.VITE_API_URL;
-
-  const hasCookie = checkCookieExists("is_logged_in");
-  const verifyUrl = hasCookie ? `${API_URL}/auth/verify` : null;
+  const verifyUrl = `${API_URL}/auth/verify`;
 
   const {
     data: verifyData,
@@ -58,7 +55,7 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  const finalLoading = hasCookie ? (fetchLoading || isVerifying) : false;
+  const finalLoading = fetchLoading || isVerifying;
 
   return (
     <AuthContext.Provider

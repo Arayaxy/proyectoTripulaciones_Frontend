@@ -72,6 +72,7 @@ export const EventoDetailPage = () => {
         <h1>Eventos</h1>
       </header>
       <section className='container'>
+        <article className='containerDatosEvento'>
         <NavbarInterno eventoId={id} />
         {seccion === 'presupuesto' ? (
           <PresupuestoView eventoId={id} />
@@ -87,6 +88,7 @@ export const EventoDetailPage = () => {
             <SeccionDetail evento={evento} />
           </>
         )}
+        </article>
       </section>
     </>
   )

@@ -18,8 +18,8 @@ export const Home = () => {
     <div>
       <h3>Home</h3>
       <p>Hola, {user?.name}</p>
-      {error && import.meta.env.VITE_MODE === 'developement' && <p>{error}</p>}
-      {error && import.meta.env.VITE_MODE === 'production' && <p>Error session, refresca la pagina.</p>}
+      {error && import.meta.env.MODE === 'development' && <p>{error}</p>}
+      {error && import.meta.env.MODE === 'production' && <p>Error session, refresca la pagina.</p>}
       <button onClick={handleLogOut}>Cerrar Session</button>
     </div>
   );
