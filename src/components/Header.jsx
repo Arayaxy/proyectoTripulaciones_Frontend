@@ -2,7 +2,7 @@ import React from 'react'
 import './partials/_header.scss'
 import heroLogo from '../assets/logo_2026_Backstage.svg'
 import { Navbar } from './Navbar'
-import { useNavigate } from 'react-router'
+import { useNavigate, Link } from 'react-router'
 import { useAuth } from '../contexts/AuthContext'
 import { useState } from 'react'
 
@@ -23,8 +23,8 @@ export const Header = () => {
     <>
       <section className='headerContainer'>
         <div>
-          <a href="/">
-           <img src={heroLogo} alt="MITÜMI Backstage" /> </a>
+          <Link to="/">
+           <img src={heroLogo} alt="MITÜMI Backstage" /> </Link>
         </div>
         <div className='botonyMenu'>
           <button className='btn btn--logout' onClick={handleLogOut}>Logout</button>
