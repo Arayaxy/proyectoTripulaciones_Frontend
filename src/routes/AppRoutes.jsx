@@ -28,16 +28,27 @@ import { EditarEventoPage } from "../pages/admin/EditarEventosPage"
 import { PublicRoute } from "../components/PublicRoute"
 import { Backdoor } from "../pages/auth/Backdoor"
 import { AdminsPage } from "../pages/admin/AdminsPage"
+//nuveo
+import { RequirePonente } from "../components/RequirePonente"
+import { LayoutPonente } from "../components/LayoutPonente"
 
 export const AppRoutes = () => {
   return (
     <Routes>
 
+      {/* PUBLIC RUTAS */}
       <Route path="/" element={<PublicRoute><Login /></PublicRoute>} />
       <Route path="/backdoor" element={<Backdoor />} />
 
+      {/* PONENTES RUTAS */}
+      <Route element={<RequirePonente><LayoutPonente /></RequirePonente>}>
+        <Route path="/ponentedata" element={<p>We are working on it...</p>} />
+      </Route>
+
+
       <Route path='/ponencia' element={<FichaPonente />} />
 
+      {/* ADMIN RUTAS */}
       <Route element={<RequireAdmin><Layout /></RequireAdmin>}>
         <Route path='/eventos' element={<EventosPage />} />
         <Route path='/eventos/nuevo' element={<CrearEventoPage />} />
