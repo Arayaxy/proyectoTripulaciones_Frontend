@@ -2,9 +2,13 @@
 @use '../../styles/mixins' as *;
 
 .file-upload {
-  display: flex;
-  flex-direction: column;
+  @include flex-center;
   gap: $sp-12;
+  padding: $sp-32 $sp-24;
+  border: 1px solid $color-black-10;
+  margin-top: $sp-12;
+  background-color: rgba($color-black-5, 0.05);
+  border-radius: $sp-8;
 }
 
 .file-upload__select {

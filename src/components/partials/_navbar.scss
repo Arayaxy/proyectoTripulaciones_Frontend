@@ -7,17 +7,24 @@
 .main-navbar {
   display: none;
   position: fixed;
-  top: 65px;
-  left: 0;
-  right: 0;
-  background: $color-white;
-  border-bottom: 1px solid $color-border;
+  top: 72px;
+  width: 70%;
+  background: $color-footer-bg;
+  border: 1px solid $color-border;
+  border-width: 0px 1px 1px;
   padding: $sp-16 $sp-20;
   z-index: 99;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 
   &--open {
     display: block;
+
+    @include bp-1200 {
+
+      border: 0px;
+      width: 100%;
+
+    }
   }
 
   ul {
@@ -26,20 +33,31 @@
     padding: 0;
     @include flex(column, flex-start, stretch);
     gap: $sp-4;
+    li {
+      text-align: right;
+      border-bottom: 1px solid $color-black-10;
+
+      @include bp-1200 {
+          border-bottom: 0px;
+        }
+
+    }
   }
+
 
   a {
     display: block;
     padding: $sp-12 $sp-16;
     color: $color-text;
-    font-size: $txt-base;
-    font-weight: $fw-medium;
+    font: $fw-bold $txt-base $font-menu;
+    text-transform: uppercase;
     border-radius: $radius-md;
     text-decoration: none;
     transition: background 0.2s ease;
+    letter-spacing: 0.1px;
 
     &:hover {
-      background: $color-black-5;
+      background: $color-black-10;
       color: $color-primary;
     }
 
@@ -49,17 +67,24 @@
     }
   }
 
-  @include bp-990 {
+  @include bp-1200 {
     display: flex !important;
     position: static;
     background: none;
     border-bottom: none;
     padding: 0;
     box-shadow: none;
+    border: 0px;
+    width: 100%;
 
     ul {
       flex-direction: row;
       gap: $sp-4;
     }
   }
+  @include bp-1400 {
+      ul {
+        gap: $sp-8;
+      }
+    }
 }

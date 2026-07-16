@@ -92,12 +92,13 @@ export const EspacioForm = ({ initialValues, onSubmit, loading, onCancel, readOn
 
       {!readOnly && (
         <div className="presupuesto-form__actions">
-          <button className="presupuesto-form__btn presupuesto-form__btn--submit" type="submit" disabled={loading}>
-            {loading ? "Guardando..." : "Guardar"}
-          </button>
-          <button className="presupuesto-form__btn presupuesto-form__btn--cancel" type="button" onClick={onCancel} disabled={loading}>
+          <button className="btn btn--logout" type="button" onClick={onCancel} disabled={loading}>
             Cancelar
           </button>
+          <button className="btn btn--primary" type="submit" disabled={loading}>
+            {loading ? "Guardando..." : "Guardar"}
+          </button>
+
         </div>
       )}
     </form>

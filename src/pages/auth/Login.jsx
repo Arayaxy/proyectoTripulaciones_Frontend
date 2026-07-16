@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
 import { signOut } from "firebase/auth";
@@ -11,6 +11,7 @@ export const Login = () => {
   const { googleSignIn, user, setUser, loading, setLoading, error, setError, logOut } = useAuth();
   const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_API_URL;
+  const [loginError, setLoginError] = useState(null);
 
   useEffect(() => {
     if (user && user.role === "admin") {
@@ -19,7 +20,7 @@ export const Login = () => {
   }, [user, navigate]);
 
   const handleGoogleSignIn = async () => {
-    setError(null);
+    setLoginError(null);
     setLoading(true);
 
     try {
@@ -50,20 +51,16 @@ export const Login = () => {
       navigate("/eventos");
     } catch (err) {
       console.error(err.message);
-      setError(err.message);
+      setLoginError("Error al iniciar sesión. Intenta de nuevo.");
     } finally {
       setLoading(false);
     }
   };
 
-  if (loading && !user) return <div>Cargando...</div>;
-
   return (
     <main className="login">
       <header className="login__header">
-        <a href="/">
-          <img src={heroLogo} alt="MITÜMI Backstage" />
-        </a>
+        <img src={heroLogo} alt="MITÜMI Backstage" />
       </header>
       <div className="login__hero">
         <img src={heroImg} alt="MITÜMI Backstage" className="login__hero-img" />

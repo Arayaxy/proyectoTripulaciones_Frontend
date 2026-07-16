@@ -8,13 +8,12 @@
   border-radius: $radius-lg;
   padding: $sp-24;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: rgba(0, 0, 0, 0.01);
 }
 
 .client-card__name {
-  font-family: $font-primary;
-  font-size: $txt-lg;
-  font-weight: $fw-semibold;
+  font: $fw-bold $txt-titleCard $font-primary;
+  text-transform: uppercase;
   color: $color-primary;
   margin: 0 0 $sp-12;
   border-bottom: 1px solid $color-black-10;
@@ -22,13 +21,18 @@
 }
 
 .client-card__detail {
+  @include flex-between;
   font-family: $font-secondary;
   font-size: $txt-sm;
   color: $color-text;
   margin: 0 0 $sp-4;
-  padding: $sp-4 $sp-8;
+  padding: 0 $sp-4 $sp-8;
+  border-bottom: 1px solid #e5e5e5;
   strong {
     color: $color-primary;
+  }
+  :last-child {
+    border-bottom: none;
   }
 
 }
@@ -39,7 +43,6 @@
 }
 .client-card__botones {
   @include flex-center;
-  border-top: 1px solid $color-black-10;
   padding: $sp-12 $sp-16 0;
   margin-top: $sp-12;
   gap: $sp-16;
