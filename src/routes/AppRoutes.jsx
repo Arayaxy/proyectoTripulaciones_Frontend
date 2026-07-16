@@ -9,7 +9,6 @@ import { EspacioSalaCrearPage } from "../pages/admin/EspacioSalaCrearPage"
 import { EspacioSalaEditarPage } from "../pages/admin/EspacioSalaEditarPage"
 import { PonentesPage } from "../pages/admin/PonentesPage"
 import { AgentePage } from "../pages/admin/AgentePage"
-import { BusquedasPage } from "../pages/admin/BusquedasPage"
 import { ConcursosPage } from "../pages/admin/ConcursosPage"
 import { RequireAdmin } from "../components/RequireAdmin"
 import { FichaPonente } from "../pages/ponente/FichaPonente"
@@ -59,7 +58,6 @@ export const AppRoutes = () => {
         <Route path='/ponentes/nuevo' element={<CrearPonentePage />} />
         <Route path='/consultas' element={<AgentePage />} />
         <Route path='/concursos' element={<ConcursosPage />} />
-        <Route path='/busquedas' element={<BusquedasPage />} />
         <Route path='/detalle/:eventoId/ponencias/nuevo' element={<CrearPonenciaPage />} />
         <Route path='/detalle/:eventoId/ponencias/editar/:ponenciaId' element={<EditarPonenciaPage />} />
         <Route path='/detalle/:id' element={<EventoDetailPage />} />

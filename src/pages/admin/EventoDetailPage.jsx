@@ -1,7 +1,7 @@
 import { NavbarInterno } from '../../components/NavbarInterno'
 import { EventoInfo } from '../../components/EventoInfo'
 import { SeccionDetail } from '../../components/SeccionDetail'
-import { PonenciasView } from '../../components/PonenciasView'
+import { EventoPonenciasView } from '../../components/EventoPonenciasView'
 import { useParams, useSearchParams } from 'react-router'
 import { useFetch } from '../../hooks/useFetch'
 
@@ -73,19 +73,21 @@ export const EventoDetailPage = () => {
       </header>
       <section className='container'>
         <article className='containerDatosEvento'>
-          <NavbarInterno eventoId={id} />
-
-          {seccion === 'presupuesto' ? (
-            <PresupuestoView eventoId={id} />
-          ) : seccion === 'datos' ? (
+        <NavbarInterno eventoId={id} />
+        {seccion === 'presupuesto' ? (
+          <PresupuestoView eventoId={id} />
+        ) : seccion === 'datos' ? (
+          <EventoInfo evento={evento} />
+        ) : seccion === 'ponencias' ? (
+          <EventoPonenciasView evento={evento} eventoId={id} onDelete={handleDeletePonencia} />
+        ) : seccion === 'lugar' ? (
+          <h2>Gestión de Lugar</h2>
+        ) : (
+          <>
             <EventoInfo evento={evento} />
-          ) : seccion === 'ponentes' ? (
-            <PonenciasView evento={evento} eventoId={id} onDelete={handleDeletePonencia} />
-          ) : seccion === 'lugar' ? (
-            <h2>Gestión de Lugar</h2>
-          ) : (
-            <EventoInfo evento={evento} />
-          )}
+            <SeccionDetail evento={evento} />
+          </>
+        )}
         </article>
       </section>
     </>
