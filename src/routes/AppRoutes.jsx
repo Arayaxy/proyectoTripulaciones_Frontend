@@ -9,6 +9,7 @@ import { EspacioSalaCrearPage } from "../pages/admin/EspacioSalaCrearPage"
 import { EspacioSalaEditarPage } from "../pages/admin/EspacioSalaEditarPage"
 import { PonentesPage } from "../pages/admin/PonentesPage"
 import { AgentePage } from "../pages/admin/AgentePage"
+import { BusquedasPage } from "../pages/admin/BusquedasPage"
 import { ConcursosPage } from "../pages/admin/ConcursosPage"
 import { RequireAdmin } from "../components/RequireAdmin"
 import { FichaPonente } from "../pages/ponente/FichaPonente"
@@ -25,6 +26,9 @@ import { PresupuestosPage } from "../pages/admin/PresupuestoPage"
 import { CrearPresupuestoPage } from "../pages/admin/CrearPresupuestoPage"
 import { EditarPresupuestoPage } from "../pages/admin/EditarPresupuestoPage"
 import { EditarEventoPage } from "../pages/admin/EditarEventosPage"
+import { EditarPonenciaPage } from "../pages/admin/EditarPonenciaPage"
+import { CrearPonenciaPage } from "../pages/admin/CrearPonenciaPage"
+import { CrearPonentePage } from "../pages/admin/CrearPonentePage"
 import { PublicRoute } from "../components/PublicRoute"
 import { Backdoor } from "../pages/auth/Backdoor"
 import { PresupuestoDetailPage } from "../pages/admin/PresupuestoDetailPage"
@@ -52,8 +56,12 @@ export const AppRoutes = () => {
         <Route path='/espacios/:id/salas/nuevo' element={<EspacioSalaCrearPage />} />
         <Route path='/espacios/:id/salas/editar/:salaId' element={<EspacioSalaEditarPage />} />
         <Route path='/ponentes' element={<PonentesPage />} />
+        <Route path='/ponentes/nuevo' element={<CrearPonentePage />} />
         <Route path='/consultas' element={<AgentePage />} />
         <Route path='/concursos' element={<ConcursosPage />} />
+        <Route path='/busquedas' element={<BusquedasPage />} />
+        <Route path='/detalle/:eventoId/ponencias/nuevo' element={<CrearPonenciaPage />} />
+        <Route path='/detalle/:eventoId/ponencias/editar/:ponenciaId' element={<EditarPonenciaPage />} />
         <Route path='/detalle/:id' element={<EventoDetailPage />} />
         <Route path='/datos' element={<DatosEventoPage />} />
         <Route path='/ponencias' element={<PonenciasPage />} />

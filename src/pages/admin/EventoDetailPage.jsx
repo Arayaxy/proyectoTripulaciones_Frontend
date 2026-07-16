@@ -1,6 +1,7 @@
 import { NavbarInterno } from '../../components/NavbarInterno'
 import { EventoInfo } from '../../components/EventoInfo'
 import { SeccionDetail } from '../../components/SeccionDetail'
+import { PonenciasView } from '../../components/PonenciasView'
 import { useParams, useSearchParams } from 'react-router'
 import { useFetch } from '../../hooks/useFetch'
 
@@ -37,8 +38,30 @@ export const EventoDetailPage = () => {
   const { id } = useParams()
   const [searchParams] = useSearchParams()
   const seccion = searchParams.get('seccion')
-  const { data, loading } = useFetch(`${API_URL}/eventos/${id}`)
+  const { data, loading, setData } = useFetch(`${API_URL}/eventos/${id}`)
   const evento = data?.data
+
+  const handleDeletePonencia = async (ponenciaId) => {
+    if (!window.confirm('¿Estás seguro de eliminar esta ponencia?')) return
+    try {
+      const res = await fetch(`${API_URL}/ponencias/${ponenciaId}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      })
+      const result = await res.json()
+      if (result.ok) {
+        setData({
+          ...data,
+          data: {
+            ...evento,
+            ponencias: evento.ponencias.filter((p) => p.id !== ponenciaId),
+          },
+        })
+      }
+    } catch (err) {
+      console.error('Error al eliminar ponencia:', err)
+    }
+  }
 
   if (loading) return <div className="event_info_cargando">Cargando...</div>
   if (!evento) return <div className="evento_info_error">Evento no encontrado</div>
@@ -57,7 +80,7 @@ export const EventoDetailPage = () => {
         ) : seccion === 'datos' ? (
           <EventoInfo evento={evento} />
         ) : seccion === 'ponencias' ? (
-          <h2>Gestión de Ponencias</h2>
+          <PonenciasView evento={evento} eventoId={id} onDelete={handleDeletePonencia} />
         ) : seccion === 'lugar' ? (
           <h2>Gestión de Lugar</h2>
         ) : (
