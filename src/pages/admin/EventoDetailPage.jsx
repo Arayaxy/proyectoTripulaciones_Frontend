@@ -103,7 +103,7 @@ export const EventoDetailPage = () => {
             </article>
           </>
         ) : (
-          <article className='containerDatosEvento'>
+          <>
             {seccion === 'datos' ? (
               <>
                 <EventoInfo evento={evento} />
@@ -127,7 +127,7 @@ export const EventoDetailPage = () => {
                 </div>
               </>
             )}
-          </article>
+          </>
         )}
       </section>
     </>

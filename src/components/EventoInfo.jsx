@@ -78,23 +78,6 @@ export const EventoInfo = ({ evento }) => {
         </article>
       )}
 
-      {evento.presupuesto && (
-        <article className="client-card">
-          <h2 className="client-card__name">Presupuesto</h2>
-          <p className="client-card__detail">
-            <span className="client-card__label">Total:</span> <strong>{evento.presupuesto.total}€</strong>
-          </p>
-          <p className="client-card__detail">
-            <span className="client-card__label">Estado:</span>{' '}
-            <strong>{evento.presupuesto.estadoPresupuesto ? 'Aprobado' : 'Pendiente'}</strong>
-          </p>
-          <p className="client-card__detail">
-            <span className="client-card__label">Fecha:</span>{' '}
-            <strong>{new Date(evento.presupuesto.fecha).toLocaleDateString('es-ES')}</strong>
-          </p>
-        </article>
-      )}
-
       {evento.ponencias?.length > 0 && (
         <article className="client-card">
           <h2 className="client-card__name">Ponencias ({evento.ponencias.length})</h2>
