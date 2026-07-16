@@ -9,7 +9,13 @@ const API_URL = import.meta.env.VITE_API_URL
 export const PresupuestosPage = () => {
 
   const navigate = useNavigate()
-  const { data, loading, setData } = useFetch(`${API_URL}/presupuestos`)
+  const { data, loading, setData } = useFetch(`${API_URL}/eventos`)
+
+  const presupuestos = data?.data?.filter(e => e.presupuesto).map(e => ({
+    ...e.presupuesto,
+    eventoNombre: e.nombreEvento,
+    eventoId: e.id,
+  })) || []
 
   const [mode, setMode] = useState("list")
   const [message, setMessage] = useState("")
@@ -44,19 +50,26 @@ export const PresupuestosPage = () => {
 
   useEffect(() => {
     if (createData) {
-      setData(prev => ({ ...prev, data: [...(prev?.data || []), createData.data] }))
+      setData(prev => ({
+        ...prev,
+        data: [...(prev?.data || []), createData.data]
+      }))
       setShouldCreate(false)
       setNewValues(null)
       setMode("list")
       setMessage("Presupuesto creado correctamente")
     }
-  }, [createData])
+  }, [createData, setData])
 
   useEffect(() => {
     if (updateData) {
       setData(prev => ({
         ...prev,
-        data: prev.data.map(p => p.id === updateId ? updateData.data : p)
+        data: prev.data.map(e =>
+          e.id === updateId
+            ? { ...e, presupuesto: updateData.data }
+            : e
+        )
       }))
       setShouldUpdate(false)
       setUpdateValues(null)
@@ -64,19 +77,23 @@ export const PresupuestosPage = () => {
       setMode("list")
       setMessage("Presupuesto actualizado correctamente")
     }
-  }, [updateData])
+  }, [updateData, setData, updateId])
 
   useEffect(() => {
     if (deleteData) {
       setData(prev => ({
         ...prev,
-        data: prev.data.filter(p => p.id !== deleteId)
+        data: prev.data.map(e =>
+          e.id === deleteId
+            ? { ...e, presupuesto: null }
+            : e
+        )
       }))
       setShouldDelete(false)
       setDeleteId(null)
       setMessage("Presupuesto eliminado correctamente")
     }
-  }, [deleteData])
+  }, [deleteData, setData, deleteId])
 
   const handleCreate = (values) => {
     setNewValues(values)
@@ -111,15 +128,12 @@ export const PresupuestosPage = () => {
 
       {mode === "list" && (
         <>
-
-          {data?.data?.length > 0 ? (
+          {presupuestos.length > 0 ? (
             <section className='container'>
               <div className="presupuestos__list">
-                {data.data.map(p => (
+                {presupuestos.map(p => (
                   <div className="presupuesto-card" key={p.id}>
-                    <h2>
-                      {p.evento?.nombreEvento || 'Evento sin asignar'}
-                    </h2>
+                    <h2>{p.eventoNombre}</h2>
                     <div className="presupuesto-card__row">
                       <span className="presupuesto-card__label">Total:</span>
                       <span className="presupuesto-card__value">{p.total}€</span>
@@ -148,7 +162,6 @@ export const PresupuestosPage = () => {
                       </button>
                     </div>
                   </div>
-
                 ))}
               </div>
             </section>
