@@ -41,8 +41,8 @@ export const EventoCard = ({ evento }) => {
         {evento.estado && (
           <span className="client-card__estado">{evento.estado}</span>
         )}
-        <button className="btn btn--primary md" onClick={() => navigate(`/detalle/${evento.id}`)}>
-          Ver detalle
+        <button className="btn btn--outline sm" onClick={() => navigate(`/detalle/${evento.id}`)}>
+          Ir a evento
         </button>
       </div>
     </article>
