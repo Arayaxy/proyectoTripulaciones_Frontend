@@ -17,6 +17,7 @@ export const PresupuestosPage = () => {
     eventoId: e.id,
   })) || []
 
+  const [searchTerm, setSearchTerm] = useState("")
   const [mode, setMode] = useState("list")
   const [message, setMessage] = useState("")
   const [formValues, setFormValues] = useState(null)
@@ -126,12 +127,36 @@ export const PresupuestosPage = () => {
         </div>
       )}
 
+      <div className="search-bar">
+        <input
+          className="search-bar__input"
+          type="text"
+          placeholder="Buscar por nombre del evento, estado o servicio..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+
       {mode === "list" && (
         <>
           {presupuestos.length > 0 ? (
             <section className='container'>
               <div className="presupuestos__list">
-                {presupuestos.map(p => (
+                {presupuestos
+                  .filter((p) => {
+                    const term = searchTerm.toLowerCase()
+                    if (!term) return true
+                    const servicios = ["Catering", "Audiovisuales", "Otros"]
+                      .filter(s => p[s.toLowerCase()])
+                      .join(", ")
+                    const estadoTexto = p.estadoPresupuesto ? "aprobado" : "pendiente"
+                    return (
+                      p.eventoNombre?.toLowerCase().includes(term) ||
+                      estadoTexto.includes(term) ||
+                      servicios.toLowerCase().includes(term)
+                    )
+                  })
+                  .map(p => (
                   <div className="presupuesto-card" key={p.id}>
                     <h2>{p.eventoNombre}</h2>
                     <div className="presupuesto-card__row">

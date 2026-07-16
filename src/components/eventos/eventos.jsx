@@ -1,9 +1,10 @@
 import { useFetch } from '../../hooks/useFetch'
 import { EventoCard } from './EventoCard'
+import './_eventos.scss'
 
 const API_URL = import.meta.env.VITE_API_URL
 
-export const Eventos = () => {
+export const Eventos = ({ searchTerm = '' }) => {
   const { data, setData } = useFetch(`${API_URL}/eventos`, 'GET')
 
   const handleDelete = async (id) => {
@@ -18,12 +19,22 @@ export const Eventos = () => {
     }
   }
 
+  const filtered = data?.ok
+    ? data.data.filter((e) => {
+        const term = searchTerm.toLowerCase()
+        return (
+          e.nombreEvento?.toLowerCase().includes(term) ||
+          e.cliente?.cliente?.toLowerCase().includes(term) ||
+          e.cliente?.empresa?.toLowerCase().includes(term)
+        )
+      })
+    : []
+
   return (
     <section className="gridClientes">
-      {data?.ok &&
-        data.data.map((evento) => (
-          <EventoCard key={evento.id} evento={evento} onDelete={handleDelete} />
-        ))}
+      {filtered.map((evento) => (
+        <EventoCard key={evento.id} evento={evento} onDelete={handleDelete} />
+      ))}
     </section>
   )
 }

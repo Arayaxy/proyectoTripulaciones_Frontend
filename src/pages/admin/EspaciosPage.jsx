@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router"
 import { useFetch } from "../../hooks/useFetch"
+import "./_espacios.scss"
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -8,6 +9,7 @@ export const EspaciosPage = () => {
   const navigate = useNavigate()
   const { data, loading, setData } = useFetch(`${API_URL}/espacios`)
   const [message, setMessage] = useState("")
+  const [searchTerm, setSearchTerm] = useState("")
 
   const [shouldDelete, setShouldDelete] = useState(false)
   const [deleteId, setDeleteId] = useState(null)
@@ -64,10 +66,29 @@ export const EspaciosPage = () => {
         </div>
       )}
 
+      <div className="search-bar">
+        <input
+          className="search-bar__input"
+          type="text"
+          placeholder="Buscar por nombre del espacio o sala..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+
       {data?.data?.length > 0 ? (
         <section className="container">
           <div className="presupuestos__list">
-            {data.data.map((espacio) => (
+            {data.data
+              .filter((espacio) => {
+                const term = searchTerm.toLowerCase()
+                return (
+                  !term ||
+                  espacio.nombreEspacio?.toLowerCase().includes(term) ||
+                  espacio.salas?.some((s) => s.nombreSala?.toLowerCase().includes(term))
+                )
+              })
+              .map((espacio) => (
               <div className="presupuesto-card" key={espacio.id}>
                 <h2>{espacio.nombreEspacio}</h2>
                 <div className="presupuesto-card__row">
