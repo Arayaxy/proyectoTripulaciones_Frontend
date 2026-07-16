@@ -4,8 +4,16 @@ import './partials/_fileUpload.scss';
 export const FileUpload = ({ uploadUrl, onSuccess, onError, accept = "*", label = "Seleccionar archivo", withCredentials = true }) => {
   const [file, setFile] = useState(null);
   const [uploading, setUploading] = useState(false);
+  const [dragOver, setDragOver] = useState(false);
   const [error, setError] = useState(null);
   const inputRef = useRef(null);
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setDragOver(false);
+    const dropped = e.dataTransfer.files[0];
+    if (dropped) setFile(dropped);
+  };
 
   const handleSelect = (e) => {
     const selected = e.target.files[0];
@@ -37,11 +45,15 @@ export const FileUpload = ({ uploadUrl, onSuccess, onError, accept = "*", label 
   };
 
   return (
-    <div className="file-upload">
+    <div
+      className={`file-upload ${dragOver ? "file-upload--dragover" : ""}`}
+      onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+      onDragLeave={() => setDragOver(false)}
+      onDrop={handleDrop}
+      onClick={() => inputRef.current?.click()}
+    >
       <input ref={inputRef} type="file" accept={accept} onChange={handleSelect} hidden />
-      <button className="btn btn--outline" onClick={() => inputRef.current?.click()}>
-        {label}
-      </button>
+      {!file && <p className="file-upload__placeholder">{label}</p>}
       {file && (
         <div className="file-upload__info">
           <p className="file-upload__filename">{file.name}</p>
