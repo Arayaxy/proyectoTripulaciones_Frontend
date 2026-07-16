@@ -96,6 +96,7 @@ export const PonentesPage = () => {
           <FichaPonenciaDetalle
             ponencia={ponenciaBuscada}
             isAdmin={user?.role === 'admin'}
+            userRole={user?.role}
             onPonenciaActualizada={setPonenciaBuscada}
           />
         </div>

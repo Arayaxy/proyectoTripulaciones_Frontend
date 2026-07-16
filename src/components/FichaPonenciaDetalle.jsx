@@ -3,7 +3,7 @@ import { SolicitudEdicionForm } from "./SolicitudEdicionForm"
 import { ArchivoPonencia } from "./ArchivoPonencia"
 
 
-export const FichaPonenciaDetalle = ({ ponencia, isAdmin, onPonenciaActualizada }) => {
+export const FichaPonenciaDetalle = ({ ponencia, isAdmin, userRole, onPonenciaActualizada }) => {
   const API_URL = import.meta.env.VITE_API_URL
 
   const [mostrarSolicitud, setMostrarSolicitud] = useState(false)
@@ -75,7 +75,7 @@ export const FichaPonenciaDetalle = ({ ponencia, isAdmin, onPonenciaActualizada 
       <p>Ciudad: {ponencia.evento?.ciudad}</p>
       <p>Tipo de evento: {ponencia.evento?.tipoEvento}</p>
 
-      {true && (
+      {userRole === 'ponente' && (
         <div>
           <button onClick={() => setMostrarSolicitud(!mostrarSolicitud)}>
             Solicitar edicion
