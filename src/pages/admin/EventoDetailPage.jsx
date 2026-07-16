@@ -8,27 +8,6 @@ import '../../components/partials/_eventos.scss'
 
 const API_URL = import.meta.env.VITE_API_URL
 
-const PresupuestoView = ({ eventoId }) => {
-  const { data } = useFetch(`${API_URL}/eventos/${eventoId}`)
-  const presupuesto = data?.data?.presupuesto
-
-  if (!presupuesto) return <p className="evento_info_fecha">Este evento no tiene presupuesto asignado</p>
-
-  return (
-    <>
-      <h2 className="evento_info_titulo">Presupuesto del Evento</h2>
-      <p className="evento_info_fecha">
-        Estado: <strong>{presupuesto.estadoPresupuesto ? "Aprobado" : "Pendiente"}</strong>
-      </p>
-      <p>
-        <span className="evento_info_ciudad">Total:</span>{' '}
-        <strong>{presupuesto.total}€</strong>
-      </p>
-      <p>Fecha: {new Date(presupuesto.fecha).toLocaleDateString()}</p>
-    </>
-  )
-}
-
 export const EventoDetailPage = () => {
   const { id } = useParams()
   const [searchParams] = useSearchParams()
@@ -77,21 +56,39 @@ export const EventoDetailPage = () => {
                 year: "numeric", month: "long", day: "numeric"
               })}
             </p>
-            <p>
-              <span className="evento_info_ciudad">{evento.ciudad}</span>
-              <span className="evento_info_personas">{evento.numeroPersonas} personas</span>
-            </p>
+            <p className="evento_info_ciudad">{evento.ciudad}</p>
+            <p className="evento_info_personas">{evento.numeroPersonas} personas</p>
           </div>
 
           {seccion === 'presupuesto' ? (
-            <div className="evento_info">
-              <PresupuestoView eventoId={id} />
-            </div>
-          ) : seccion === 'datos' ? (
-            <EventoInfo evento={evento} />
+            evento.presupuesto ? (
+              <div className="evento_info">
+                <h2 className="evento_info_titulo">Presupuesto del Evento</h2>
+                <p className="evento_info_fecha">
+                  Estado: <strong>{evento.presupuesto.estadoPresupuesto ? "Aprobado" : "Pendiente"}</strong>
+                </p>
+                <p>
+                  <span className="evento_info_ciudad">Total:</span>{' '}
+                  <strong>{evento.presupuesto.total}€</strong>
+                </p>
+                <p>Fecha: {new Date(evento.presupuesto.fecha).toLocaleDateString()}</p>
+              </div>
+            ) : (
+              <div className="evento_info">
+                <h2 className="evento_info_titulo">Presupuesto</h2>
+                <p className="evento_info_fecha">Este evento no tiene presupuesto asignado</p>
+                <div className="zonaBotones">
+                  <Link to="/presupuestos/crear" className="btn btn--primary">Crear presupuesto</Link>
+                </div>
+              </div>
+            )
           ) : seccion === 'ponentes' ? (
             <div className="evento_info">
               <PonenciasView evento={evento} eventoId={id} onDelete={handleDeletePonencia} />
+            </div>
+          ) : seccion === 'datos' ? (
+            <div className="evento_info">
+              <EventoInfo evento={evento} />
             </div>
           ) : seccion === 'lugar' ? (
             <div className="evento_info">
@@ -128,17 +125,17 @@ export const EventoDetailPage = () => {
               </article>
 
               <article className="evento_info">
-                <h2 className="evento_info_titulo">Ponentes</h2>
+                <h2 className="evento_info_titulo">Ponencias</h2>
                 <p className="evento_info_fecha">
                   Asignados: <strong>{evento.ponencias?.length || 0}</strong>
                 </p>
                 <p>
                   {evento.ponencias?.length > 0
                     ? evento.ponencias.map(p => p.ponente?.nombrePonente).join(', ')
-                    : 'Sin ponentes asignados'}
+                    : 'Sin ponencias asignadas'}
                 </p>
                 <div className="zonaBotones">
-                  <Link to={`/detalle/${id}?seccion=ponentes`} className="btn btn--outline sm">Ver ponentes</Link>
+                  <Link to={`/detalle/${id}?seccion=ponentes`} className="btn btn--outline sm">Ver ponencias</Link>
                 </div>
               </article>
             </>

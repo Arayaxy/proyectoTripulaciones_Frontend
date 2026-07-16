@@ -2,8 +2,8 @@ import './partials/_eventos.scss'
 
 export const EventoInfo = ({ evento }) => {
   return (
-    <div>
-      <article className="evento_info">
+    <>
+      <article>
         <h2 className="evento_info_titulo">{evento.nombreEvento}</h2>
         <p className="evento_info_fecha">Estado: <strong>{evento.estado}</strong></p>
         <p><span className="evento_info_ciudad">Ciudad:</span> <strong>{evento.ciudad}</strong></p>
@@ -16,7 +16,7 @@ export const EventoInfo = ({ evento }) => {
       </article>
 
       {evento.cliente && (
-        <article className="evento_info">
+        <article>
           <h2 className="evento_info_titulo">Cliente</h2>
           <p>Nombre: <strong>{evento.cliente.cliente}</strong></p>
           <p>Email: <strong>{evento.cliente.email}</strong></p>
@@ -27,7 +27,7 @@ export const EventoInfo = ({ evento }) => {
       )}
 
       {evento.sala && (
-        <article className="evento_info">
+        <article>
           <h2 className="evento_info_titulo">Sala</h2>
           <p>Nombre: <strong>{evento.sala.nombreSala}</strong></p>
           <p>Tipo: <strong>{evento.sala.tipoSala}</strong></p>
@@ -36,7 +36,7 @@ export const EventoInfo = ({ evento }) => {
       )}
 
       {evento.ponencias?.length > 0 && (
-        <article className="evento_info">
+        <article>
           <h2 className="evento_info_titulo">Ponencias ({evento.ponencias.length})</h2>
           {evento.ponencias.map((p) => (
             <p key={p.id}>
@@ -46,6 +46,6 @@ export const EventoInfo = ({ evento }) => {
           ))}
         </article>
       )}
-    </div>
+    </>
   )
 }
