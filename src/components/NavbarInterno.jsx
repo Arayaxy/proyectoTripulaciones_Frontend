@@ -1,4 +1,4 @@
-import { NavLink } from "react-router"
+import { NavLink, Link } from "react-router"
 import './partials/_navbar.scss'
 
 export const NavbarInterno = ({ eventoId }) => {
@@ -17,6 +17,9 @@ export const NavbarInterno = ({ eventoId }) => {
         </li>
         <li>
           <NavLink to={`/detalle/${eventoId}?seccion=presupuesto`}>Presupuesto</NavLink>
+        </li>
+        <li>
+          <Link to={`/detalle/${eventoId}`}>Volver</Link>
         </li>
       </ul>
     </nav>
