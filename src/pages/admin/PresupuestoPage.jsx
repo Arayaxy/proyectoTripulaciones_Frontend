@@ -94,10 +94,6 @@ export const PresupuestosPage = () => {
     setShouldDelete(true)
   }
 
-  const openEdit = (presupuesto) => {
-    navigate(`/presupuestos/editar/${presupuesto.id}`)
-  }
-
   if (loading) return <div className="presupuestos__loading">Cargando presupuestos...</div>
 
   return (
@@ -121,6 +117,9 @@ export const PresupuestosPage = () => {
               <div className="presupuestos__list">
                 {data.data.map(p => (
                   <div className="presupuesto-card" key={p.id}>
+                    <h2>
+                      {p.evento?.nombreEvento || 'Evento sin asignar'}
+                    </h2>
                     <div className="presupuesto-card__row">
                       <span className="presupuesto-card__label">Total:</span>
                       <span className="presupuesto-card__value">{p.total}€</span>
@@ -144,16 +143,8 @@ export const PresupuestosPage = () => {
                       </span>
                     </div>
                     <div className="presupuesto-card__actions">
-
-                      <button
-                        className="btn btn--logout"
-                        onClick={() => handleDelete(p.id)}
-                        disabled={deleteLoading && deleteId === p.id}
-                      >
-                        {deleteLoading && deleteId === p.id ? "Eliminando..." : "Eliminar"}
-                      </button>
-                      <button className="btn btn--primary" onClick={() => openEdit(p)}>
-                        Editar
+                      <button className="btn btn--outline sm" onClick={() => navigate(`/presupuestos/${p.id}`)}>
+                        Ver detalle
                       </button>
                     </div>
                   </div>

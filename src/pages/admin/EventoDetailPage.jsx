@@ -11,7 +11,7 @@ export const EventoDetailPage = () => {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const seccion = searchParams.get('seccion')
-  const { data, loading } = useFetch(`${API_URL}/eventos/${id}`)
+  const { data, loading, setData } = useFetch(`${API_URL}/eventos/${id}`)
   const evento = data?.data
 
   const handleDelete = async () => {
