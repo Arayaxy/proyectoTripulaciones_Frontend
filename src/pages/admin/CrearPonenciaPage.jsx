@@ -123,8 +123,8 @@ export const CrearPonenciaPage = () => {
       preferencias: form.preferencias,
       necesita_hotel: form.necesitaHotel,
       necesita_viaje: form.necesitaViaje,
-      necesita_taxi: form.necesitaTaxi,
-      necesita_coche: form.necesitaCoche,
+      necesita_taxi: false,
+      necesita_coche: false,
     }
     try {
       const res = await fetch(VIAJES_URL, {
@@ -290,14 +290,6 @@ export const CrearPonenciaPage = () => {
                 <label className="busqueda-agente-form__check">
                   <input type="checkbox" name="necesitaViaje" checked={form.necesitaViaje} onChange={handleChange} />
                   <span>Viaje</span>
-                </label>
-                <label className="busqueda-agente-form__check">
-                  <input type="checkbox" name="necesitaTaxi" checked={form.necesitaTaxi} onChange={handleChange} />
-                  <span>Taxi</span>
-                </label>
-                <label className="busqueda-agente-form__check">
-                  <input type="checkbox" name="necesitaCoche" checked={form.necesitaCoche} onChange={handleChange} />
-                  <span>Coche de alquiler</span>
                 </label>
               </div>
             </fieldset>
