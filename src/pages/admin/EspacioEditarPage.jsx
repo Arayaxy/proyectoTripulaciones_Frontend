@@ -11,7 +11,7 @@ export const EspacioEditarPage = () => {
   const [message, setMessage] = useState("")
 
   const { data: espacioData, loading: espacioLoading } = useFetch(
-    id ? `${API_URL}/espacios/${id}` : null
+    id ? `${API_URL}/espacios/${id}?salas=false` : null
   )
 
   const [shouldSubmit, setShouldSubmit] = useState(false)
