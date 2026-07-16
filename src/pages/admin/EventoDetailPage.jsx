@@ -1,28 +1,11 @@
 import { NavbarInterno } from '../../components/NavbarInterno'
 import { EventoInfo } from '../../components/EventoInfo'
 import { SeccionDetail } from '../../components/SeccionDetail'
+import { PonenciasView } from '../../components/PonenciasView'
 import { useParams, useSearchParams } from 'react-router'
 import { useFetch } from '../../hooks/useFetch'
-import { FichaPonenciaDetalle } from '../../components/FichaPonenciaDetalle'
 
 const API_URL = import.meta.env.VITE_API_URL
-
-const PonenciasView = ({ eventoId }) => {
-  const { data, loading } = useFetch(`${API_URL}/ponencias?idEvento=${eventoId}`)
-  const ponencias = data?.data || []
-
-  if (loading) return <p>Cargando ponencias...</p>
-  if (ponencias.length === 0) return <p>Este evento no tiene ponencias asignadas</p>
-
-  return (
-    <div>
-      <h2>Ponencias ({ponencias.length})</h2>
-      {ponencias.map((ponencia) => (
-        <FichaPonenciaDetalle key={ponencia.id} ponencia={ponencia} isAdmin={true} />
-      ))}
-    </div>
-  )
-}
 
 const PresupuestoView = ({ eventoId }) => {
   const { data } = useFetch(`${API_URL}/eventos/${eventoId}`)
@@ -55,8 +38,30 @@ export const EventoDetailPage = () => {
   const { id } = useParams()
   const [searchParams] = useSearchParams()
   const seccion = searchParams.get('seccion')
-  const { data, loading } = useFetch(`${API_URL}/eventos/${id}`)
+  const { data, loading, setData } = useFetch(`${API_URL}/eventos/${id}`)
   const evento = data?.data
+
+  const handleDeletePonencia = async (ponenciaId) => {
+    if (!window.confirm('¿Estás seguro de eliminar esta ponencia?')) return
+    try {
+      const res = await fetch(`${API_URL}/ponencias/${ponenciaId}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      })
+      const result = await res.json()
+      if (result.ok) {
+        setData({
+          ...data,
+          data: {
+            ...evento,
+            ponencias: evento.ponencias.filter((p) => p.id !== ponenciaId),
+          },
+        })
+      }
+    } catch (err) {
+      console.error('Error al eliminar ponencia:', err)
+    }
+  }
 
   if (loading) return <div className="event_info_cargando">Cargando...</div>
   if (!evento) return <div className="evento_info_error">Evento no encontrado</div>
@@ -73,7 +78,7 @@ export const EventoDetailPage = () => {
         ) : seccion === 'datos' ? (
           <EventoInfo evento={evento} />
         ) : seccion === 'ponencias' ? (
-          <PonenciasView eventoId={id} />
+          <PonenciasView evento={evento} eventoId={id} onDelete={handleDeletePonencia} />
         ) : seccion === 'lugar' ? (
           <h2>Gestión de Lugar</h2>
         ) : (
