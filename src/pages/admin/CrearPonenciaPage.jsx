@@ -13,7 +13,6 @@ export const CrearPonenciaPage = () => {
   const location = useLocation()
   const eventoState = location.state?.evento
   const [message, setMessage] = useState("")
-
   const { data: ponentesData, setData: setPonentesData } = useFetch(`${API_URL}/ponentes`)
 
   useEffect(() => {
@@ -56,7 +55,6 @@ export const CrearPonenciaPage = () => {
 
   const [shouldSubmit, setShouldSubmit] = useState(false)
   const [formValues, setFormValues] = useState(null)
-
   const { data, loading, error, setData, setError } = useFetch(
     shouldSubmit ? `${API_URL}/ponencias` : null,
     "POST",
@@ -96,7 +94,6 @@ export const CrearPonenciaPage = () => {
   const [buscando, setBuscando] = useState(false)
   const [resultados, setResultados] = useState(null)
   const [errorBusqueda, setErrorBusqueda] = useState(null)
-
   const VIAJES_URL = import.meta.env.VITE_VIAJES_URL
 
   const handlePonenteChange = (e) => {
@@ -177,16 +174,13 @@ export const CrearPonenciaPage = () => {
       <header className="titlePage">
         <h1>Nueva Ponencia</h1>
       </header>
-
       {message && (
         <div className={`presupuestos__message ${message.includes("Error") ? "presupuestos__message--error" : "presupuestos__message--success"}`}>
           {message}
         </div>
       )}
-
       <section className="container">
         {eventoId && <NavbarInterno eventoId={eventoId} />}
-
         <form className="form-cliente" onSubmit={handleSubmit}>
           <h2>Datos de la Ponencia</h2>
           <div className="form-cliente__grid">
@@ -205,8 +199,9 @@ export const CrearPonenciaPage = () => {
             </label>
             <label className="form-cliente__field">
               <span>Ponente</span>
-              <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
-                <select className="input" name="idPonente" value={form.idPonente} onChange={handlePonenteChange} required style={{ flex: 1 }}>
+              {/* CAMBIO 1: inline style → className */}
+              <div className="form-cliente__ponente-row">
+                <select className="input" name="idPonente" value={form.idPonente} onChange={handlePonenteChange} required>
                   <option value="">Seleccionar ponente</option>
                   {ponentesData?.data?.map((ponente) => (
                     <option key={ponente.id} value={ponente.id}>{ponente.nombrePonente} - {ponente.empresa}</option>
@@ -310,7 +305,6 @@ export const CrearPonenciaPage = () => {
               {buscando ? "Buscando..." : "Buscar"}
             </button>
             {errorBusqueda && <p className="busqueda-agente-form__error">{errorBusqueda}</p>}
-
           </div>
 
           <div className="form-cliente__section">
@@ -379,7 +373,8 @@ export const CrearPonenciaPage = () => {
             <button className="btn btn--primary" type="submit" disabled={loading}>
               {loading ? "Guardando..." : "Crear Ponencia"}
             </button>
-            <button className="btn btn--cancel" type="button" onClick={() => navigate(`/detalle/${eventoId}?seccion=ponencias`)} disabled={loading}>
+            {/* CAMBIO 2: btn--cancel → btn--nobg */}
+            <button className="btn btn--nobg" type="button" onClick={() => navigate(`/detalle/${eventoId}?seccion=ponencias`)} disabled={loading}>
               Cancelar
             </button>
           </div>
