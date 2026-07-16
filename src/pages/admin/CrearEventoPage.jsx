@@ -10,8 +10,9 @@ export const CrearEventoPage = () => {
   const [clientes, setClientes] = useState([])
   const [shouldSend, setShouldSend] = useState(false)
   const [payload, setPayload] = useState(null)
+  const [message, setMessage] = useState("")
 
-  const { data } = useFetch(
+  const { data, loading, error } = useFetch(
     shouldSend ? `${API_URL}/eventos` : null,
     'POST',
     shouldSend ? payload : null
@@ -20,6 +21,14 @@ export const CrearEventoPage = () => {
   useEffect(() => {
     if (data?.ok) navigate('/eventos')
   }, [data, navigate])
+
+  useEffect(() => {
+    if (error) {
+      setMessage(error)
+      setShouldSend(false)
+      setPayload(null)
+    }
+  }, [error])
 
   useEffect(() => {
     fetch(`${API_URL}/clientes`, { credentials: 'include' })
@@ -37,9 +46,15 @@ export const CrearEventoPage = () => {
       <header className="titlePage">
         <h1>Nuevo Evento</h1>
       </header>
+      {message && (
+        <div className={`presupuestos__message ${message.includes("Error") ? "presupuestos__message--error" : "presupuestos__message--success"}`}>
+          {message}
+        </div>
+      )}
       <section className="container">
         <CrearEventoFormulario
           onSubmit={handleSubmit}
+          loading={loading}
           clientes={clientes}
         />
       </section>

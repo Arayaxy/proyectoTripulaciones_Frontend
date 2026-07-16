@@ -14,11 +14,12 @@ const initialForm = {
   tipoEvento: '',
   nota: '',
   idCliente: '',
-  estado: '',
+  estado: 'Planificado',
 }
 
-export const CrearEventoFormulario = ({ onSubmit, clientes }) => {
+export const CrearEventoFormulario = ({ onSubmit, loading, clientes }) => {
   const [form, setForm] = useState(initialForm)
+  const [errors, setErrors] = useState({})
   const [respuesta, setRespuesta] = useState(null)
   const [autocompleteData, setAutocompleteData] = useState(null)
 
@@ -28,6 +29,16 @@ export const CrearEventoFormulario = ({ onSubmit, clientes }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    const errs = {}
+    if (!form.nombreEvento.trim()) errs.nombreEvento = "El nombre del evento es obligatorio"
+    if (!form.ciudad.trim()) errs.ciudad = "La ciudad es obligatoria"
+    if (!form.tipoEvento.trim()) errs.tipoEvento = "El tipo de evento es obligatorio"
+    if (!form.fechaInicio) errs.fechaInicio = "La fecha de inicio es obligatoria"
+    if (!form.fechaFin) errs.fechaFin = "La fecha de fin es obligatoria"
+    if (!form.numeroPersonas || Number(form.numeroPersonas) <= 0) errs.numeroPersonas = "Indica un número de asistentes válido"
+    if (!form.idCliente) errs.idCliente = "Selecciona un cliente"
+    setErrors(errs)
+    if (Object.keys(errs).length > 0) return
     onSubmit({
       ...form,
       numeroPersonas: Number(form.numeroPersonas),
@@ -76,11 +87,11 @@ export const CrearEventoFormulario = ({ onSubmit, clientes }) => {
         <h2>Datos del Evento</h2>
         <div className="form-cliente__grid">
           <label className="form-cliente__field">
-            <span>Nombre del Evento</span>
+            <span>Nombre del Evento *</span>
             <input className="input" name="nombreEvento" placeholder="Nombre del evento" value={form.nombreEvento} onChange={handleChange} required />
           </label>
           <label className="form-cliente__field">
-            <span>Ciudad</span>
+            <span>Ciudad *</span>
             <input className="input" name="ciudad" placeholder="Ciudad" value={form.ciudad} onChange={handleChange} required />
           </label>
           <label className="form-cliente__field">
@@ -88,23 +99,23 @@ export const CrearEventoFormulario = ({ onSubmit, clientes }) => {
             <input className="input" name="lugarConfirmado" placeholder="Lugar" value={form.lugarConfirmado} onChange={handleChange} />
           </label>
           <label className="form-cliente__field">
-            <span>Tipo de Evento</span>
+            <span>Tipo de Evento *</span>
             <input className="input" name="tipoEvento" placeholder="Tipo de evento" value={form.tipoEvento} onChange={handleChange} required />
           </label>
           <label className="form-cliente__field">
-            <span>Fecha Inicio</span>
+            <span>Fecha Inicio *</span>
             <input className="input" type="date" name="fechaInicio" value={form.fechaInicio} onChange={handleChange} required />
           </label>
           <label className="form-cliente__field">
-            <span>Fecha Fin</span>
+            <span>Fecha Fin *</span>
             <input className="input" type="date" name="fechaFin" value={form.fechaFin} onChange={handleChange} required />
           </label>
           <label className="form-cliente__field">
-            <span>Número de Personas</span>
+            <span>Número de Personas *</span>
             <input className="input" type="number" name="numeroPersonas" placeholder="0" min="1" value={form.numeroPersonas} onChange={handleChange} required />
           </label>
           <label className="form-cliente__field">
-            <span>Cliente</span>
+            <span>Cliente *</span>
             <select className="input" name="idCliente" value={form.idCliente} onChange={handleChange} required>
               <option value="">Seleccionar cliente</option>
               {clientes?.map((c) => (<option key={c.id} value={c.id}>{`${c.cliente} - ${c.empresa}`}</option>))}
@@ -122,7 +133,12 @@ export const CrearEventoFormulario = ({ onSubmit, clientes }) => {
             <textarea className="input" name="nota" placeholder="Nota opcional" rows="3" value={form.nota} onChange={handleChange} />
           </label>
         </div>
-        <button className="btn btn--primary" type="submit">Guardar</button>
+        {Object.keys(errors).length > 0 && (
+          <p className="presupuesto-form__error">Completa todos los campos obligatorios</p>
+        )}
+        <button className="btn btn--primary" type="submit" disabled={loading}>
+          {loading ? "Guardando..." : "Guardar"}
+        </button>
       </form>
 
       <FileUpload uploadUrl={AUTOCOMPLETE_URL} onSuccess={handleAutocompleteSuccess} withCredentials={false} />

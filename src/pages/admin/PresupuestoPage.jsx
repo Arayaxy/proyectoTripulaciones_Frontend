@@ -96,6 +96,15 @@ export const PresupuestosPage = () => {
     }
   }, [deleteData, setData, deleteId])
 
+  const filteredPresupuestos = presupuestos.filter(p => {
+    const term = searchTerm.toLowerCase()
+    if (!term) return true
+    const servicios = ["Catering", "Audiovisuales", "Otros"]
+    const matchNombre = p.eventoNombre?.toLowerCase().includes(term)
+    const matchServicios = servicios.some(s => s.toLowerCase().includes(term))
+    return matchNombre || matchServicios
+  })
+
   const handleCreate = (values) => {
     setNewValues(values)
     setShouldCreate(true)
@@ -118,7 +127,6 @@ export const PresupuestosPage = () => {
     <div>
       <header className='titlePage'>
         <h1>Presupuestos</h1>
-        <button className="btn btn--anadir" onClick={() => navigate("/presupuestos/crear")}>Crear presupuesto</button>
       </header>
 
       {message && (
@@ -127,36 +135,22 @@ export const PresupuestosPage = () => {
         </div>
       )}
 
-      <div className="search-bar">
-        <input
-          className="search-bar__input"
-          type="text"
-          placeholder="Buscar por nombre del evento, estado o servicio..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
-
       {mode === "list" && (
         <>
-          {presupuestos.length > 0 ? (
+          <div className="search-bar">
+            <input
+              className="search-bar__input"
+              type="text"
+              placeholder="Buscar por nombre de evento..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+
+          {filteredPresupuestos.length > 0 ? (
             <section className='container'>
               <div className="presupuestos__list">
-                {presupuestos
-                  .filter((p) => {
-                    const term = searchTerm.toLowerCase()
-                    if (!term) return true
-                    const servicios = ["Catering", "Audiovisuales", "Otros"]
-                      .filter(s => p[s.toLowerCase()])
-                      .join(", ")
-                    const estadoTexto = p.estadoPresupuesto ? "aprobado" : "pendiente"
-                    return (
-                      p.eventoNombre?.toLowerCase().includes(term) ||
-                      estadoTexto.includes(term) ||
-                      servicios.toLowerCase().includes(term)
-                    )
-                  })
-                  .map(p => (
+                {filteredPresupuestos.map(p => (
                   <div className="presupuesto-card" key={p.id}>
                     <h2>{p.eventoNombre}</h2>
                     <div className="presupuesto-card__row">
@@ -192,7 +186,7 @@ export const PresupuestosPage = () => {
             </section>
           ) : (
             <div className="presupuestos__empty">
-              <p>No hay presupuestos</p>
+              <p>{searchTerm ? "No se encontraron presupuestos" : "No hay presupuestos"}</p>
             </div>
           )}
         </>
