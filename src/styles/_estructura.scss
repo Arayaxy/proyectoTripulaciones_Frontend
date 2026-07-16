@@ -66,8 +66,48 @@ header.titlePage {
   @include bp-990 {
     grid-template-columns: repeat(3, 1fr);
   }
-  @include bp-1200 {
+  @include bp-1900 {
     grid-template-columns: repeat(4, 1fr);
   }
 
+}
+
+.search-bar {
+  padding: $sp-16 $sp-20;
+  border-bottom: 1px solid $color-border;
+  background: $color-black-5;
+  @include flex(row, center, center);
+
+  @include bp-990 {
+    padding: $sp-16 $sp-32;
+  }
+
+  &__input {
+    width: 90%;
+    padding: $sp-12 $sp-20;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    font-size: $txt-base;
+    font-family: $font-primary;
+    font-weight: $fw-medium;
+    color: $color-text;
+    background: $color-white;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    @include bp-990 {
+      width: 70%;
+    }
+
+    &::placeholder {
+      color: $color-text-muted;
+      font-weight: $fw-medium;
+    }
+
+    &:focus {
+      border-color: $color-primary;
+      box-shadow: 0 0 0 3px rgba(43, 122, 142, 0.1);
+    }
+  }
 }
