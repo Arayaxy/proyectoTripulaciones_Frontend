@@ -1,5 +1,159 @@
-@use '../../styles/fonts';
 @use '../../styles/variables' as *;
 @use '../../styles/mixins' as *;
-@use '../../styles/elements';
-@use '../../styles/reset';
+
+.ponentes-list {
+  @include flex(column, flex-start, stretch);
+  gap: $sp-16;
+
+  &__header {
+    @include flex-between;
+    align-items: center;
+    gap: $sp-12;
+
+    h2 {
+      font-size: $txt-xl;
+      font-weight: $fw-bold;
+      color: $color-primary;
+      font-family: $font-primary;
+    }
+  }
+}
+
+.ponente-card {
+  background: $color-white;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  padding: $sp-16;
+  @include flex(column, flex-start, stretch);
+  gap: $sp-12;
+
+  &__header {
+    @include flex-between;
+    align-items: flex-start;
+    gap: $sp-12;
+  }
+
+  &__title {
+    font-size: $txt-lg;
+    font-weight: $fw-bold;
+    color: $color-primary;
+    font-family: $font-primary;
+    margin-bottom: $sp-4;
+  }
+
+  &__ponente {
+    font-size: $txt-sm;
+    color: $color-text-muted;
+    font-weight: $fw-medium;
+  }
+
+  &__estado {
+    padding: $sp-4 $sp-12;
+    border-radius: $radius-md;
+    font-size: $txt-sm;
+    font-weight: $fw-semibold;
+    white-space: nowrap;
+    background: $color-black-5;
+    color: $color-text-muted;
+
+    &--confirmado {
+      background: rgba(#22c55e, 0.12);
+      color: #16a34a;
+    }
+
+    &--pendiente {
+      background: rgba(#f97316, 0.12);
+      color: #ea580c;
+    }
+
+    &--cancelado {
+      background: rgba($color-error, 0.12);
+      color: $color-error;
+    }
+
+    &--tentativo {
+      background: rgba($color-primary, 0.12);
+      color: $color-primary;
+    }
+  }
+
+  &__body {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $sp-8;
+
+    @include bp-990 {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+    &__field {
+      @include flex(row, flex-start, baseline);
+      gap: $sp-8;
+      font-size: $txt-sm;
+      color: $color-text;
+      font-family: $font-primary;
+
+      span:last-child {
+        font-family: $font-secondary;
+        font-weight: $fw-bold;
+        color: $color-primary;
+      }
+    }
+
+  &__label {
+    font-weight: $fw-semibold;
+    color: $color-text-muted;
+    min-width: 130px;
+    flex-shrink: 0;
+  }
+
+  &__footer {
+    border-top: 1px solid $color-border;
+    padding-top: $sp-12;
+  }
+
+  &__actions {
+    @include flex(row, flex-end, center);
+    gap: $sp-8;
+  }
+
+  &__edit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: $sp-8 $sp-16;
+    border-radius: $radius-md;
+    font: $fw-medium $txt-sm $font-primary;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid $color-primary;
+    color: $color-primary;
+    background: $color-white;
+
+    &:hover {
+      background: $color-primary;
+      color: $color-white;
+    }
+  }
+
+  &__delete-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: $sp-8 $sp-16;
+    border-radius: $radius-md;
+    font: $fw-medium $txt-sm $font-primary;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid $color-error;
+    color: $color-error;
+    background: $color-white;
+
+    &:hover {
+      background: $color-error;
+      color: $color-white;
+    }
+  }
+}

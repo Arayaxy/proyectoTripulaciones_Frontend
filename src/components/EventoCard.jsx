@@ -10,6 +10,7 @@ export const EventoCard = ({ evento, onDelete }) => {
 
   return (
     <article className="client-card">
+      <div>
       <h2 className="client-card__name">{evento.nombreEvento}</h2>
       <p className="client-card__detail">
         <span className="client-card__label">Ciudad:</span>{' '}
@@ -41,6 +42,7 @@ export const EventoCard = ({ evento, onDelete }) => {
           <strong>{evento.estado.descripcion}</strong>
         </p>
       )}
+      </div>
       <div className="client-card__botones">
         <button className="btn btn--outline md" onClick={() => navigate(`/detalle/${evento.id}`)}>
           Ver detalles

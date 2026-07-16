@@ -36,8 +36,7 @@ export const PonenciasView = ({ evento, eventoId, onDelete }) => {
         <div key={p.id} className="ponente-card">
           <div className="ponente-card__header">
             <div>
-              <h3 className="ponente-card__title">{p.tipoPonencia}</h3>
-              <p className="ponente-card__ponente">{p.ponente?.nombrePonente}</p>
+              <h3 className="ponente-card__title">{p.tipoPonencia} {p.ponente?.nombrePonente}</h3>
             </div>
             <span className={`ponente-card__estado ponente-card__estado--${p.ponenteEstado?.toLowerCase()}`}>
               {p.ponenteEstado}
@@ -87,20 +86,21 @@ export const PonenciasView = ({ evento, eventoId, onDelete }) => {
           </div>
           <div className="ponente-card__footer">
             <div className="ponente-card__actions">
-              <Link
-                to={`/detalle/${eventoId}/ponencias/editar/${p.id}`}
-                state={linkState}
-                className="ponente-card__edit-btn"
-              >
-                Editar
-              </Link>
               <button
                 type="button"
-                className="ponente-card__delete-btn"
+                className="btn btn--logout"
                 onClick={() => onDelete(p.id)}
               >
                 Eliminar
               </button>
+              <Link
+                to={`/detalle/${eventoId}/ponencias/editar/${p.id}`}
+                state={linkState}
+                className="btn btn--primary"
+              >
+                Editar
+              </Link>
+
             </div>
           </div>
         </div>
