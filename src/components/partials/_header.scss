@@ -35,15 +35,20 @@
 .botonyMenu {
   @include flex(row, flex-end, center);
   gap: $sp-8;
+
+  @include bp-1200 {
+    .btn--logout {
+      order: 2;
+    }
+  }
 }
 
 .header__logout {
-
   @include bp-1200 {
     order: 2;
   }
-
 }
+
 
 .header__hamburger {
   background: none;
@@ -55,29 +60,4 @@
   @include bp-1200 {
     display: none;
   }
-}
-
-
-/*====================================
-Responsive768
-============================================== */
-@media screen and (min-width:768px) {}
-
-/*cierra 768 */
-/* ===========================================
-Responsive 990
-============================================== */
-@media screen and (min-width:990px) {
-
-}
-
-/*cierra 990 */
-/* ===========================================
-Responsive 1200
-============================================== */
-@media screen and (min-width:1200px) {
-  .headerContainer {
-    @include flex-between;
-
-    }
 }
