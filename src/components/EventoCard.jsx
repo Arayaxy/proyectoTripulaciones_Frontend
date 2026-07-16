@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router'
+import '../clientes/_clientCard.scss'
 
 export const EventoCard = ({ evento, onDelete }) => {
   const navigate = useNavigate()

@@ -1,32 +1,65 @@
 import { NavbarInterno } from '../../components/NavbarInterno'
 import { EventoInfo } from '../../components/EventoInfo'
-import { useParams, useNavigate, useSearchParams } from 'react-router'
+import { SeccionDetail } from '../../components/SeccionDetail'
+import { PonenciasView } from '../../components/PonenciasView'
+import { useParams, useSearchParams } from 'react-router'
 import { useFetch } from '../../hooks/useFetch'
-import '../../components/clientes/_clientCard.scss'
 
 const API_URL = import.meta.env.VITE_API_URL
 
+const PresupuestoView = ({ eventoId }) => {
+  const { data } = useFetch(`${API_URL}/eventos/${eventoId}`)
+  const presupuesto = data?.data?.presupuesto
+
+  if (!presupuesto) return <p>Este evento no tiene presupuesto asignado</p>
+
+  return (
+    <div>
+      <h2>Presupuesto del Evento</h2>
+      <div className="presupuesto-card" style={{ marginTop: '16px' }}>
+        <div className="presupuesto-card__row">
+          <span className="presupuesto-card__label">Total:</span>
+          <span className="presupuesto-card__value">{presupuesto.total}€</span>
+        </div>
+        <div className="presupuesto-card__row">
+          <span className="presupuesto-card__label">Estado:</span>
+          <span>{presupuesto.estadoPresupuesto ? "Aprobado" : "Pendiente"}</span>
+        </div>
+        <div className="presupuesto-card__row">
+          <span className="presupuesto-card__label">Fecha:</span>
+          <span>{new Date(presupuesto.fecha).toLocaleDateString()}</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export const EventoDetailPage = () => {
   const { id } = useParams()
-  const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const seccion = searchParams.get('seccion')
   const { data, loading, setData } = useFetch(`${API_URL}/eventos/${id}`)
   const evento = data?.data
 
-  const handleDelete = async () => {
-    if (!window.confirm('¿Estás seguro de eliminar este evento?')) return
+  const handleDeletePonencia = async (ponenciaId) => {
+    if (!window.confirm('¿Estás seguro de eliminar esta ponencia?')) return
     try {
-      const res = await fetch(`${API_URL}/eventos/${id}`, {
+      const res = await fetch(`${API_URL}/ponencias/${ponenciaId}`, {
         method: 'DELETE',
         credentials: 'include',
       })
-      const json = await res.json()
-      if (json.ok) {
-        navigate('/eventos')
+      const result = await res.json()
+      if (result.ok) {
+        setData({
+          ...data,
+          data: {
+            ...evento,
+            ponencias: evento.ponencias.filter((p) => p.id !== ponenciaId),
+          },
+        })
       }
     } catch (err) {
-      console.error(err)
+      console.error('Error al eliminar ponencia:', err)
     }
   }
 
@@ -39,218 +72,21 @@ export const EventoDetailPage = () => {
         <h1>Eventos</h1>
       </header>
       <section className='container'>
-        <NavbarInterno eventoId={id} />
+        <article className='containerDatosEvento'>
+          <NavbarInterno eventoId={id} />
 
-        {!seccion ? (
-          <>
-            <h2 className="client-card__name">{evento.nombreEvento}</h2>
-            <p className="client-card__detail">
-              {evento.tipoEvento} · {evento.ciudad} · {new Date(evento.fechaInicio).toLocaleDateString('es-ES')}
-            </p>
-
-            <article className="client-card">
-              <h2 className="client-card__name">Lugar</h2>
-              <p className="client-card__detail">
-                <span className="client-card__label">Estado:</span>
-                <strong>{evento.lugarConfirmado ? 'Confirmado' : 'Pendiente'}</strong>
-              </p>
-              <p className="client-card__detail">
-                <span className="client-card__label">Ubicación:</span>
-                <strong>{evento.lugarConfirmado || 'Sin confirmar'}</strong>
-              </p>
-              <p className="client-card__detail">Gestiona la ubicación y detalles del lugar del evento</p>
-              <div className="client-card__botones">
-                <button className="btn btn--outline sm" onClick={() => navigate(`/detalle/${id}?seccion=lugar`)}>
-                  Ir a Lugar
-                </button>
-              </div>
-            </article>
-
-            <article className="client-card">
-              <h2 className="client-card__name">Presupuesto</h2>
-              <p className="client-card__detail">
-                <span className="client-card__label">Estado:</span>
-                <strong>{evento.presupuesto?.estadoPresupuesto ? 'Aprobado' : 'Pendiente'}</strong>
-              </p>
-              <p className="client-card__detail">
-                <span className="client-card__label">Total:</span>
-                <strong>{evento.presupuesto ? `${evento.presupuesto.total}€` : 'Sin presupuesto'}</strong>
-              </p>
-              <p className="client-card__detail">Controla el presupuesto asignado al evento</p>
-              <div className="client-card__botones">
-                <button className="btn btn--outline sm" onClick={() => navigate(`/detalle/${id}?seccion=presupuesto`)}>
-                  Ir a Presupuesto
-                </button>
-              </div>
-            </article>
-
-            <article className="client-card">
-              <h2 className="client-card__name">Ponentes</h2>
-              <p className="client-card__detail">
-                <span className="client-card__label">Estado:</span>
-                <strong>{evento.ponencias?.length > 0 ? 'Asignados' : 'Pendiente'}</strong>
-              </p>
-              <p className="client-card__detail">
-                <span className="client-card__label">Asignados:</span>
-                <strong>{evento.ponencias?.length || 0} ponentes</strong>
-              </p>
-              <p className="client-card__detail">Administra los ponentes y sus asignaciones</p>
-              <div className="client-card__botones">
-                <button className="btn btn--outline sm" onClick={() => navigate(`/detalle/${id}?seccion=ponentes`)}>
-                  Ir a Ponentes
-                </button>
-              </div>
-            </article>
-          </>
-        ) : (
-          <>
-            {seccion === 'datos' ? (
-              <>
-                <EventoInfo evento={evento} />
-                <div className="client-card__botones">
-                  <button className="btn btn--logout" onClick={handleDelete}>Eliminar</button>
-                  <button className="btn btn--primary" onClick={() => navigate(`/eventos/editar/${id}`)}>Editar</button>
-                </div>
-              </>
-            ) : seccion === 'ponentes' ? (
-              evento.ponencias?.length > 0 ? (
-                <article className="client-card">
-                  <h2 className="client-card__name">Ponencias ({evento.ponencias.length})</h2>
-                  {evento.ponencias.map(p => (
-                    <p key={p.id} className="client-card__detail">
-                      <span className="client-card__label">{p.ponente?.nombrePonente || 'Ponente'}:</span>
-                      <strong>{p.tipoPonencia}</strong>
-                    </p>
-                  ))}
-                  <div className="client-card__botones">
-                    <button className="btn btn--outline sm" onClick={() => navigate(`/detalle/${id}/ponentes/nuevo`)}>
-                      Añadir Ponente
-                    </button>
-                  </div>
-                </article>
-              ) : (
-                <article className="client-card">
-                  <h2 className="client-card__name">Ponencias</h2>
-                  <p className="client-card__detail">Este evento no tiene ponencias asignadas</p>
-                  <div className="client-card__botones">
-                    <button className="btn btn--outline sm" onClick={() => navigate(`/detalle/${id}/ponentes/nuevo`)}>
-                      Añadir Ponente
-                    </button>
-                  </div>
-                </article>
-              )
-            ) : seccion === 'lugar' ? (
-              evento.lugarConfirmado || evento.sala ? (
-                <article className="client-card">
-                  <h2 className="client-card__name">Lugar</h2>
-                  {evento.lugarConfirmado && (
-                    <p className="client-card__detail">
-                      <span className="client-card__label">Ubicación:</span>
-                      <strong>{evento.lugarConfirmado}</strong>
-                    </p>
-                  )}
-                  {evento.nota && (
-                    <p className="client-card__detail">
-                      <span className="client-card__label">Nota:</span>
-                      <strong>{evento.nota}</strong>
-                    </p>
-                  )}
-                  {evento.sala && (
-                    <>
-                      <p className="client-card__detail">
-                        <span className="client-card__label">Sala:</span>
-                        <strong>{evento.sala.nombreSala}</strong>
-                      </p>
-                      <p className="client-card__detail">
-                        <span className="client-card__label">Tipo:</span>
-                        <strong>{evento.sala.tipoSala}</strong>
-                      </p>
-                      <p className="client-card__detail">
-                        <span className="client-card__label">Capacidad:</span>
-                        <strong>{evento.sala.capacidadMaxSala} personas</strong>
-                      </p>
-                    </>
-                  )}
-                </article>
-              ) : (
-                <article className="client-card">
-                  <h2 className="client-card__name">Lugar</h2>
-                  <p className="client-card__detail">Este evento no tiene lugar asignado</p>
-                  <div className="client-card__botones">
-                    <button className="btn btn--outline sm" onClick={() => navigate(`/detalle/${id}?seccion=lugar`)}>
-                      Asignar Lugar
-                    </button>
-                  </div>
-                </article>
-              )
-            ) : seccion === 'presupuesto' ? (
-              evento.presupuesto ? (
-                <article className="client-card">
-                  <h2 className="client-card__name">Presupuesto</h2>
-                  <p className="client-card__detail">
-                    <span className="client-card__label">Total:</span>
-                    <strong>{evento.presupuesto.total}€</strong>
-                  </p>
-                  <p className="client-card__detail">
-                    <span className="client-card__label">Estado:</span>
-                    <strong>{evento.presupuesto.estadoPresupuesto ? 'Aprobado' : 'Pendiente'}</strong>
-                  </p>
-                  <p className="client-card__detail">
-                    <span className="client-card__label">Fecha:</span>
-                    <strong>{new Date(evento.presupuesto.fecha).toLocaleDateString('es-ES')}</strong>
-                  </p>
-                  {evento.presupuesto.catering && (
-                    <p className="client-card__detail">
-                      <span className="client-card__label">Catering:</span>
-                      <strong>{evento.presupuesto.precioCatering}€</strong>
-                    </p>
-                  )}
-                  {evento.presupuesto.audiovisuales && (
-                    <p className="client-card__detail">
-                      <span className="client-card__label">Audiovisuales:</span>
-                      <strong>{evento.presupuesto.precioAudiovisuales}€</strong>
-                    </p>
-                  )}
-                  {evento.presupuesto.otros && (
-                    <p className="client-card__detail">
-                      <span className="client-card__label">Otros:</span>
-                      <strong>{evento.presupuesto.precioOtros}€</strong>
-                    </p>
-                  )}
-                  {evento.presupuesto.observaciones && (
-                    <p className="client-card__detail">
-                      <span className="client-card__label">Observaciones:</span>
-                      <strong>{evento.presupuesto.observaciones}</strong>
-                    </p>
-                  )}
-                  <div className="client-card__botones">
-                    <button className="btn btn--outline sm" onClick={() => navigate(`/presupuestos/${evento.presupuesto.id}`)}>
-                      Ver detalle completo
-                    </button>
-                  </div>
-                </article>
-              ) : (
-                <article className="client-card">
-                  <h2 className="client-card__name">Presupuesto</h2>
-                  <p className="client-card__detail">Este evento no tiene presupuesto asignado</p>
-                  <div className="client-card__botones">
-                    <button className="btn btn--outline sm" onClick={() => navigate('/presupuestos/crear')}>
-                      Crear Presupuesto
-                    </button>
-                  </div>
-                </article>
-              )
-            ) : (
-              <>
-                <EventoInfo evento={evento} />
-                <div className="client-card__botones">
-                  <button className="btn btn--logout" onClick={handleDelete}>Eliminar</button>
-                  <button className="btn btn--primary" onClick={() => navigate(`/eventos/editar/${id}`)}>Editar</button>
-                </div>
-              </>
-            )}
-          </>
-        )}
+          {seccion === 'presupuesto' ? (
+            <PresupuestoView eventoId={id} />
+          ) : seccion === 'datos' ? (
+            <EventoInfo evento={evento} />
+          ) : seccion === 'ponentes' ? (
+            <PonenciasView evento={evento} eventoId={id} onDelete={handleDeletePonencia} />
+          ) : seccion === 'lugar' ? (
+            <h2>Gestión de Lugar</h2>
+          ) : (
+            <EventoInfo evento={evento} />
+          )}
+        </article>
       </section>
     </>
   )
