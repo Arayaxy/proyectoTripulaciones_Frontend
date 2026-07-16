@@ -11,7 +11,6 @@ export const Navbar = ({ isOpen, onClose }) => {
         <li><NavLink to="/ponentes" onClick={onClose}>Ponentes</NavLink></li>
         <li><NavLink to="/consultas" onClick={onClose}>Consultas</NavLink></li>
         <li><NavLink to="/concursos" onClick={onClose}>Concursos Públicos</NavLink></li>
-        <li><NavLink to="/busquedas" onClick={onClose}>Búsquedas</NavLink></li>
         <li><NavLink to="/presupuestos" onClick={onClose}>Presupuestos</NavLink></li>
       </ul>
     </nav>

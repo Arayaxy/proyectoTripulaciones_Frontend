@@ -1,7 +1,7 @@
 import { NavbarInterno } from '../../components/NavbarInterno'
 import { EventoInfo } from '../../components/EventoInfo'
 import { SeccionDetail } from '../../components/SeccionDetail'
-import { PonenciasView } from '../../components/PonenciasView'
+import { EventoPonenciasView } from '../../components/EventoPonenciasView'
 import { useParams, useSearchParams } from 'react-router'
 import { useFetch } from '../../hooks/useFetch'
 
@@ -79,7 +79,7 @@ export const EventoDetailPage = () => {
         ) : seccion === 'datos' ? (
           <EventoInfo evento={evento} />
         ) : seccion === 'ponencias' ? (
-          <PonenciasView evento={evento} eventoId={id} onDelete={handleDeletePonencia} />
+          <EventoPonenciasView evento={evento} eventoId={id} onDelete={handleDeletePonencia} />
         ) : seccion === 'lugar' ? (
           <h2>Gestión de Lugar</h2>
         ) : (
