@@ -30,6 +30,10 @@ import { CrearPonenciaPage } from "../pages/admin/CrearPonenciaPage"
 import { CrearPonentePage } from "../pages/admin/CrearPonentePage"
 import { PublicRoute } from "../components/PublicRoute"
 import { Backdoor } from "../pages/auth/Backdoor"
+import { AdminsPage } from "../pages/admin/AdminsPage"
+//nuveo
+import { RequirePonente } from "../components/RequirePonente"
+import { LayoutPonente } from "../components/LayoutPonente"
 import { SolicitudesEdicionPage } from "../pages/admin/SolicitudesEdicionPage"
 import { PresupuestoDetailPage } from "../pages/admin/PresupuestoDetailPage"
 
@@ -37,11 +41,19 @@ export const AppRoutes = () => {
   return (
     <Routes>
 
+      {/* PUBLIC RUTAS */}
       <Route path="/" element={<PublicRoute><Login /></PublicRoute>} />
       <Route path="/backdoor" element={<Backdoor />} />
 
-      <Route path='/ponencia' element={<FichaPonente />} />
+      {/* PONENTES RUTAS */}
+      <Route element={<RequirePonente><LayoutPonente /></RequirePonente>}>
+        <Route path='/ponencia' element={<FichaPonente />} />
+      </Route>
 
+
+
+
+      {/* ADMIN RUTAS */}
       <Route element={<RequireAdmin><Layout /></RequireAdmin>}>
         <Route path='/eventos' element={<EventosPage />} />
         <Route path='/eventos/nuevo' element={<CrearEventoPage />} />
@@ -70,6 +82,8 @@ export const AppRoutes = () => {
         <Route path='/presupuestos/editar/:id' element={<EditarPresupuestoPage />} />
         <Route path='/presupuestos/:id' element={<PresupuestoDetailPage />} />
         <Route path='/lugar' element={<LugarPage />} />
+        <Route path='/presupuesto' element={<PresupuestosPage />} />
+        <Route path='/admins' element={<AdminsPage />} />
       </Route>
       {/* <Route path='/*' element={<Navigate to='/NotFound' />} /> */}
     </Routes>

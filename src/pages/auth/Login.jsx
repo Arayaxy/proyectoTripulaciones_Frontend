@@ -1,19 +1,32 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../contexts/AuthContext";
+import { signOut } from "firebase/auth";
+import { auth } from "../../config/firebase";
 import heroLogo from '../../assets/logo_2026_Backstage.svg'
 import heroImg from '../../assets/heroImg.jpg'
-import './_login.scss'
+import '../../components/partials/_login.scss'
 
 export const Login = () => {
-  const { googleSignIn, user, setUser, loading, setLoading } = useAuth();
+  const { googleSignIn, user, setUser, loading, setLoading, logOut } = useAuth();
   const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_API_URL;
+
+
   const [loginError, setLoginError] = useState(null);
 
+
   useEffect(() => {
-    if (user && user.role === "admin") {
-      navigate("/eventos", { replace: true });
+    setLoginError(null);
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      if (user.role === "admin") {
+        navigate("/eventos", { replace: true });
+      } else if (user.role === "ponente") {
+        navigate("/ponencia", { replace: true });
+      }
     }
   }, [user, navigate]);
 
@@ -34,15 +47,26 @@ export const Login = () => {
         credentials: "include",
       });
 
-      if (!resp.ok) throw new Error("Error Validacion");
-
       const data = await resp.json();
+
+      if (resp.status === 403) {
+        await signOut(auth);
+        await logOut();
+        setLoginError(data.message || "No tienes privilegios de acceso");
+        return;
+      }
+
+      if (!resp.ok) throw new Error(data.message || "Error de validación");
 
       setUser(data.user);
       navigate("/eventos");
     } catch (err) {
       console.error(err.message);
-      setLoginError("Error al iniciar sesión. Intenta de nuevo.");
+
+      if (err.code === "auth/popup-closed-by-user" ||
+        err.message?.includes("popup-closed-by-user")) {
+        setLoginError("Inicio de sesión cancelado");
+      }
     } finally {
       setLoading(false);
     }
@@ -51,7 +75,9 @@ export const Login = () => {
   return (
     <main className="login">
       <header className="login__header">
-        <img src={heroLogo} alt="MITÜMI Backstage" />
+        <a href="/">
+          <img src={heroLogo} alt="MITÜMI Backstage" />
+        </a>
       </header>
       <div className="login__hero">
         <img src={heroImg} alt="MITÜMI Backstage" className="login__hero-img" />
@@ -60,7 +86,7 @@ export const Login = () => {
       <section className="login__body">
         <h2>¡Hola!</h2>
         <p>Usa tu <strong>cuenta de Google</strong> para entrar en <strong>The Backstage</strong></p>
-        {loginError && <p>{loginError}</p>}
+        {loginError && <p className="login__error">{loginError}</p>}
         <button
           className="login__google-btn"
           onClick={handleGoogleSignIn}
@@ -80,7 +106,6 @@ export const Login = () => {
             </>
           )}
         </button>
-
       </section>
 
       <footer className="login__footer">

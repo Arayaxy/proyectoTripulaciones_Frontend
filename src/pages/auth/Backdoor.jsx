@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import "./_backdoor.scss";
+import "../../components/partials/_backdoor.scss";
 
 export const Backdoor = () => {
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  const [key, setKey] = useState("");
+  const [adminSuperKey, setAdminSuperKey] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
   const [success, setSuccess] = useState(false);
@@ -21,7 +22,7 @@ export const Backdoor = () => {
       const resp = await fetch(`${API_URL}/auth/backdoor`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, key }),
+        body: JSON.stringify({ fullName, email, admin_super_key: adminSuperKey }),
       });
 
       const data = await resp.json();
@@ -49,13 +50,22 @@ export const Backdoor = () => {
             <h2 className="backdoor__title">Éxito</h2>
             <p className="backdoor__success">{message}</p>
             <button className="backdoor__link" onClick={() => navigate("/")}>
-              Ir al inicio de sesión
+              Ir al inicio
             </button>
           </>
         ) : (
           <>
             <h2 className="backdoor__title">Acceso restringido</h2>
             <form className="backdoor__form" onSubmit={handleSubmit}>
+              <input
+                className="backdoor__input"
+                type="text"
+                placeholder="Nombre completo"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                required
+                disabled={loading}
+              />
               <input
                 className="backdoor__input"
                 type="email"
@@ -69,8 +79,8 @@ export const Backdoor = () => {
                 className="backdoor__input"
                 type="password"
                 placeholder="Super Secret Key"
-                value={key}
-                onChange={(e) => setKey(e.target.value)}
+                value={adminSuperKey}
+                onChange={(e) => setAdminSuperKey(e.target.value)}
                 required
                 disabled={loading}
               />
