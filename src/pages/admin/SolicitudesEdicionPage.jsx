@@ -4,6 +4,9 @@ import { useFetch } from "../../hooks/useFetch"
 export const SolicitudesEdicionPage = () => {
   const API_URL = import.meta.env.VITE_API_URL
   const [estadoFiltro, setEstadoFiltro] = useState('Pendiente')
+  const [accionError, setAccionError] = useState(null)
+  const [accionMensaje, setAccionMensaje] = useState(null)
+  const [accionEnCursoId, setAccionEnCursoId] = useState(null)
 
   const url = estadoFiltro
     ? `${API_URL}/solicitudes-edicion?estado=${estadoFiltro}`
@@ -17,8 +20,6 @@ export const SolicitudesEdicionPage = () => {
   } = useFetch(url)
 
   const solicitudes = solicitudesData?.data || []
-  const camposPonente = ['email', 'telefono', 'empresa', 'cargo', 'sector', 'docuIdentificacion']
-  const camposPonencia = ['nombreHotel', 'localizacionHotel', 'notaTransporte', 'ponenteEstado', 'tipoPonencia']
 
   const formatFecha = (fecha) => {
     if (!fecha) return 'Sin fecha'
@@ -29,54 +30,17 @@ export const SolicitudesEdicionPage = () => {
     })
   }
 
-  const aplicarCambioSolicitado = async (solicitud) => {
-    const body = {
-      [solicitud.campo]: solicitud.valorSolicitado,
-    }
-
-    if (camposPonente.includes(solicitud.campo)) {
-      return fetch(`${API_URL}/ponentes/${solicitud.ponencia.idPonente}`, {
-        method: 'PATCH',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      })
-    }
-
-    if (camposPonencia.includes(solicitud.campo)) {
-      return fetch(`${API_URL}/ponencias/${solicitud.ponencia.id}`, {
-        method: 'PATCH',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      })
-    }
-
-    throw new Error('Campo no permitido para actualizar')
-  }
-
   const handleCambiarEstado = async (solicitud, nuevoEstado) => {
     try {
-      if (nuevoEstado === 'Aprobada') {
-        const applyResponse = await aplicarCambioSolicitado(solicitud)
-        const applyResult = await applyResponse.json()
+      setAccionError(null)
+      setAccionMensaje(null)
+      setAccionEnCursoId(solicitud.id)
 
-        if (!applyResponse.ok) {
-          throw new Error(applyResult.message || 'No se pudo aplicar el cambio solicitado')
-        }
-      }
+      const accion = nuevoEstado === 'Aprobada' ? 'aprobar' : 'rechazar'
 
-      const response = await fetch(`${API_URL}/solicitudes-edicion/${solicitud.id}`, {
+      const response = await fetch(`${API_URL}/solicitudes-edicion/${solicitud.id}/${accion}`, {
         method: 'PATCH',
         credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ estado: nuevoEstado }),
       })
 
       const result = await response.json()
@@ -97,8 +61,11 @@ export const SolicitudesEdicionPage = () => {
           data: solicitudesActualizadas,
         }
       })
+      setAccionMensaje('Solicitud actualizada correctamente')
     } catch (err) {
-      console.error(err.message)
+      setAccionError(err.message)
+    } finally {
+      setAccionEnCursoId(null)
     }
   }
 
@@ -122,14 +89,16 @@ export const SolicitudesEdicionPage = () => {
 
       {loading && <p>Cargando solicitudes...</p>}
       {error && <p>{error}</p>}
+      {accionError && <p>{accionError}</p>}
+      {accionMensaje && <p>{accionMensaje}</p>}
 
       <div>
         {solicitudes.map((solicitud) => (
           <article key={solicitud.id}>
             <h2>Solicitud sobre: {solicitud.campo}</h2>
-            <p>ID solicitud: {solicitud.id}</p>
-            <p>ID ponencia: {solicitud.idPonencia}</p>
-            <p>ID ponente: {solicitud.ponencia?.idPonente}</p>
+            <p>Evento: {solicitud.ponencia?.evento?.nombreEvento || 'Sin evento'}</p>
+            <p>Ponente: {solicitud.ponencia?.ponente?.nombrePonente || 'Sin ponente'}</p>
+            <p>Tipo ponencia: {solicitud.ponencia?.tipoPonencia || 'Sin tipo'}</p>
             <p>Campo solicitado: {solicitud.campo}</p>
             <p>Nuevo valor: {solicitud.valorSolicitado}</p>
             <p>Mensaje: {solicitud.mensaje || 'Sin mensaje'}</p>
@@ -138,11 +107,17 @@ export const SolicitudesEdicionPage = () => {
 
             {solicitud.estado === 'Pendiente' && (
               <div>
-                <button onClick={() => handleCambiarEstado(solicitud, 'Aprobada')}>
-                  Aprobar
+                <button
+                  onClick={() => handleCambiarEstado(solicitud, 'Aprobada')}
+                  disabled={accionEnCursoId === solicitud.id}
+                >
+                  {accionEnCursoId === solicitud.id ? 'Procesando...' : 'Aprobar'}
                 </button>
 
-                <button onClick={() => handleCambiarEstado(solicitud, 'Rechazada')}>
+                <button
+                  onClick={() => handleCambiarEstado(solicitud, 'Rechazada')}
+                  disabled={accionEnCursoId === solicitud.id}
+                >
                   Rechazar
                 </button>
               </div>
