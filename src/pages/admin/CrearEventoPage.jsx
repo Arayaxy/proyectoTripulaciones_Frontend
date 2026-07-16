@@ -8,7 +8,6 @@ const API_URL = import.meta.env.VITE_API_URL
 export const CrearEventoPage = () => {
   const navigate = useNavigate()
   const [clientes, setClientes] = useState([])
-  const [estados, setEstados] = useState([])
   const [shouldSend, setShouldSend] = useState(false)
   const [payload, setPayload] = useState(null)
 
@@ -26,9 +25,6 @@ export const CrearEventoPage = () => {
     fetch(`${API_URL}/clientes`, { credentials: 'include' })
       .then((r) => r.json())
       .then((res) => { if (res.ok) setClientes(res.data) })
-    fetch(`${API_URL}/estados`, { credentials: 'include' })
-      .then((r) => r.json())
-      .then((res) => { if (res.ok) setEstados(res.data) })
   }, [])
 
   const handleSubmit = (formData) => {
@@ -45,7 +41,6 @@ export const CrearEventoPage = () => {
         <CrearEventoFormulario
           onSubmit={handleSubmit}
           clientes={clientes}
-          estados={estados}
         />
       </section>
     </>

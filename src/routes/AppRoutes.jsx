@@ -31,6 +31,7 @@ import { CrearPonentePage } from "../pages/admin/CrearPonentePage"
 import { PublicRoute } from "../components/PublicRoute"
 import { Backdoor } from "../pages/auth/Backdoor"
 import { SolicitudesEdicionPage } from "../pages/admin/SolicitudesEdicionPage"
+import { PresupuestoDetailPage } from "../pages/admin/PresupuestoDetailPage"
 
 export const AppRoutes = () => {
   return (
@@ -67,8 +68,8 @@ export const AppRoutes = () => {
         <Route path='/presupuestos' element={<PresupuestosPage />} />
         <Route path='/presupuestos/crear' element={<CrearPresupuestoPage />} />
         <Route path='/presupuestos/editar/:id' element={<EditarPresupuestoPage />} />
+        <Route path='/presupuestos/:id' element={<PresupuestoDetailPage />} />
         <Route path='/lugar' element={<LugarPage />} />
-
       </Route>
       {/* <Route path='/*' element={<Navigate to='/NotFound' />} /> */}
     </Routes>

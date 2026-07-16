@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router'
 
-export const EventoCard = ({ evento, onDelete }) => {
+export const EventoCard = ({ evento }) => {
   const navigate = useNavigate()
 
   const formatDate = (dateStr) => {
@@ -46,10 +46,12 @@ export const EventoCard = ({ evento, onDelete }) => {
         )}
       </div>
       <div className="client-card__botones">
+        {evento.estado && (
+          <span className="client-card__estado">{evento.estado}</span>
+        )}
         <button className="btn btn--outline sm" onClick={() => navigate(`/detalle/${evento.id}`)}>
-          Detalles
+          Ir a evento
         </button>
-
       </div>
     </article>
   )
