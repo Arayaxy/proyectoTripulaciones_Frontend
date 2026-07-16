@@ -10,7 +10,7 @@ export const NavbarInterno = ({ eventoId }) => {
           <NavLink to={`/detalle/${eventoId}?seccion=datos`}>Datos</NavLink>
         </li>
         <li>
-          <NavLink to={`/detalle/${eventoId}?seccion=ponencias`}>Ponencias</NavLink>
+          <NavLink to={`/detalle/${eventoId}?seccion=ponentes`}>Ponentes</NavLink>
         </li>
         <li>
           <NavLink to={`/detalle/${eventoId}?seccion=lugar`}>Lugar</NavLink>

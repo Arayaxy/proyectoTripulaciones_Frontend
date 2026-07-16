@@ -96,7 +96,7 @@ export const EventoDetailPage = () => {
               </p>
               <p className="client-card__detail">Administra los ponentes y sus asignaciones</p>
               <div className="client-card__botones">
-                <button className="btn btn--outline sm" onClick={() => navigate(`/detalle/${id}?seccion=ponencias`)}>
+                <button className="btn btn--outline sm" onClick={() => navigate(`/detalle/${id}?seccion=ponentes`)}>
                   Ir a Ponentes
                 </button>
               </div>
@@ -112,10 +112,77 @@ export const EventoDetailPage = () => {
                   <button className="btn btn--primary" onClick={() => navigate(`/eventos/editar/${id}`)}>Editar</button>
                 </div>
               </>
-            ) : seccion === 'ponencias' ? (
-              <h2>Gestión de Ponentes</h2>
+            ) : seccion === 'ponentes' ? (
+              evento.ponencias?.length > 0 ? (
+                <article className="client-card">
+                  <h2 className="client-card__name">Ponencias ({evento.ponencias.length})</h2>
+                  {evento.ponencias.map(p => (
+                    <p key={p.id} className="client-card__detail">
+                      <span className="client-card__label">{p.ponente?.nombrePonente || 'Ponente'}:</span>
+                      <strong>{p.tipoPonencia}</strong>
+                    </p>
+                  ))}
+                  <div className="client-card__botones">
+                    <button className="btn btn--outline sm" onClick={() => navigate(`/detalle/${id}/ponentes/nuevo`)}>
+                      Añadir Ponente
+                    </button>
+                  </div>
+                </article>
+              ) : (
+                <article className="client-card">
+                  <h2 className="client-card__name">Ponencias</h2>
+                  <p className="client-card__detail">Este evento no tiene ponencias asignadas</p>
+                  <div className="client-card__botones">
+                    <button className="btn btn--outline sm" onClick={() => navigate(`/detalle/${id}/ponentes/nuevo`)}>
+                      Añadir Ponente
+                    </button>
+                  </div>
+                </article>
+              )
             ) : seccion === 'lugar' ? (
-              <h2>Gestión de Lugar</h2>
+              evento.lugarConfirmado || evento.sala ? (
+                <article className="client-card">
+                  <h2 className="client-card__name">Lugar</h2>
+                  {evento.lugarConfirmado && (
+                    <p className="client-card__detail">
+                      <span className="client-card__label">Ubicación:</span>
+                      <strong>{evento.lugarConfirmado}</strong>
+                    </p>
+                  )}
+                  {evento.nota && (
+                    <p className="client-card__detail">
+                      <span className="client-card__label">Nota:</span>
+                      <strong>{evento.nota}</strong>
+                    </p>
+                  )}
+                  {evento.sala && (
+                    <>
+                      <p className="client-card__detail">
+                        <span className="client-card__label">Sala:</span>
+                        <strong>{evento.sala.nombreSala}</strong>
+                      </p>
+                      <p className="client-card__detail">
+                        <span className="client-card__label">Tipo:</span>
+                        <strong>{evento.sala.tipoSala}</strong>
+                      </p>
+                      <p className="client-card__detail">
+                        <span className="client-card__label">Capacidad:</span>
+                        <strong>{evento.sala.capacidadMaxSala} personas</strong>
+                      </p>
+                    </>
+                  )}
+                </article>
+              ) : (
+                <article className="client-card">
+                  <h2 className="client-card__name">Lugar</h2>
+                  <p className="client-card__detail">Este evento no tiene lugar asignado</p>
+                  <div className="client-card__botones">
+                    <button className="btn btn--outline sm" onClick={() => navigate(`/detalle/${id}?seccion=lugar`)}>
+                      Asignar Lugar
+                    </button>
+                  </div>
+                </article>
+              )
             ) : seccion === 'presupuesto' ? (
               evento.presupuesto ? (
                 <article className="client-card">
