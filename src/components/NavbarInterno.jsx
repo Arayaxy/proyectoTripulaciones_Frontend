@@ -4,7 +4,7 @@ import './partials/_navbar.scss'
 export const NavbarInterno = ({ eventoId }) => {
 
   return (
-    <nav className="main-navbar">
+    <nav className="navbar-interno">
       <ul>
         <li>
           <NavLink to={`/detalle/${eventoId}?seccion=datos`}>Datos</NavLink>
