@@ -1,0 +1,128 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.resultado-busqueda {
+  margin-top: $sp-24;
+
+  &__resumen {
+    background: $color-white;
+    border: 1px solid $color-border;
+    border-radius: $radius-lg;
+    padding: $sp-20;
+    margin-bottom: $sp-16;
+    font-size: $txt-base;
+    line-height: 1.6;
+
+    h3 {
+      font-size: $txt-sm;
+      font-weight: $fw-semibold;
+      color: $color-text-muted;
+      margin-bottom: $sp-8;
+    }
+  }
+
+  &__info {
+    background: $color-white;
+    border: 1px solid $color-border;
+    border-radius: $radius-lg;
+    padding: $sp-16;
+    margin-bottom: $sp-16;
+    font-size: $txt-sm;
+
+    p {
+      margin-bottom: $sp-4;
+    }
+
+    span {
+      font-weight: $fw-semibold;
+      color: $color-text-muted;
+    }
+  }
+
+  &__section {
+    margin-bottom: $sp-24;
+  }
+
+  &__section-title {
+    font-size: $txt-lg;
+    font-weight: $fw-semibold;
+    color: $color-primary;
+    margin-bottom: $sp-12;
+    padding-bottom: $sp-8;
+    border-bottom: 2px solid $color-accent;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: $sp-16;
+  }
+
+  &__card {
+    background: $color-white;
+    border: 1px solid $color-border;
+    border-radius: $radius-lg;
+    overflow: hidden;
+  }
+
+  &__card-title {
+    background: $color-primary;
+    color: $color-white;
+    padding: $sp-12 $sp-16;
+    font-size: $txt-base;
+    font-weight: $fw-semibold;
+  }
+
+  &__card-subtitle {
+    font-weight: $fw-regular;
+    font-size: $txt-xs;
+    opacity: 0.8;
+  }
+
+  &__card-body {
+    padding: $sp-16;
+    font-size: $txt-sm;
+
+    p {
+      margin-bottom: $sp-4;
+      display: flex;
+      gap: $sp-4;
+    }
+
+    span {
+      font-weight: $fw-semibold;
+      color: $color-text-muted;
+      min-width: 100px;
+    }
+  }
+
+  &__tramo {
+    background: $color-bg;
+    border-radius: $radius-md;
+    padding: $sp-12;
+    margin-top: $sp-8;
+    margin-bottom: $sp-8;
+  }
+
+  &__tramo-label {
+    font-weight: $fw-semibold;
+    color: $color-accent;
+    margin-bottom: $sp-4;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: $sp-16;
+  }
+
+  &__raw {
+    background: $color-bg;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    padding: $sp-16;
+    font-size: $txt-xs;
+    overflow-x: auto;
+    white-space: pre-wrap;
+  }
+}

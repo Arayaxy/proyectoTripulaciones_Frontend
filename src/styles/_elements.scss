@@ -65,9 +65,7 @@
       color: $color-white;
 
   }
-  @include bp-1200 {
-      order: 2;
-    }
+
   }
 
   &--sm {

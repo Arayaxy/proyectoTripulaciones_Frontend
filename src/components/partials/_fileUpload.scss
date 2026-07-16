@@ -2,28 +2,29 @@
 @use '../../styles/mixins' as *;
 
 .file-upload {
-  @include flex-center;
-  gap: $sp-12;
-  padding: $sp-32 $sp-24;
-  border: 1px solid $color-black-10;
-  margin-top: $sp-12;
-  background-color: rgba($color-black-5, 0.05);
-  border-radius: $sp-8;
+  border: 2px dashed $color-border;
+  border-radius: $radius-lg;
+  padding: $sp-32;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+
+  &--dragover {
+    border-color: $color-primary;
+    background-color: rgba($color-primary, 0.05);
+  }
 }
 
-.file-upload__select {
-  padding: $sp-12 $sp-20;
-  background: $color-primary;
-  color: $color-white;
-  border: none;
-  border-radius: $radius-md;
+.file-upload__placeholder {
+  font-family: $font-secondary;
   font-size: $txt-base;
-  cursor: pointer;
-  align-self: flex-start;
+  color: $color-text-muted;
+  margin: 0;
 }
 
 .file-upload__info {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: $sp-12;
 }

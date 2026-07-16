@@ -9,7 +9,7 @@ export const PublicRoute = ({ children }) => {
       return <Navigate to="/eventos" replace />;
     }
     if (user.role === 'ponente') {
-      return <Navigate to="/ponentedata" replace />;
+      return <Navigate to="/ponencia" replace />;
     }
   }
 

@@ -10,15 +10,11 @@ export const EditarEventoPage = () => {
   const navigate = useNavigate()
   const { data } = useFetch(`${API_URL}/eventos/${id}`, 'GET')
   const [clientes, setClientes] = useState([])
-  const [estados, setEstados] = useState([])
 
   useEffect(() => {
     fetch(`${API_URL}/clientes`, { credentials: 'include' })
       .then((r) => r.json())
       .then((res) => { if (res.ok) setClientes(res.data) })
-    fetch(`${API_URL}/estados`, { credentials: 'include' })
-      .then((r) => r.json())
-      .then((res) => { if (res.ok) setEstados(res.data) })
   }, [])
 
   const handleSubmit = async (formData) => {
@@ -44,7 +40,6 @@ export const EditarEventoPage = () => {
           initialData={data.data}
           onSubmit={handleSubmit}
           clientes={clientes}
-          estados={estados}
         />
       </section>
     </>

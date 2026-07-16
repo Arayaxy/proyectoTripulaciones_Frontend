@@ -20,7 +20,7 @@ export const HeaderPonente = () => {
   return (
     <section className='headerContainer'>
       <div>
-        <Link to="/ponentedata">
+        <Link to="/ponencia">
           <img src={heroLogo} alt="MITÜMI Backstage" />
         </Link>
       </div>

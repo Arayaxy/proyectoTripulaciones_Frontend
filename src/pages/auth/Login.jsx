@@ -25,7 +25,7 @@ export const Login = () => {
       if (user.role === "admin") {
         navigate("/eventos", { replace: true });
       } else if (user.role === "ponente") {
-        navigate("/ponentedata", { replace: true });
+        navigate("/ponencia", { replace: true });
       }
     }
   }, [user, navigate]);
