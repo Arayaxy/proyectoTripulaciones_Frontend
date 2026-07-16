@@ -37,13 +37,10 @@ export const EventoCard = ({ evento }) => {
           <strong>{evento.cliente.cliente}</strong>
         </p>
       )}
-      {evento.estado && (
-        <p className="client-card__detail">
-          <span className="client-card__label">Estado:</span>{' '}
-          <strong>{evento.estado.descripcion}</strong>
-        </p>
-      )}
       <div className="client-card__botones">
+        {evento.estado && (
+          <span className="client-card__estado">{evento.estado}</span>
+        )}
         <button className="btn btn--primary md" onClick={() => navigate(`/detalle/${evento.id}`)}>
           Ver detalle
         </button>
