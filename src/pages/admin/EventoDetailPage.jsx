@@ -72,6 +72,45 @@ export const EventoDetailPage = () => {
                   <strong>{evento.presupuesto.total}€</strong>
                 </p>
                 <p>Fecha: {new Date(evento.presupuesto.fecha).toLocaleDateString()}</p>
+
+                <p className="evento_info_fecha" style={{ marginTop: '12px' }}>Ubicación</p>
+                {evento.presupuesto.precioUbicacion ? (
+                  <p>Precio ubicación: <strong>{evento.presupuesto.precioUbicacion}€</strong></p>
+                ) : (
+                  <p>Precio ubicación: <strong>No especificado</strong></p>
+                )}
+                {evento.presupuesto.notaUbicacion && <p>Nota: {evento.presupuesto.notaUbicacion}</p>}
+
+                {evento.presupuesto.catering && (
+                  <>
+                    <p className="evento_info_fecha" style={{ marginTop: '12px' }}>Catering</p>
+                    <p>Precio catering: <strong>{evento.presupuesto.precioCatering}€</strong></p>
+                    {evento.presupuesto.notaCatering && <p>Nota: {evento.presupuesto.notaCatering}</p>}
+                  </>
+                )}
+
+                {evento.presupuesto.audiovisuales && (
+                  <>
+                    <p className="evento_info_fecha" style={{ marginTop: '12px' }}>Audiovisuales</p>
+                    <p>Precio audiovisuales: <strong>{evento.presupuesto.precioAudiovisuales}€</strong></p>
+                    {evento.presupuesto.notaAudiovisuales && <p>Nota: {evento.presupuesto.notaAudiovisuales}</p>}
+                  </>
+                )}
+
+                {evento.presupuesto.otros && (
+                  <>
+                    <p className="evento_info_fecha" style={{ marginTop: '12px' }}>Otros</p>
+                    <p>Precio otros: <strong>{evento.presupuesto.precioOtros}€</strong></p>
+                    {evento.presupuesto.notaOtros && <p>Nota: {evento.presupuesto.notaOtros}</p>}
+                  </>
+                )}
+
+                {evento.presupuesto.observaciones && (
+                  <>
+                    <p className="evento_info_fecha" style={{ marginTop: '12px' }}>Observaciones</p>
+                    <p>{evento.presupuesto.observaciones}</p>
+                  </>
+                )}
               </div>
             ) : (
               <div className="evento_info">
@@ -92,12 +131,28 @@ export const EventoDetailPage = () => {
             </div>
           ) : seccion === 'lugar' ? (
             <div className="evento_info">
-              <h2 className="evento_info_titulo">Lugar</h2>
+              <h2 className="evento_info_titulo">Lugar del Evento</h2>
               <p className="evento_info_fecha">
                 Estado: <strong>{evento.lugarConfirmado ? 'Confirmado' : 'Pendiente'}</strong>
               </p>
-              <p><span className="evento_info_ciudad">Sala:</span> <strong>{evento.sala?.nombreSala || 'Sin asignar'}</strong></p>
+              {evento.sala ? (
+                <>
+                  <p>Sala: <strong>{evento.sala.nombreSala}</strong></p>
+                  {evento.sala.tipoSala && <p>Tipo: <strong>{evento.sala.tipoSala}</strong></p>}
+                  {evento.sala.capacidadMaxSala && <p>Capacidad: <strong>{evento.sala.capacidadMaxSala} personas</strong></p>}
+                  {evento.sala.notaSala && <p>Nota: <strong>{evento.sala.notaSala}</strong></p>}
+                </>
+              ) : (
+                <p>Sala: <strong>Sin asignar</strong></p>
+              )}
               <p>Ubicación: <strong>{evento.ciudad}</strong></p>
+              <p>Asistentes: <strong>{evento.numeroPersonas} personas</strong></p>
+              <p>
+                Fechas: {new Date(evento.fechaInicio).toLocaleDateString()} — {new Date(evento.fechaFin).toLocaleDateString()}
+              </p>
+              {evento.cliente && (
+                <p>Cliente: <strong>{evento.cliente.cliente}</strong>{evento.cliente.empresa && <> ({evento.cliente.empresa})</>}</p>
+              )}
             </div>
           ) : (
             <>
@@ -107,7 +162,13 @@ export const EventoDetailPage = () => {
                   Estado: <strong>{evento.lugarConfirmado ? 'Confirmado' : 'Pendiente'}</strong>
                 </p>
                 <p>Sala: <strong>{evento.sala?.nombreSala || 'Sin asignar'}</strong></p>
+                {evento.sala?.tipoSala && (
+                  <p>Tipo: <strong>{evento.sala.tipoSala}</strong></p>
+                )}
                 <p>Ubicación: <strong>{evento.ciudad}</strong></p>
+                {evento.sala?.capacidadMaxSala && (
+                  <p>Capacidad: <strong>{evento.sala.capacidadMaxSala} personas</strong></p>
+                )}
                 <div className="zonaBotones">
                   <Link to={`/detalle/${id}?seccion=lugar`} className="btn btn--outline sm">Ver lugar</Link>
                 </div>
@@ -119,6 +180,16 @@ export const EventoDetailPage = () => {
                   Estado: <strong>{evento.presupuesto?.estadoPresupuesto ? 'Aprobado' : 'Pendiente'}</strong>
                 </p>
                 <p>Total: <strong>{evento.presupuesto?.total ? `${evento.presupuesto.total}€` : 'Sin presupuesto'}</strong></p>
+                {evento.presupuesto?.fecha && (
+                  <p>Fecha: <strong>{new Date(evento.presupuesto.fecha).toLocaleDateString()}</strong></p>
+                )}
+                {evento.presupuesto && (
+                  <p>
+                    {evento.presupuesto.catering ? 'Catering ✓' : 'Catering ✗'}
+                    {' | '}
+                    {evento.presupuesto.audiovisuales ? 'Audiovisuales ✓' : 'Audiovisuales ✗'}
+                  </p>
+                )}
                 <div className="zonaBotones">
                   <Link to={`/detalle/${id}?seccion=presupuesto`} className="btn btn--outline sm">Ver presupuesto</Link>
                 </div>
@@ -129,11 +200,25 @@ export const EventoDetailPage = () => {
                 <p className="evento_info_fecha">
                   Asignados: <strong>{evento.ponencias?.length || 0}</strong>
                 </p>
-                <p>
-                  {evento.ponencias?.length > 0
-                    ? evento.ponencias.map(p => p.ponente?.nombrePonente).join(', ')
-                    : 'Sin ponencias asignadas'}
-                </p>
+                {evento.ponencias?.length > 0 ? (
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                    {evento.ponencias.map((p) => (
+                      <li key={p.id} style={{ marginBottom: '8px' }}>
+                        <strong>{p.ponente?.nombrePonente}</strong>
+                        {p.ponente?.empresa && <span> — {p.ponente.empresa}</span>}
+                        {p.ponente?.cargo && <span> ({p.ponente.cargo})</span>}
+                        <br />
+                        <span style={{ fontSize: '0.85em', opacity: 0.8 }}>
+                          {p.tipoPonencia} | {new Date(p.horarioPonencia).toLocaleString('es-ES', {
+                            weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit'
+                          })}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>Sin ponencias asignadas</p>
+                )}
                 <div className="zonaBotones">
                   <Link to={`/detalle/${id}?seccion=ponentes`} className="btn btn--outline sm">Ver ponencias</Link>
                 </div>
