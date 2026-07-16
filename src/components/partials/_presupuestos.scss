@@ -108,29 +108,3 @@
     padding-top: $sp-12;
   }
 }
-
-.search-bar {
-  padding: 0 16px;
-  margin-bottom: 24px;
-
-  &__input {
-    width: 100%;
-    max-width: 480px;
-    padding: 10px 16px;
-    border: 1px solid $color-border;
-    border-radius: $radius-md;
-    font-family: $font-primary;
-    font-size: 14px;
-    color: $color-text;
-    outline: none;
-    transition: border-color 0.2s;
-
-    &::placeholder {
-      color: $color-text-muted;
-    }
-
-    &:focus {
-      border-color: $color-primary;
-    }
-  }
-}
