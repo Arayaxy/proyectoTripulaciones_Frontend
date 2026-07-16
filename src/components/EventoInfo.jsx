@@ -1,11 +1,11 @@
 import './partials/_eventos.scss'
+import './clientes/_clientCard.scss'    // <--- AÑADIR
 
 export const EventoInfo = ({ evento }) => {
   return (
     <div>
       <article className="client-card">
         <h2 className="client-card__name">{evento.nombreEvento}</h2>
-
         <p className="client-card__detail">
           <span className="client-card__label">Estado:</span> <strong>{evento.estado}</strong>
         </p>
