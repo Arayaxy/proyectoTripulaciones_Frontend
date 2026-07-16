@@ -72,8 +72,6 @@ export const Login = () => {
     }
   };
 
- // if (loading && !user) return <div>Cargando...</div>;
-
   return (
     <main className="login">
       <header className="login__header">
