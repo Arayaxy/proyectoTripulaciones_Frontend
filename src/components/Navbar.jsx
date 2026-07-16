@@ -12,6 +12,7 @@ export const Navbar = ({ isOpen, onClose }) => {
         <li><NavLink to="/consultas" onClick={onClose}>Agente consultas internas</NavLink></li>
         <li><NavLink to="/concursos" onClick={onClose}>Concursos Públicos</NavLink></li>
         <li><NavLink to="/presupuestos" onClick={onClose}>Presupuestos</NavLink></li>
+        <li><NavLink to="/admins" onClick={onClose}>Admins</NavLink></li>
       </ul>
     </nav>
   )

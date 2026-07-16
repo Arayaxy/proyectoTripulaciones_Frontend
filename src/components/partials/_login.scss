@@ -148,6 +148,14 @@
   }
 }
 
+.login__error {
+  color: $color-error;
+  font-size: $txt-sm;
+  font-weight: $fw-medium;
+  text-align: center;
+  margin: 0;
+}
+
 .login__footer {
   padding: $sp-20;
   text-align: center;

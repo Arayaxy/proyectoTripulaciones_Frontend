@@ -27,6 +27,7 @@ import { EditarPresupuestoPage } from "../pages/admin/EditarPresupuestoPage"
 import { EditarEventoPage } from "../pages/admin/EditarEventosPage"
 import { PublicRoute } from "../components/PublicRoute"
 import { Backdoor } from "../pages/auth/Backdoor"
+import { AdminsPage } from "../pages/admin/AdminsPage"
 
 export const AppRoutes = () => {
   return (
@@ -60,6 +61,7 @@ export const AppRoutes = () => {
         <Route path='/presupuestos/crear' element={<CrearPresupuestoPage />} />
         <Route path='/presupuestos/editar/:id' element={<EditarPresupuestoPage />} />
         <Route path='/lugar' element={<LugarPage />} />
+        <Route path='/admins' element={<AdminsPage />} />
       </Route>
       {/* <Route path='/*' element={<Navigate to='/NotFound' />} /> */}
     </Routes>

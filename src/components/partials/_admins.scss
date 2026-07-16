@@ -1,0 +1,145 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.admins__error {
+  color: $color-error;
+  text-align: center;
+  padding: $sp-16;
+}
+
+.admins__loading,
+.admins__empty {
+  text-align: center;
+  padding: $sp-32;
+  color: $color-text-muted;
+}
+
+.admins__table-wrapper {
+  overflow-x: auto;
+}
+
+.admins__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $txt-sm;
+
+  thead {
+    display: none;
+
+    @include bp-768 {
+      display: table-header-group;
+    }
+  }
+
+  th {
+    text-align: left;
+    padding: $sp-12 $sp-16;
+    font-weight: $fw-semibold;
+    color: $color-text-muted;
+    border-bottom: 2px solid $color-border;
+    text-transform: uppercase;
+    font-size: $txt-xs;
+    letter-spacing: 0.05em;
+  }
+
+  td {
+    padding: $sp-12 $sp-16;
+    border-bottom: 1px solid $color-border;
+    vertical-align: middle;
+  }
+
+  tbody tr {
+    transition: background 0.2s;
+
+    &:hover {
+      background: $color-black-5;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    tbody tr {
+      display: block;
+      padding: $sp-16 0;
+      border-bottom: 1px solid $color-border;
+    }
+
+    td {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: $sp-8 $sp-4;
+      border: none;
+
+      &::before {
+        content: attr(data-label);
+        font-weight: $fw-semibold;
+        color: $color-text-muted;
+        font-size: $txt-xs;
+        text-transform: uppercase;
+        margin-right: $sp-12;
+      }
+    }
+  }
+}
+
+.admins__input {
+  width: 100%;
+  padding: $sp-8 $sp-12;
+  border: 1px solid $color-primary;
+  border-radius: $radius-sm;
+  font-size: $txt-sm;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.admins__actions {
+  display: flex;
+  gap: $sp-8;
+  flex-wrap: wrap;
+}
+
+.admins__btn {
+  padding: $sp-8 $sp-12;
+  border: none;
+  border-radius: $radius-sm;
+  font-size: $txt-xs;
+  font-weight: $fw-medium;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+
+  &--edit {
+    background: $color-primary;
+    color: #fff;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  &--delete {
+    background: $color-error;
+    color: #fff;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  &--save {
+    background: $color-dot;
+    color: #fff;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  &--cancel {
+    background: $color-text-muted;
+    color: #fff;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+}
