@@ -1,0 +1,93 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// ── Buscador superior ─────────────────────────────────────────────────────
+
+.buscadorPonente {
+  background: $color-black-5;
+  border-bottom: 1px solid $color-border;
+  padding: $sp-16 $sp-20;
+  @include flex(column, flex-start, stretch);
+  gap: $sp-16;
+
+  @include bp-990 {
+    @include flex(row, flex-start, flex-end);
+    padding: $sp-20 $sp-32;
+    gap: $sp-20;
+  }
+
+  // Cada bloque label + select
+  div {
+    @include flex(column, flex-start, stretch);
+    gap: $sp-8;
+    flex: 1;
+    min-width: 0;
+
+    label {
+      font-size: $txt-sm;
+      font-weight: $fw-semibold;
+      color: $color-primary;
+      font-family: $font-primary;
+    }
+
+    select {
+      width: 100%;
+      padding: $sp-12 $sp-16;
+      border: 1px solid $color-border;
+      border-radius: $radius-md;
+      font-size: $txt-base;
+      font-weight: $fw-medium;
+      font-family: $font-primary;
+      color: $color-text;
+      background: $color-white;
+      outline: none;
+      box-sizing: border-box;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+      appearance: auto;
+
+      &:focus {
+        border-color: $color-primary;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background: $color-black-5;
+      }
+    }
+
+    p {
+      font-size: $txt-xs;
+      color: $color-text-muted;
+      margin-top: $sp-4;
+    }
+  }
+
+  // Botón buscar
+  button {
+    padding: $sp-12 $sp-24;
+    border-radius: $radius-md;
+    font-size: $txt-base;
+    font-weight: $fw-medium;
+    font-family: $font-primary;
+    border: 1px solid $color-border;
+    background: $color-white;
+    color: $color-text;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    align-self: flex-end; // se alinea al fondo junto a los selects
+
+    &:hover:not(:disabled) {
+      background: $color-primary;
+      color: $color-white;
+      border-color: $color-primary;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+}

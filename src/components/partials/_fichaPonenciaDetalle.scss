@@ -1,0 +1,118 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.ficha-ponencia {
+  background: $color-white;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  padding: $sp-20 $sp-24;
+  @include flex(column, flex-start, stretch);
+  gap: 0;
+
+  // ── Nombre del ponente ───────────────────────────────────────────────
+  >h2 {
+    font-size: $txt-xl;
+    font-weight: $fw-bold;
+    color: $color-primary;
+    font-family: $font-primary;
+    padding-bottom: $sp-16;
+    margin-bottom: $sp-16;
+    border-bottom: 2px solid $color-border;
+  }
+
+  // ── Encabezados de sección ───────────────────────────────────────────
+  >h3 {
+    font-size: $txt-base;
+    font-weight: $fw-bold;
+    color: $color-text;
+    font-family: $font-primary;
+    margin-top: $sp-20;
+    margin-bottom: $sp-12;
+    padding-bottom: $sp-8;
+    border-bottom: 1px solid $color-border;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+
+  // ── Campos de datos ──────────────────────────────────────────────────
+  >p {
+    @include flex(row, flex-start, baseline);
+    gap: $sp-8;
+    font-size: $txt-sm;
+    color: $color-text;
+    padding: $sp-8 0;
+    border-bottom: 1px solid $color-black-5;
+    font-family: $font-primary;
+  }
+
+  // ── Botón solicitar edición ──────────────────────────────────────────
+  >div {
+    margin-top: $sp-24;
+    padding-top: $sp-20;
+    border-top: 1px solid $color-border;
+    @include flex(column, flex-start, flex-start);
+    gap: $sp-16;
+
+    >button {
+      padding: $sp-8 $sp-20;
+      border-radius: $radius-md;
+      font-size: $txt-sm;
+      font-weight: $fw-medium;
+      font-family: $font-primary;
+      border: 1px solid $color-primary;
+      color: $color-primary;
+      background: $color-white;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: $color-primary;
+        color: $color-white;
+      }
+    }
+  }
+    // ── Bloque archivo (Presentación, Billetes) ───────────────────────────────
+
+    .archivo-ponencia {
+      margin: $sp-12 0;
+
+      // Título "Presentacion", "Billete ida"... igual que h3
+      >p:first-child {
+        font-size: $txt-base;
+        font-weight: $fw-bold;
+        color: $color-text;
+        font-family: $font-primary;
+        padding-bottom: $sp-8;
+        margin-bottom: $sp-8;
+        border-bottom: 1px solid $color-border;
+      }
+
+      // "Sin archivo"
+      >p:last-of-type {
+        font-size: $txt-sm;
+        color: $color-text-muted;
+        margin-bottom: $sp-8;
+      }
+
+      // "Ver archivo"
+      >a {
+        display: inline-block;
+        font-size: $txt-sm;
+        font-weight: $fw-medium;
+        color: $color-primary;
+        text-decoration: none;
+        margin-bottom: $sp-8;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      // FileUpload al 100%
+      >div {
+        width: 100%;
+      }
+    }
+}

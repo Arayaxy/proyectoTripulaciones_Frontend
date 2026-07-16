@@ -70,10 +70,12 @@ export const SolicitudesEdicionPage = () => {
   }
 
   return (
-    <section>
+    <>
+      <header className="titlePage">
       <h1>Solicitudes de edicion</h1>
-
-      <div>
+      </header>
+      <section className="container">
+        <div>
         <label htmlFor="estadoFiltro">Estado</label>
         <select
           id="estadoFiltro"
@@ -85,7 +87,7 @@ export const SolicitudesEdicionPage = () => {
           <option value="Aprobada">Aprobadas</option>
           <option value="Rechazada">Rechazadas</option>
         </select>
-      </div>
+        </div>
 
       {loading && <p>Cargando solicitudes...</p>}
       {error && <p>{error}</p>}
@@ -125,6 +127,7 @@ export const SolicitudesEdicionPage = () => {
           </article>
         ))}
       </div>
-    </section>
+      </section>
+    </>
   )
 }

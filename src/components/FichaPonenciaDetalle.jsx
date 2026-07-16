@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { SolicitudEdicionForm } from "./SolicitudEdicionForm"
 import { ArchivoPonencia } from "./ArchivoPonencia"
+import './partials/_fichaPonenciaDetalle.scss'
 
 
 export const FichaPonenciaDetalle = ({ ponencia, isAdmin, userRole, onPonenciaActualizada }) => {
@@ -20,7 +21,7 @@ export const FichaPonenciaDetalle = ({ ponencia, isAdmin, userRole, onPonenciaAc
   }
 
   return (
-    <article>
+    <article className="ficha-ponencia">
       <h2>{ponencia.ponente?.nombrePonente}</h2>
 
       <h3>Datos del ponente</h3>

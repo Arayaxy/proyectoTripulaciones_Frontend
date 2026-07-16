@@ -15,7 +15,7 @@ export const ArchivoPonencia = ({
   }
 
   return (
-    <div>
+    <div className="archivo-ponencia">
       <p>{label}</p>
 
       {fileUrl ? (
