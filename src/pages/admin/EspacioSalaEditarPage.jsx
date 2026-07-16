@@ -17,7 +17,7 @@ export const EspacioSalaEditarPage = () => {
   const [message, setMessage] = useState("")
 
   const { data: salaData, loading: salaLoading } = useFetch(
-    salaId ? `${API_URL}/salas/${salaId}` : null
+    salaId ? `${API_URL}/salas/${salaId}?eventos=false` : null
   )
 
   const [shouldSubmit, setShouldSubmit] = useState(false)
