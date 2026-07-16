@@ -15,6 +15,9 @@ export const EventoDetailPage = () => {
   const { data, loading, setData } = useFetch(`${API_URL}/eventos/${id}`)
   const evento = data?.data
 
+  const formatDate = (date) => date ? new Date(date).toLocaleDateString("es-ES") : ""
+  const formatDateTime = (date) => date ? new Date(date).toLocaleString("es-ES") : ""
+
   const handleDeletePonencia = async (ponenciaId) => {
     if (!window.confirm('¿Estás seguro de eliminar esta ponencia?')) return
     try {
@@ -52,9 +55,7 @@ export const EventoDetailPage = () => {
           <div className="evento_info">
             <h2 className="evento_info_titulo">{evento.nombreEvento}</h2>
             <p className="evento_info_fecha">
-              {new Date(evento.fechaInicio).toLocaleDateString("es-ES", {
-                year: "numeric", month: "long", day: "numeric"
-              })}
+              {formatDate(evento.fechaInicio)}
             </p>
             <p className="evento_info_ciudad">{evento.ciudad}</p>
             <p className="evento_info_personas">{evento.numeroPersonas} personas</p>
@@ -71,7 +72,7 @@ export const EventoDetailPage = () => {
                   <span className="evento_info_ciudad">Total:</span>{' '}
                   <strong>{evento.presupuesto.total}€</strong>
                 </p>
-                <p>Fecha: {new Date(evento.presupuesto.fecha).toLocaleDateString()}</p>
+                <p>Fecha: {formatDate(evento.presupuesto?.fecha)}</p>
 
                 <p className="evento_info_fecha" style={{ marginTop: '12px' }}>Ubicación</p>
                 {evento.presupuesto.precioUbicacion ? (
@@ -148,7 +149,7 @@ export const EventoDetailPage = () => {
               <p>Ubicación: <strong>{evento.ciudad}</strong></p>
               <p>Asistentes: <strong>{evento.numeroPersonas} personas</strong></p>
               <p>
-                Fechas: {new Date(evento.fechaInicio).toLocaleDateString()} — {new Date(evento.fechaFin).toLocaleDateString()}
+                Fechas: {formatDate(evento.fechaInicio)} — {formatDate(evento.fechaFin)}
               </p>
               {evento.cliente && (
                 <p>Cliente: <strong>{evento.cliente.cliente}</strong>{evento.cliente.empresa && <> ({evento.cliente.empresa})</>}</p>
@@ -181,7 +182,7 @@ export const EventoDetailPage = () => {
                 </p>
                 <p>Total: <strong>{evento.presupuesto?.total ? `${evento.presupuesto.total}€` : 'Sin presupuesto'}</strong></p>
                 {evento.presupuesto?.fecha && (
-                  <p>Fecha: <strong>{new Date(evento.presupuesto.fecha).toLocaleDateString()}</strong></p>
+                  <p>Fecha: <strong>{formatDate(evento.presupuesto.fecha)}</strong></p>
                 )}
                 {evento.presupuesto && (
                   <p>
@@ -209,9 +210,9 @@ export const EventoDetailPage = () => {
                         {p.ponente?.cargo && <span> ({p.ponente.cargo})</span>}
                         <br />
                         <span style={{ fontSize: '0.85em', opacity: 0.8 }}>
-                          {p.tipoPonencia} | {new Date(p.horarioPonencia).toLocaleString('es-ES', {
+                          {p.tipoPonencia} | {p.horarioPonencia ? new Date(p.horarioPonencia).toLocaleString('es-ES', {
                             weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit'
-                          })}
+                          }) : ""}
                         </span>
                       </li>
                     ))}

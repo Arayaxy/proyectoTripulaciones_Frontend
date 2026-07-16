@@ -3,6 +3,7 @@ import './partials/_ponente.scss'
 
 export const PonenciasView = ({ evento, eventoId, onDelete }) => {
   const ponencias = evento.ponencias || []
+  const formatDateTime = (date) => date ? new Date(date).toLocaleString("es-ES") : ""
 
   const linkState = { evento }
 
@@ -65,19 +66,19 @@ export const PonenciasView = ({ evento, eventoId, onDelete }) => {
             </div>
             <div className="ponente-card__field">
               <span className="ponente-card__label">Horario Ponencia:</span>
-              <span>{new Date(p.horarioPonencia).toLocaleString("es-ES")}</span>
+              <span>{formatDateTime(p.horarioPonencia)}</span>
             </div>
             <div className="ponente-card__field">
               <span className="ponente-card__label">Check-in:</span>
-              <span>{new Date(p.checkinHorario).toLocaleString("es-ES")}</span>
+              <span>{formatDateTime(p.checkinHorario)}</span>
             </div>
             <div className="ponente-card__field">
               <span className="ponente-card__label">Transporte Ida:</span>
-              <span>{new Date(p.horarioIdaTransporte).toLocaleString("es-ES")}</span>
+              <span>{formatDateTime(p.horarioIdaTransporte)}</span>
             </div>
             <div className="ponente-card__field">
               <span className="ponente-card__label">Transporte Vuelta:</span>
-              <span>{new Date(p.horarioVueltaTransporte).toLocaleString("es-ES")}</span>
+              <span>{formatDateTime(p.horarioVueltaTransporte)}</span>
             </div>
           </div>
           <div className="ponente-card__footer">
