@@ -117,7 +117,62 @@ export const EventoDetailPage = () => {
             ) : seccion === 'lugar' ? (
               <h2>Gestión de Lugar</h2>
             ) : seccion === 'presupuesto' ? (
-              <h2>Gestión de Presupuesto</h2>
+              evento.presupuesto ? (
+                <article className="client-card">
+                  <h2 className="client-card__name">Presupuesto</h2>
+                  <p className="client-card__detail">
+                    <span className="client-card__label">Total:</span>
+                    <strong>{evento.presupuesto.total}€</strong>
+                  </p>
+                  <p className="client-card__detail">
+                    <span className="client-card__label">Estado:</span>
+                    <strong>{evento.presupuesto.estadoPresupuesto ? 'Aprobado' : 'Pendiente'}</strong>
+                  </p>
+                  <p className="client-card__detail">
+                    <span className="client-card__label">Fecha:</span>
+                    <strong>{new Date(evento.presupuesto.fecha).toLocaleDateString('es-ES')}</strong>
+                  </p>
+                  {evento.presupuesto.catering && (
+                    <p className="client-card__detail">
+                      <span className="client-card__label">Catering:</span>
+                      <strong>{evento.presupuesto.precioCatering}€</strong>
+                    </p>
+                  )}
+                  {evento.presupuesto.audiovisuales && (
+                    <p className="client-card__detail">
+                      <span className="client-card__label">Audiovisuales:</span>
+                      <strong>{evento.presupuesto.precioAudiovisuales}€</strong>
+                    </p>
+                  )}
+                  {evento.presupuesto.otros && (
+                    <p className="client-card__detail">
+                      <span className="client-card__label">Otros:</span>
+                      <strong>{evento.presupuesto.precioOtros}€</strong>
+                    </p>
+                  )}
+                  {evento.presupuesto.observaciones && (
+                    <p className="client-card__detail">
+                      <span className="client-card__label">Observaciones:</span>
+                      <strong>{evento.presupuesto.observaciones}</strong>
+                    </p>
+                  )}
+                  <div className="client-card__botones">
+                    <button className="btn btn--outline sm" onClick={() => navigate(`/presupuestos/${evento.presupuesto.id}`)}>
+                      Ver detalle completo
+                    </button>
+                  </div>
+                </article>
+              ) : (
+                <article className="client-card">
+                  <h2 className="client-card__name">Presupuesto</h2>
+                  <p className="client-card__detail">Este evento no tiene presupuesto asignado</p>
+                  <div className="client-card__botones">
+                    <button className="btn btn--outline sm" onClick={() => navigate('/presupuestos/crear')}>
+                      Crear Presupuesto
+                    </button>
+                  </div>
+                </article>
+              )
             ) : (
               <>
                 <EventoInfo evento={evento} />
