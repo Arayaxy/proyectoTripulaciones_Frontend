@@ -18,8 +18,4 @@ export const PonenteCard = ({ ponente, onDelete }) => {
       </div>
     </article>
   )
-}</think>
-
-<｜DSML｜tool_calls>
-<｜DSML｜invoke name="write">
-<｜DSML｜parameter name="filePath" string="true">C:\Users\Isild\Desktop\proyecto_tripulaciones\proyectoTripulaciones_Frontend\src\components\ponentes\PonenteCard.jsx
+}

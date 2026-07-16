@@ -3,8 +3,26 @@ import { EventoInfo } from '../../components/EventoInfo'
 import { SeccionDetail } from '../../components/SeccionDetail'
 import { useParams, useSearchParams } from 'react-router'
 import { useFetch } from '../../hooks/useFetch'
+import { FichaPonenciaDetalle } from '../../components/FichaPonenciaDetalle'
 
 const API_URL = import.meta.env.VITE_API_URL
+
+const PonenciasView = ({ eventoId }) => {
+  const { data, loading } = useFetch(`${API_URL}/ponencias?idEvento=${eventoId}`)
+  const ponencias = data?.data || []
+
+  if (loading) return <p>Cargando ponencias...</p>
+  if (ponencias.length === 0) return <p>Este evento no tiene ponencias asignadas</p>
+
+  return (
+    <div>
+      <h2>Ponencias ({ponencias.length})</h2>
+      {ponencias.map((ponencia) => (
+        <FichaPonenciaDetalle key={ponencia.id} ponencia={ponencia} isAdmin={true} />
+      ))}
+    </div>
+  )
+}
 
 const PresupuestoView = ({ eventoId }) => {
   const { data } = useFetch(`${API_URL}/eventos/${eventoId}`)
@@ -55,7 +73,7 @@ export const EventoDetailPage = () => {
         ) : seccion === 'datos' ? (
           <EventoInfo evento={evento} />
         ) : seccion === 'ponencias' ? (
-          <h2>Gestión de Ponencias</h2>
+          <PonenciasView eventoId={id} />
         ) : seccion === 'lugar' ? (
           <h2>Gestión de Lugar</h2>
         ) : (
