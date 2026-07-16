@@ -1,12 +1,8 @@
 import { Link } from 'react-router'
-import { useFetch } from '../hooks/useFetch'
 import './partials/_ponente.scss'
 
-const API_URL = import.meta.env.VITE_API_URL
-
 export const PonenciasView = ({ evento, eventoId, onDelete }) => {
-  const { data } = useFetch(`${API_URL}/ponencias?idEvento=${eventoId}`)
-  const ponencias = data?.data || evento.ponencias || []
+  const ponencias = evento.ponencias || []
 
   const linkState = { evento }
 

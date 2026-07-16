@@ -160,8 +160,6 @@ export const CrearPonenciaPage = () => {
       billeteVueltaLink: form.billeteVueltaLink || undefined,
       notaTransporte: form.notaTransporte || undefined,
       presentacionLink: form.presentacionLink || undefined,
-      fechaInicio: form.fechaInicio ? new Date(form.fechaInicio).toISOString() : undefined,
-      fechaFin: form.fechaFin ? new Date(form.fechaFin).toISOString() : undefined,
       idEvento: eventoId,
     }
     Object.keys(payload).forEach((k) => { if (payload[k] === "") payload[k] = undefined })

@@ -44,12 +44,12 @@ export const EventoDetailPage = () => {
         credentials: 'include',
       })
       const result = await res.json()
-      if (result.ok) {
+      if (result.ok || result.success) {
         setData({
           ...data,
           data: {
             ...evento,
-            ponencias: evento.ponencias.filter((p) => p.id !== ponenciaId),
+            ponencias: (evento.ponencias || []).filter((p) => p.id !== ponenciaId),
           },
         })
       }
